@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import{Button, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
 import Input_field from '../components/Input_field'
+import ImagePicker from 'react-native-image-crop-picker';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -13,15 +14,28 @@ const Post_add=()=>{
     const [description,setDescription]=useState('');
     const [images,setImages]=useState('');
     const [rent,setRent]=useState('');
+    selectFromGallery=()=>{
+        ImagePicker.openPicker({
+            cropping: true
+          }).then(image => {
+            console.log(image);
+            setImages(image.path)
+          });
+    }
     return(
         <ImageBackground source={require("../assets/bg.jpg")} style={styles.image}> 
             <View style={styles.bg}>
                 <Text style={styles.heading}>Post Your Add</Text>
                 <Input_field height='7'  st={accountNum} setSt={setAccountNum} pholder='Account Number'></Input_field>
                 <Input_field height='7'  st={location} setSt={setLocation} pholder='Location'></Input_field>
-                <Input_field height='7'  st={images} setSt={setImages} pholder='Upload Images'></Input_field>
                 <Input_field height='30' st={description} setSt={setDescription} pholder='Description'></Input_field>
                 <Input_field height='7'  st={rent} setSt={setRent} pholder='Rent'></Input_field>
+                <TouchableNativeFeedback onPress={selectFromGallery}>
+                    <View style={styles.btn}>
+                        <Text style={{textAlign:'center', justifyContent: 'center'}}>Select Images</Text>
+                    
+                    </View>
+                </TouchableNativeFeedback>
                 <TouchableNativeFeedback >
                     <View style={styles.btn}>
                         <Text style={{textAlign:'center', justifyContent: 'center'}}>Post Add</Text>
