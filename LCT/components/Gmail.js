@@ -1,5 +1,6 @@
 import React from 'react';
 import { View ,Image,StyleSheet, TouchableOpacity} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 function Gmail(props) {
     return (
@@ -13,11 +14,11 @@ const styles = StyleSheet.create({
    
     button:{
         backgroundColor:'#ffffff',
-        height: 92, 
-        width:98,
-        borderRadius:50,
-        marginTop:473,
-        margin:20
+        height:hp('15%'),
+        width:wp('30%'),
+        borderRadius:hp('20%'),
+        marginTop:hp('64%'),
+        margin:hp('5%'),
     }
 })
 export default Gmail;

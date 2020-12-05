@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground ,StyleSheet,View,TouchableOpacity,Text,Image} from 'react-native';
 import Fb from '../components/Fb';
 import Gmail from '../components/Gmail';
-
+import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 function SignupScreen(props) {
     return (
     <ImageBackground
@@ -36,19 +36,19 @@ const styles = StyleSheet.create({
        
     },
     logo:{
-        width:284,
-        height:107,
+        width:wp('80%'),
+        height:hp('15%'),
         position:'absolute',
-        top:100,
+        top:hp('15%'),
         
     },
     text:{
         color:'#ffffff',
         position:'absolute',
-        height: 36, 
-        width:382,
-        top:450,
-        left:70,
+        height: hp('15%'), 
+        width:wp('75%'),
+        top:hp('60%'),
+        left:wp('15%'),
         fontSize:16,
         fontWeight:'bold'
        
