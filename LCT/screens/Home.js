@@ -12,7 +12,7 @@ function Home(props) {
                     <Circle  title="Hotels & Restaurants" color="#6d96e8" size="20%" ></Circle>
                 </View> 
                 <View style={styles.logo}>
-                    <CircleImage/>
+                    <CircleImage color="#607591" size="40%" image={require("../assets/LogoLTG.png")}/>
                 </View>
                 <View style={styles.destinations}>
                     <Circle title="Destinations" color="#217FD6" size="20%" />
