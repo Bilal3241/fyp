@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageBackground ,StyleSheet,View,TouchableOpacity,Text,Image} from 'react-native';
-import Fb from '../components/Fb';
-import Gmail from '../components/Gmail';
+import Icon from  '../components/Icon';
+
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Logo from '../components/Logo';
 import colors from '../config/colors';
@@ -17,9 +17,11 @@ function SignupScreen(props) {
         Sign-up using facebook or gmail
         </Text>   
         
-        <Fb />
-        <Gmail/>
+        <Icon  imageName={require("../assets/fb1.png")}/>
+        <Icon  imageName={require("../assets/gmail3.jpg")}/>
+        
         </View>
+
     </ImageBackground>
     );
 }
