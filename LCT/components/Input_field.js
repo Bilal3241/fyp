@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
-import {TextInput, View,StyleSheet} from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import React from 'react';
+import { TextInput, StyleSheet} from 'react-native';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import colors from '../config/colors';
 
 
-const Input_field = ({height, pholder,st,setSt}) => {
-    // const [text, setText] = useState('');
-    return(
-        <View style={{margin:2}}>
-            <TextInput 
-            style={[{height: hp((height+'%'))},styles.inp]}
-            placeholder={pholder}
-            onChangeText={st => setSt(st)}
-            defaultValue={st}
-            />
-        </View>
-    )
-};
-const styles=StyleSheet.create({
-    inp:{
-        width:wp('80%'),
-        borderRadius:20,
-        backgroundColor:'rgba(255,255,255,0.8)',
-        borderWidth:1,
-        color:'black'
+function InputField({pholder, st, setSt, cheight='6', cwidth='80', ...otherProps}) {
+    return (
+        <TextInput
+        style={[styles.input, {height: hp(cheight+'%')} ]}
+        placeholder= {pholder}
+        onChangeText={st=>setSt(st)}
+        defaultValue={st} 
+        {...otherProps}
+        />
+    );
+}
+const styles = StyleSheet.create({
+    input:{
+        backgroundColor: colors.inpWhite,
+        color:colors.black,
+        paddingHorizontal:'3%',
+        marginVertical:'2%',
+        borderRadius:30,
+        width: wp('80%'),
     }
 })
 
-export default Input_field;
+export default InputField;
