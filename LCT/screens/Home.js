@@ -3,6 +3,7 @@ import CircleImage from '../components/CircleImage';
 import {ImageBackground,StyleSheet, View} from 'react-native';
 import Circle from '../components/Circle';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import colors from '../config/colors';
 
 function Home(props) {
     return (
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent: "center",
         alignItems:"center",
-        backgroundColor:'rgba(10,10,10,0.6)',
+        backgroundColor:colors.bgcolor,
     }
 })
 export default Home;

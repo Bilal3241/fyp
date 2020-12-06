@@ -3,14 +3,16 @@ import { ImageBackground ,StyleSheet,View,TouchableOpacity,Text,Image} from 'rea
 import Fb from '../components/Fb';
 import Gmail from '../components/Gmail';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Logo from '../components/Logo';
+import colors from '../config/colors';
+
 function SignupScreen(props) {
     return (
     <ImageBackground
         source={require("../assets/bg.jpg")}
         style={styles.background}>
         <View style={styles.container}>
-        <Image style={styles.logo}source={require("../assets/LogoLTG.png")}></Image> 
-        
+        <Logo />
         <Text style={styles.text}>
         Sign-up using facebook or gmail
         </Text>   
@@ -24,30 +26,25 @@ function SignupScreen(props) {
 const styles = StyleSheet.create({
     background:{
         flex:1,
+        justifyContent:'center',
+        alignItems: 'center',
         resizeMode: "cover",
-      
     },
     container:{
-        flex:1,    
+        flex:1,
         flexDirection:'row',
-        alignItems:'center',
         justifyContent:'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+        height:'100%',
+        width: '100%',
+        backgroundColor: colors.bgcolor,
        
-    },
-    logo:{
-        width:wp('80%'),
-        height:hp('15%'),
-        position:'absolute',
-        top:hp('15%'),
-        
     },
     text:{
         color:'#ffffff',
         position:'absolute',
         height: hp('15%'), 
         width:wp('75%'),
-        top:hp('60%'),
+        top:hp('50%'),
         left:wp('15%'),
         fontSize:16,
         fontWeight:'bold'

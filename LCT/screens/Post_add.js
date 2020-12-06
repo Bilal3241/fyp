@@ -2,11 +2,9 @@ import React,{useState} from 'react';
 import{Button, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
 import Input_field from '../components/Input_field'
 import ImagePicker from 'react-native-image-crop-picker';
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-  } from 'react-native-responsive-screen';
-
+import AppButton from '../components/App_Button';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import colors from '../config/colors';
 
 const Post_add=()=>{
     const [accountNum,setAccountNum]=useState('');
@@ -26,27 +24,12 @@ const Post_add=()=>{
         <ImageBackground source={require("../assets/bg.jpg")} style={styles.image}> 
             <View style={styles.bg}>
                 <Text style={styles.heading}>Post Your Add</Text>
-                <Input_field height='7'  st={accountNum} setSt={setAccountNum} pholder='Account Number'></Input_field>
-                <Input_field height='7'  st={location} setSt={setLocation} pholder='Location'></Input_field>
-                <Input_field height='30' st={description} setSt={setDescription} pholder='Description'></Input_field>
-                <Input_field height='7'  st={rent} setSt={setRent} pholder='Rent'></Input_field>
-                <TouchableNativeFeedback onPress={selectFromGallery}>
-                    <View style={styles.btn}>
-                        <Text style={{textAlign:'center', justifyContent: 'center'}}>Select Images</Text>
-                    
-                    </View>
-                </TouchableNativeFeedback>
-                <TouchableNativeFeedback >
-                    <View style={styles.btn}>
-                        <Text style={{textAlign:'center', justifyContent: 'center'}}>Post Add</Text>
-                    
-                    </View>
-                </TouchableNativeFeedback>
-                {/* <Text style={styles.heading}>{accountNum}</Text>
-                <Text style={styles.heading}>{location}</Text>
-                <Text style={styles.heading}>{description}</Text>
-                <Text style={styles.heading}>{images}</Text>
-                <Text style={styles.heading}>{rent}</Text> */}
+                <Input_field  st={accountNum} setSt={setAccountNum} pholder='Account Number'></Input_field>
+                <Input_field st={location} setSt={setLocation} pholder='Location'></Input_field>
+                <Input_field cheight='30' st={description} setSt={setDescription} pholder='Description'></Input_field>
+                <Input_field st={rent} setSt={setRent} pholder='Rent'></Input_field>
+                <AppButton title="Select Images" press={selectFromGallery}></AppButton>
+                <AppButton title="Post ad" press={()=>alert("pressed")}></AppButton>
             </View>
         </ImageBackground>
     )
@@ -55,6 +38,8 @@ const styles=StyleSheet.create({
     image:{
         flex:1,
         resizeMode: "cover",
+        justifyContent: "center",
+        alignItems:"center",
     },
     heading:{
         fontSize:hp('6%'),
@@ -65,18 +50,10 @@ const styles=StyleSheet.create({
         flex:1,
         justifyContent: "center",
         alignItems:'center',
-        backgroundColor:'rgba(10, 10, 10, 0.6)',
+        backgroundColor:colors.bgcolor,
         width:'100%',
         height:'100%',
+        paddingHorizontal:'10%',
     },
-    btn:{
-        
-        width:wp('80%'),
-        borderRadius:20,
-        backgroundColor:'#0099fa',
-        height:hp('7%'),
-        justifyContent: "center"
-        // paddingHorizontal:'50%'
-    }
 })
 export default Post_add;
