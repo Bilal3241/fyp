@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image, StyleSheet,View} from 'react-native';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import Logo from '../components/Logo';
 function CircleImage(props) {
     return (
         <View style={styles.circle}>
-           <Image style={styles.logo} source={require("../assets/LogoLTG.png")}></Image>
-        </View>
+          <Logo cheight='14' cwidth='65'/>
+          </View>
     );
 }
 const styles = StyleSheet.create({
@@ -18,11 +18,6 @@ const styles = StyleSheet.create({
         borderRadius:hp('20%'),
         justifyContent:"center",
         alignItems:"center",
-    },
-    logo:{
-        position: "absolute",
-        width: wp('68%'),
-        height: hp('14%'),
     },
 })
 export default CircleImage;

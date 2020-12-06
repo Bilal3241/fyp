@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         height:hp('15%'),
         width:wp('30%'),
         borderRadius:hp('20%'),
-        marginTop:hp('63%'),
+        marginTop:hp('64%'),
         margin:hp('5%'),
     },
 })
