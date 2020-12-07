@@ -17,8 +17,9 @@ const styles = StyleSheet.create({
     },
     logo:{
         position: "absolute",
-        width: wp('68%'),
-        height: hp('14%'),
+        width: wp('65%'),
+        height: hp('13%'),
+        resizeMode:'contain',
     },
 })
 export default CircleImage;
