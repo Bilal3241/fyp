@@ -7,12 +7,14 @@ import EditProfile from './screens/Edit_Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Header,Container,Left,Icon} from 'native-base';
+import VectorIcon from 'react-native-vector-icons/Ionicons';
 import SignupScreen from './screens/SignupScreen';
 const Drawer = createDrawerNavigator();
-
+//<VectorIcon name='md-menu' size={40}></VectorIcon>
 export default function App() {
   return (
     <NavigationContainer>
+    
       <Drawer.Navigator initialRouteName="Splash">
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Splash" component={Splash} />
