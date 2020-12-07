@@ -3,25 +3,26 @@ import CircleImage from '../components/CircleImage';
 import {ImageBackground,StyleSheet, View} from 'react-native';
 import Circle from '../components/Circle';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import colors from '../config/colors';
 
 function Home(props) {
     return (
         <ImageBackground style={styles.container}  source={require("../assets/bg.jpg")}>
             <View style={styles.back}>
                 <View style={styles.hotelnRes}>
-                    <Circle  title="Hotels & Restaurants" color="#6d96e8" size="20%" ></Circle>
+                    <Circle  title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
                 </View> 
                 <View style={styles.logo}>
-                    <CircleImage color="#607591" size="40%" image={require("../assets/LogoLTG.png")}/>
+                    <CircleImage color="rgba(21,66,107,0.7)" size="40%" image={require("../assets/LogoLTG.png")}/>
                 </View>
                 <View style={styles.destinations}>
-                    <Circle title="Destinations" color="#217FD6" size="20%" />
+                    <Circle title="Destinations" color="rgba(33,127,214,0.7)" size="20%" />
                 </View> 
                 <View style={styles.nearby}>
-                    <Circle  title="Nearby Attractions" color="#38A2DE" size="25%"></Circle>
+                    <Circle  title="Nearby Attractions" color="rgba(56,162,222,0.7)" size="25%"></Circle>
                 </View>
                 <View style={styles.reservations}>
-                    <Circle  title="Reservations" color="#1DD0F8" size="20%"></Circle>
+                    <Circle  title="Reservations" color="rgba(29,208,248,0.7)" size="20%"></Circle>
                 </View> 
             </View>
         </ImageBackground>
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent: "center",
         alignItems:"center",
-        backgroundColor:'rgba(10,10,10,0.6)',
+        backgroundColor:colors.bgcolor,
     }
 })
 export default Home;

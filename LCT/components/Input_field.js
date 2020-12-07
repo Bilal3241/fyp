@@ -10,7 +10,7 @@ function InputField({pholder, st, setSt, cheight='6', cwidth='80', ...otherProps
         style={[styles.input, {height: hp(cheight+'%')} ]}
         placeholder= {pholder}
         onChangeText={st=>setSt(st)}
-        defaultValue={st} 
+        defaultValue={st}
         {...otherProps}
         />
     );
