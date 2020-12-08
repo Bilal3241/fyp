@@ -5,7 +5,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 function Icon(props) {
     return (
         
-    <TouchableOpacity  onPress={()=>{alert("you clicked facebook")}}>
+    <TouchableOpacity  onPress={()=>{alert("you clicked gmails")}}>
        <Image style={styles.button} 
        source={props.imageName}/>
        </TouchableOpacity>
@@ -13,11 +13,15 @@ function Icon(props) {
 }
 const styles = StyleSheet.create({
     button:{
+
+        borderRadius:hp('20%'),
         height:hp('17%'),
         width:wp('30%'),
         borderRadius:hp('50%'),
         marginTop:hp('63%'),
         margin:hp('5%'),
+        height:hp('10%'),
+        width:wp('60%')
     },
 })
 export default Icon;
