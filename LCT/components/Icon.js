@@ -13,8 +13,8 @@ function Icon(props) {
 }
 const styles = StyleSheet.create({
     button:{
-        height:hp('15%'),
-        width:wp('30%'),
+        height:hp('10%'),
+        width:wp('60%'),
         borderRadius:hp('20%'),
         marginTop:hp('63%'),
         margin:hp('5%'),

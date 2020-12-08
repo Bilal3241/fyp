@@ -12,11 +12,11 @@ function SignupScreen(props) {
         <Image style={styles.logo}source={require("../assets/LogoLTG.png")}></Image> 
         
         <Text style={styles.text}>
-        Sign-up using facebook or gmail
+        Sign-up using gmail
         </Text>   
         
-        <Icon  imageName={require("../assets/fb1.png")}/>
-        <Icon  imageName={require("../assets/gmail3.jpg")}/>
+        <Icon  imageName={require("../assets/gmail.png")}/>
+       
         
         </View>
 
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         height: hp('15%'), 
         width:wp('75%'),
         top:hp('60%'),
-        left:wp('15%'),
+        left:wp('29%'),
         fontSize:16,
         fontWeight:'bold'
        
