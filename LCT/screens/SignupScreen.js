@@ -12,7 +12,7 @@ function SignupScreen(props) {
         <Image style={styles.logo}source={require("../assets/LogoLTG.png")}></Image> 
         
         <Text style={styles.text}>
-        Sign-up using gmail
+        Sign-up using your gmail
         </Text>   
         
         <Icon  imageName={require("../assets/gmail.png")}/>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         height: hp('15%'), 
         width:wp('75%'),
         top:hp('60%'),
-        left:wp('29%'),
+        left:wp('25%'),
         fontSize:16,
         fontWeight:'bold'
        
