@@ -15,12 +15,6 @@ function SignupScreen(props) {
 
             <Image style={styles.logo}source={require("../assets/LogoLTG.png")}></Image> 
 
-        <Logo ctop='15'/>
-        
-        <Text style={styles.text}>
-        Sign-up using your gmail
-        </Text>   
-
         
             <Text style={styles.text}>
                 Sign-up using your gmail
