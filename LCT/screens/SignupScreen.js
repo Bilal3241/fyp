@@ -18,7 +18,7 @@ function SignupScreen(props) {
         <Logo ctop='15'/>
         
         <Text style={styles.text}>
-        Sign-up using facebook or gmail
+        Sign-up using your gmail
         </Text>   
 
         
@@ -59,11 +59,7 @@ const styles = StyleSheet.create({
         height: hp('15%'), 
         width:wp('75%'),
         top:hp('60%'),
-
-        left:wp('25%'),
-
         left:wp('20%'),
-
         fontSize:16,
         fontWeight:'bold'
     }
