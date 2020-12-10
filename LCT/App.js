@@ -9,6 +9,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Header,Container,Left,Icon} from 'native-base';
 import VectorIcon from 'react-native-vector-icons/Ionicons';
 import SignupScreen from './screens/SignupScreen';
+import Reserve_Room from './screens/Reserve_Room';
 const Drawer = createDrawerNavigator();
 //<VectorIcon name='md-menu' size={40}></VectorIcon>
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Drawer.Screen name="Edit Profile" component={EditProfile} />
         <Drawer.Screen name="Post Add" component={Post_add} />
         <Drawer.Screen name="Signup Screen" component={SignupScreen} />
+        <Drawer.Screen name="Reserve Room" component={Reserve_Room} />
       </Drawer.Navigator>
     </NavigationContainer>
    
