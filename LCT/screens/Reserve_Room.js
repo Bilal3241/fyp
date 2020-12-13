@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {Button, Text, StyleSheet,ImageBackground,View} from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import colors from '../config/colors';
+import colors from '../config/Colors';
 import Input_field from '../components/Input_field';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import AppButton from '../components/App_Button';

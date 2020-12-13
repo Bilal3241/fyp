@@ -7,7 +7,7 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-import colors from '../config/colors';
+import colors from '../config/Colors';
 
 
 const Post_add=()=>{

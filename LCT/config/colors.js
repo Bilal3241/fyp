@@ -4,4 +4,5 @@ export default {
     inpWhite: 'rgba(255,255,255,0.7)',
     white: '#FFFFFF',
     black: '#000000',
+    cardBg: 'rgba(103,185,232,0.7)',
 };
