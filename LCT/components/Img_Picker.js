@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import{ImageBackground, StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import colors from '../config/colors';
+import colors from '../config/Colors';
 
 function ImgPicker(props) {
 const [usrImg, setImg]=useState(require('../assets/user.png'));

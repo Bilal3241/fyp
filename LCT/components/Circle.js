@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet,Text, TouchableOpacity} from 'react-native';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import colors from '../config/colors';
+import colors from '../config/Colors';
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
