@@ -3,12 +3,17 @@ import CircleImage from '../components/CircleImage';
 import {ImageBackground,StyleSheet, View} from 'react-native';
 import Circle from '../components/Circle';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import colors from '../config/Colors';
+import colors from '../config/colors';
+import Icon from 'react-native-vector-icons/Ionicons';  
 
-function Home(props) {
+
+function Home({navigation}) {
     return (
         <ImageBackground style={styles.container}  source={require("../assets/bg.jpg")}>
             <View style={styles.back}>
+                <View style={styles.icon}>
+                    <Icon name="menu-outline" size={50} color="white" onPress={() => navigation.openDrawer()}></Icon> 
+                </View>
                 <View style={styles.hotelnRes}>
                     <Circle  title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
                 </View> 
@@ -61,6 +66,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems:"center",
         backgroundColor:colors.bgcolor,
+    },
+    icon:{
+        position:"absolute",
+        top:hp('1%'),
+        left:wp('2%')
     }
 })
 export default Home;
