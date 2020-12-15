@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
     button:{
 
         borderRadius:hp('20%'),
+        height:hp('11%'),
+        width:wp('60%'),
         borderRadius:hp('50%'),
         marginTop:hp('63%'),
         margin:hp('5%'),
-        height:hp('10%'),
-        width:wp('60%')
     },
 })
 export default Icon;

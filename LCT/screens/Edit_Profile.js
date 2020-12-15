@@ -7,7 +7,7 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import ImgPicker from '../components/Img_Picker';
 
 
-function EditProfile(props) {
+function EditProfile({navigation}) {
 
     const [usrImg, setImg]=useState('');
     const [userName, setUsr]=useState('');
