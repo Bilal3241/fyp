@@ -2,7 +2,7 @@ import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title } from 'native-
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import colors from '../config/Colors';
+import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
 function AdsCard( {apartment}){//{img, title, noOfRooms, location, price}) {

@@ -2,7 +2,7 @@ import { Item, View } from 'native-base';
 import React, { useState } from 'react';
 import {FlatList, ImageBackground, ScrollView, StyleSheet} from 'react-native';
 import AppButton from '../components/App_Button';
-import colors from '../config/Colors';
+import colors from '../config/colors';
 import AdsCard from '../components/Ads_card';
 import Search_box from '../components/Search_box';
 function Ads_List(props) {

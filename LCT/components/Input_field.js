@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, StyleSheet} from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import colors from '../config/Colors';
+import colors from '../config/colors';
 
 
 function InputField({pholder, st, setSt, cheight='6', cwidth='80', ...otherProps}) {

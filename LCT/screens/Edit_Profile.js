@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import AppButton from '../components/App_Button';
 import InputField from '../components/Input_field';
-import colors from '../config/Colors';
+import colors from '../config/colors';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import ImgPicker from '../components/Img_Picker';
 

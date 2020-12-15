@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import colors from '../config/Colors';
+import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import { View } from 'native-base';
 function Search_box(st, setSt) {

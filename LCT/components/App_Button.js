@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
-import colors from '../config/Colors';
+import colors from '../config/colors';
 import {
     widthPercentageToDP as wp
   } from 'react-native-responsive-screen';

@@ -18,14 +18,14 @@ const App = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator  drawerContent={props => <DrawerScreen {...props}/>}>
+        <Drawer.Screen name="Ads Details" component={Ads_Details} />
+        <Drawer.Screen name="SignupScreen" component={SignupScreen} />
+        <Drawer.Screen name="ReserveRoom" component={Reserve_Room} />
+        <Drawer.Screen name="Ads List" component={AdsList} />
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Splash" component={Splash} />
         <Drawer.Screen name="EditProfile" component={EditProfile} />
         <Drawer.Screen name="PostAdd" component={Post_add} />
-        <Drawer.Screen name="SignupScreen" component={SignupScreen} />
-        <Drawer.Screen name="ReserveRoom" component={Reserve_Room} />
-        <Drawer.Screen name="Ads Details" component={Ads_Details} />
-        <Drawer.Screen name="Ads List" component={AdsList} />
       </Drawer.Navigator>
    </NavigationContainer>
     
