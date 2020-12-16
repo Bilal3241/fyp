@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageBackground ,StyleSheet,View,TouchableOpacity,Text,Image} from 'react-native';
 import Icon from  '../components/Icon';
+import Logo from '../components/Logo';
 
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 function SignupScreen(props) {
@@ -10,7 +11,7 @@ function SignupScreen(props) {
         style={styles.background}>
         <View style={styles.container}>
 
-        <Image style={styles.logo}source={require("../assets/LogoLTG.png")}></Image> 
+        <Logo ctop='15'/>
         
         <Text style={styles.text}>
         Sign-up using your gmail
@@ -36,13 +37,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)'
        
-    },
-    logo:{
-        width:wp('80%'),
-        height:hp('15%'),
-        position:'absolute',
-        top:hp('15%'),
-        
     },
     text:{
         color:'#ffffff',
