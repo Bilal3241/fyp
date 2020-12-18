@@ -12,6 +12,7 @@ import {Header,Container,Left,Icon} from 'native-base';
 import VectorIcon from 'react-native-vector-icons/Ionicons';
 import Reserve_Room from './screens/Reserve_Room';
 import  DrawerScreen  from './screens/DrawerScreen';
+import auth from '@react-native-firebase/auth';
 
 const Drawer = createDrawerNavigator();
 const App = () => {

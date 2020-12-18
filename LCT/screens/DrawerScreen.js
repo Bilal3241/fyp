@@ -31,7 +31,7 @@ function DrawerScreen(props) {
                 <Icon name="call-outline" color={color} size={size}/>
                 )}
                 label="Contact Us"
-                onPress={() => {props.navigation.navigate('Splash')}}
+                onPress={() => {props.navigation.navigate('SignupScreen')}}
                />
             <DrawerItem
                 icon={({color, size}) => (
