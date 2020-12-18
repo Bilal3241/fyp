@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { ImageBackground ,StyleSheet,View,Button, TouchableOpacity,Text,Image} from 'react-native';
 import Icon from  '../components/Icon';
+import auth from '@react-native-firebase/auth';
 import Logo from '../components/Logo';
 import {
     GoogleSignin,
@@ -16,8 +17,11 @@ function SignupScreen(props) {
         try {
           await GoogleSignin.hasPlayServices();
           const {accessToken, idToken} = await GoogleSignin.signIn();
+          const googleCredential=auth.GoogleAuthProvider.credential(idToken);
+
           setloggedIn(true);
           alert('signed in');
+          auth().signInWithCredential(googleCredential);
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow
