@@ -10,7 +10,7 @@ const Reserve_Room=()=>{
     const [checkIn, setCheckIn] = useState(new Date('2020-12-20'));
     const [checkOut, setCheckOut] = useState(new Date('2020-12-21'));
     const [rooms, setRooms] = useState('');
-    const [fare, setFare] = useState('');
+    const [fare, setFare] = useState(0);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     console.log(checkIn);
     const showDatePicker = () => {
@@ -27,6 +27,7 @@ const Reserve_Room=()=>{
       const handleOutConfirm = (date) => {
         setCheckOut(new Date(date.toDateString()))
         console.warn("Check Out has been picked: ", date.toDateString());
+        setFare((checkOut.getTime()-checkIn.getTime())/86400000);
         hideDatePicker();
       };
       var noOfDays=(checkOut.getTime()-checkIn.getTime())/86400000;
@@ -51,7 +52,7 @@ const Reserve_Room=()=>{
                 />
                 
                 <Input_field st={rooms} setSt={setRooms} pholder='No. of Rooms' keyboardType="numeric"></Input_field>
-                <Text style={styles.heading}>{noOfDays}</Text>
+                <Text style={styles.heading}>{fare}</Text>
                 <AppButton title="Procede to Payment " ></AppButton>
             </View>
         </ImageBackground>
