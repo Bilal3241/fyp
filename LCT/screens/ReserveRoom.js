@@ -2,11 +2,13 @@ import React,{useState} from 'react';
 import {Button, Text, StyleSheet,ImageBackground,View} from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import colors from '../config/colors';
-import Input_field from '../components/Input_field';
+import InputField from '../components/InputField';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import AppButton from '../components/App_Button';
+import AppButton from '../components/AppButton';
+import { IMAGEASSETS } from '../assets/images';
+import stylesheet from '../assets/stylesheet/stylesheet';
 
-const Reserve_Room=()=>{
+const ReserveRoom=()=>{
     const [checkIn, setCheckIn] = useState(new Date('2020-12-20'));
     const [checkOut, setCheckOut] = useState(new Date('2020-12-21'));
     const [rooms, setRooms] = useState('');
@@ -33,8 +35,8 @@ const Reserve_Room=()=>{
       var noOfDays=(checkOut.getTime()-checkIn.getTime())/86400000;
 
     return(
-        <ImageBackground source={require("../assets/bg.jpg")} style={styles.image}>
-            <View style={styles.bg}>
+        <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>
+            <View style={stylesheet.bgView}>
                 <Text style={styles.heading}>Reserve Room</Text>
                 <AppButton title="Check In" press={showDatePicker}></AppButton>
                 <DateTimePickerModal
@@ -51,9 +53,9 @@ const Reserve_Room=()=>{
                   onCancel={hideDatePicker}
                 />
                 
-                <Input_field st={rooms} setSt={setRooms} pholder='No. of Rooms' keyboardType="numeric"></Input_field>
+                <InputField st={rooms} setSt={setRooms} pholder='No. of Rooms' keyboardType="numeric"></InputField>
                 <Text style={styles.heading}>{fare}</Text>
-                <AppButton title="Procede to Payment " ></AppButton>
+                <AppButton title="Proceed to Payment " ></AppButton>
             </View>
         </ImageBackground>
     )
@@ -61,18 +63,6 @@ const Reserve_Room=()=>{
 
 }
 const styles=StyleSheet.create({
-    image:{
-        flex:1,
-        resizeMode: "cover",
-    },
-    bg:{
-        flex:1,
-        justifyContent: "center",
-        alignItems:'center',
-        backgroundColor:colors.bgcolor,
-        width:'100%',
-        height:'100%',
-    },
     heading:{
         fontSize:hp('6%'),
         color:colors.white,
@@ -80,4 +70,4 @@ const styles=StyleSheet.create({
     },
 })
 
-export default Reserve_Room;
+export default ReserveRoom;

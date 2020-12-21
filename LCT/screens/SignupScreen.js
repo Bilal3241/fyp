@@ -8,8 +8,10 @@ import {
     GoogleSigninButton,
     statusCodes,
     } from '@react-native-community/google-signin';
-
+    import stylesheet from '../assets/stylesheet/stylesheet';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { IMAGEASSETS } from '../assets/images';
+
 function SignupScreen(props) {
     const [loggedIn, setloggedIn] = useState(false);
     const [userInfo, setuserInfo] = useState([]);
@@ -22,6 +24,7 @@ function SignupScreen(props) {
           setloggedIn(true);
           alert('signed in');
           auth().signInWithCredential(googleCredential);
+          props.navigation.navigate('Home');//move to home screen
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow
@@ -57,9 +60,9 @@ function SignupScreen(props) {
       };
     return (
     <ImageBackground
-        source={require("../assets/bg.jpg")}
-        style={styles.background}>
-        <View style={styles.container}>
+        source={IMAGEASSETS.backgroundImage}
+        style={stylesheet.backgroundImage}>
+        <View style={stylesheet.bgView}>
             <Logo ctop='15'/>
             <Text style={styles.text}>
                 Sign-up using your gmail
@@ -92,19 +95,6 @@ function SignupScreen(props) {
     );
 }
 const styles = StyleSheet.create({
-    background:{
-        flex:1,
-        resizeMode: "cover",
-      
-    },
-    container:{
-        flex:1,    
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
-       
-    },
     text:{
         color:'#ffffff',
         position:'absolute',

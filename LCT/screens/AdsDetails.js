@@ -2,15 +2,17 @@ import React from 'react';
 import {View,StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 import PicSlider from  '../components/PicSlider';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import AppButton from '../components/App_Button';
+import AppButton from '../components/AppButton';
+import { IMAGEASSETS } from '../assets/images';
+import stylesheet from '../assets/stylesheet/stylesheet';
 
-function Ads_Details(props) {
+function AdsDetails(props) {
     return (
         
         <View style={styles.background}> 
             <TouchableOpacity style={styles.button} onPress={()=>{alert("Go to back bage... hahahhahahaha")}}>
                 <Image 
-                    source={require('../assets/left-arrow.png')}/>
+                    source={IMAGEASSETS.leftArrow}/>
             </TouchableOpacity>
             <Text style={styles.text}>
                 Ad's Title
@@ -79,4 +81,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Ads_Details;
+export default AdsDetails;

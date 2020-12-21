@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import AppButton from '../components/App_Button';
-import InputField from '../components/Input_field';
+import AppButton from '../components/AppButton';
+import InputField from '../components/InputField';
 import colors from '../config/colors';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
-import ImgPicker from '../components/Img_Picker';
+import ImgPicker from '../components/ImgPicker';
+import { IMAGEASSETS } from '../assets/images';
+import stylesheet from '../assets/stylesheet/stylesheet';
 
 
 function EditProfile({navigation}) {
@@ -16,9 +18,8 @@ function EditProfile({navigation}) {
     const [contact, setContact]=useState('');
     return (
         <ImageBackground
-        style={styles.background}
-        source={require("../assets/bg.jpg")}>
-            <View style={styles.bg}>
+        source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>
+            <View style={stylesheet.bgView}>
             <Text style={styles.heading}>Edit Profile</Text>
             <ImgPicker/>
             <InputField pholder='name' st={userName} setSt={setUsr} ></InputField>
@@ -32,31 +33,11 @@ function EditProfile({navigation}) {
 }
 
 const styles=StyleSheet.create({
-    background:{
-        flex: 1,
-        justifyContent: "center",
-        alignItems:"center",
-    },
-    bg:{
-        flex:1,
-        backgroundColor: colors.bgcolor,
-        justifyContent: "center",
-        alignItems:'center',
-        width:'100%',
-        height:'100%',
-        paddingHorizontal:'10%',
-    },
     heading:{
         fontSize:heightPercentageToDP('6%'),
         color:colors.white,
         textAlign:'center',
         marginVertical: '3%',
-    },
-    pic:{
-        width:widthPercentageToDP('20%'),
-        height:heightPercentageToDP('20%'),
-        borderRadius:50,
-    }
-    
+    }    
 })
 export default EditProfile;

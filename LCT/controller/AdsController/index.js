@@ -1,0 +1,1 @@
+import PostAds from './PostAds';

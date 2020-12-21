@@ -5,12 +5,13 @@ import Circle from '../components/Circle';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
-
+import {IMAGEASSETS} from "../assets/images";
+import stylesheet from '../assets/stylesheet/stylesheet';
 
 function Home({navigation}) {
     return (
-        <ImageBackground style={styles.container}  source={require("../assets/bg.jpg")}>
-            <View style={styles.back}>
+        <ImageBackground style={stylesheet.backgroundImage}  source={IMAGEASSETS.backgroundImage} resizeMode="stretch">
+            <View style={stylesheet.bgView}>
                 <View style={styles.icon}>
                     <Icon name="menu-outline" size={50} color="white" onPress={() => navigation.openDrawer()}></Icon> 
                 </View>
@@ -18,7 +19,7 @@ function Home({navigation}) {
                     <Circle  title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
                 </View> 
                 <View style={styles.logo}>
-                    <CircleImage color="rgba(21,66,107,0.7)" size="40%" image={require("../assets/LogoLTG.png")}/>
+                    <CircleImage color="rgba(21,66,107,0.7)" size="40%" image={IMAGEASSETS.logo}/>
                 </View>
                 <View style={styles.destinations}>
                     <Circle title="Destinations" color="rgba(33,127,214,0.7)" size="20%" />
@@ -34,9 +35,6 @@ function Home({navigation}) {
         );
 }
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-    },
     hotelnRes:{
         position:"absolute",
         top:hp('5%'),
@@ -60,12 +58,6 @@ const styles = StyleSheet.create({
     logo:{
         justifyContent: "center",
         alignItems:"center",
-    },
-    back:{
-        flex:1,
-        justifyContent: "center",
-        alignItems:"center",
-        backgroundColor:colors.bgcolor,
     },
     icon:{
         position:"absolute",

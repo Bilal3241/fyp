@@ -5,6 +5,7 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
+import { IMAGEASSETS } from '../assets/images';
 
 function Logo({cheight='20', cwidth='80', ctop='35'}) {
 //function Logo() {
@@ -12,7 +13,7 @@ function Logo({cheight='20', cwidth='80', ctop='35'}) {
         <Image
         //style={styles.logo}
         style={[styles.logo, {height: hp(cheight+'%')}, {width: wp(cwidth+'%')}, {top: hp(ctop+'%')} ]}
-        source={require("../assets/LogoLTG.png")}></Image>
+        source={IMAGEASSETS.logo}></Image>
         );
 }
 const styles = StyleSheet.create({
