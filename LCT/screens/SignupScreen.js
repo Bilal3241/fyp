@@ -24,7 +24,7 @@ function SignupScreen(props) {
           setloggedIn(true);
           alert('signed in');
           auth().signInWithCredential(googleCredential);
-          props.navigation.navigate('PostAd');
+          props.navigation.navigate('Home');//move to home screen
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow
