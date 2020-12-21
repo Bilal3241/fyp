@@ -6,7 +6,6 @@ import AppButton from '../../components/AppButton';
 //import styles from './style';
 import VectorIcon from 'react-native-vector-icons/Ionicons';
 import { ScrollView } from 'react-native-gesture-handler';
-import AdsController from '../../controller/AdsController';
 import { IMAGEASSETS } from '../../assets/images';
 import {
     widthPercentageToDP as wp,
@@ -14,6 +13,7 @@ import {
   } from 'react-native-responsive-screen';
 import colors from '../../config/colors';
 import stylesheet from '../../assets/stylesheet/stylesheet';
+import PostAds from '../../controller/AdsController/PostAds';
 
 
 function PostAd(){
@@ -40,7 +40,7 @@ function PostAd(){
         var data={
             Charges: rent, Description: desc, Images: images,  IsAvailable: availability,longitude: long, latitude: lat, NoOfRooms: rooms, Title: title, //account: accountNum, //owner: current User
         }
-        AdsController.PostAds(data, adPosted);
+        PostAds(data, adPosted);
     }
     return(
         <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}> 
