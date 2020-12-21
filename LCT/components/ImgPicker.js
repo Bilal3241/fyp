@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import{ImageBackground, StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import { IMAGEASSETS } from '../assets/images';
 import colors from '../config/colors';
 
 function ImgPicker(props) {
-const [usrImg, setImg]=useState(require('../assets/user.png'));
-selectFromGallery=()=>{
+const [usrImg, setImg]=useState(IMAGEASSETS.userIcon);
+const selectFromGallery=()=>{
     ImagePicker.openPicker({
         cropping: true
       }).then(image => {
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         justifyContent:'center',
         alignItems:'center',
-        marginVertical: '3%'
+        marginVertical: '3%',
     },
     img:{
         height:'100%',

@@ -4,11 +4,13 @@ import Circle from '../components/Circle';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Logo from '../components/Logo';
 import colors from '../config/colors';
+import { IMAGEASSETS } from '../assets/images';
+import stylesheet from '../assets/stylesheet/stylesheet';
 
 function Splash(props) {
     return (
-        <ImageBackground style={styles.container} source={require("../assets/bg.jpg")}>
-            <View style={styles.back}>
+        <ImageBackground style={stylesheet.backgroundImage} source={IMAGEASSETS.backgroundImage}>
+            <View style={stylesheet.bgView}>
                 <Logo />
            </View>
         </ImageBackground>
@@ -16,20 +18,11 @@ function Splash(props) {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-    },
     text:{
         color: colors.white,
         fontSize: 42,
         fontWeight: "bold",
         textAlign: "center",
-    },
-    back:{
-        flex:1,
-        justifyContent: "center",
-        alignItems:"center",
-        backgroundColor:colors.bgcolor,
     }
 })
 

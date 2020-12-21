@@ -6,13 +6,14 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';  
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import colors from '../config/colors';
+import Logo from '../components/Logo';
 
 
 function DrawerScreen(props) {
     return (
         <View style={styles.container}>
             <View style={styles.topBorder}>
-                <Image style={styles.logo} source={require("../assets/LogoLTG.png")}/>
+                <Logo cheight='9' cwidth='45' ctop='10'/>
            </View>
             <DrawerItem
                 icon={({color, size}) => (
@@ -47,10 +48,6 @@ const styles = StyleSheet.create({
         height:hp('30%'),
         alignItems:"center",
         justifyContent:"center",
-    },
-    logo:{
-        height:hp('9%'),
-        width:wp('45%'),
     },
     container:{
         flex:1,

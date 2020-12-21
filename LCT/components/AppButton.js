@@ -5,9 +5,9 @@ import {
     widthPercentageToDP as wp
   } from 'react-native-responsive-screen';
 
-function AppButton({title, press  }) {
+function AppButton({title, onPress }) {
     return (
-        <TouchableOpacity style={styles.button} onPress={press}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
     );
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         margin: '5%',
         padding:'3%',
-        width: wp("80%"),
+        width: wp("85%"),
     },
     text:{
         color: colors.white,

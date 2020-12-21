@@ -1,25 +1,26 @@
 import { Item, View } from 'native-base';
 import React, { useState } from 'react';
 import {FlatList, ImageBackground, ScrollView, StyleSheet} from 'react-native';
-import AppButton from '../components/App_Button';
+import AppButton from '../components/AppButton';
 import colors from '../config/colors';
-import AdsCard from '../components/Ads_card';
-import Search_box from '../components/Search_box';
-function Ads_List(props) {
+import AdsCard from '../components/AdsCard';
+import SearchBox from '../components/SearchBox';
+import { IMAGEASSETS } from '../assets/images';
+function AdsList(props) {
     const [search,setSeacrh]=useState('');
     let obj={};
     var objLoop=[];
     for(let i=0;i<10;i++){
-        obj={img:require('../assets/orange.jpg'), title:('Room '+i), noOfRooms:(i), location:('location '+i), price:('3'+i)}
+        obj={img:IMAGEASSETS.listImg, title:('Room '+i), noOfRooms:(i), location:('location '+i), price:('3'+i)}
         objLoop.push(<AdsCard apartment={obj}></AdsCard>)
     }
     return (
         <ImageBackground 
-        source={require('../assets/Lahore-Museum-Pakistan.jpg')}
+        source={IMAGEASSETS.museumBg}
         style={styles.background}>
             <View style={styles.bg}>
                 <AppButton title='Post your Ad' press={()=>alert("pressed")}></AppButton>
-                <Search_box st={search} setSt={setSeacrh}/>
+                <SearchBox st={search} setSt={setSeacrh}/>
                 <ScrollView> 
                     {objLoop}
                 </ScrollView>
@@ -27,7 +28,7 @@ function Ads_List(props) {
         </ImageBackground>
     );
 }
-export default Ads_List;
+export default AdsList;
 const styles = StyleSheet.create({
     background:{
         flex: 1,

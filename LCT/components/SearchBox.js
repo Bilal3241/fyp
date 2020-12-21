@@ -4,7 +4,7 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import { View } from 'native-base';
-function Search_box(st, setSt) {
+function SearchBox(st, setSt) {
     return (
         <View style={styles.view}>
             <TextInput
@@ -19,7 +19,7 @@ function Search_box(st, setSt) {
     );
 }
 
-export default Search_box;
+export default SearchBox;
 const styles = StyleSheet.create({
     view:{
         flexDirection:'row',
