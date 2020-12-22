@@ -10,7 +10,7 @@ import stylesheet from '../assets/stylesheet/stylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Home({route, navigation}) {
-    let show = () => {
+    var show = () => {
         console.warn(route);
     };
 

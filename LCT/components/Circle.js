@@ -7,7 +7,7 @@ TouchableOpacity.defaultProps = { activeOpacity: 0.8 };
 
 function Circle({title,color,size,fn}) {
     return (
-        <TouchableOpacity onPress={fn()} style={[styles.circle,{backgroundColor:color,borderRadius:(hp(size)/2),width:hp(size),height:hp(size)}]}  >
+        <TouchableOpacity onPress={fn} style={[styles.circle,{backgroundColor:color,borderRadius:(hp(size)/2),width:hp(size),height:hp(size)}]}  >
             <Text style={styles.text}>
                  {title}
             </Text>

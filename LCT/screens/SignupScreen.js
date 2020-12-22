@@ -30,7 +30,7 @@ function SignupScreen({navigation}) {
           setloggedIn(true);
           alert('signed in');
           auth().signInWithCredential(googleCredential);
-          let data={name:userInfo._user.displayName,email:userInfo._user.email, photo:userInfo._user.photoURL}
+          let data={name:userInfo._user.displayName,email:userInfo._user.email, photo:userInfo._user.photoURL};
           console.log(data);
           navigation.push('Home',data);//move to home screen
         } catch (error) {
