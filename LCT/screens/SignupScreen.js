@@ -12,19 +12,27 @@ import {
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { IMAGEASSETS } from '../assets/images';
 
-function SignupScreen(props) {
+function SignupScreen({navigation}) {
     const [loggedIn, setloggedIn] = useState(false);
     const [userInfo, setuserInfo] = useState([]);
+    function onAuthStateChanged(userInfo) {
+      setuserInfo(userInfo);
+    }
+    useEffect(() => {
+      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    }, []);
+
     _signIn = async () => {
         try {
           await GoogleSignin.hasPlayServices();
           const {accessToken, idToken} = await GoogleSignin.signIn();
           const googleCredential=auth.GoogleAuthProvider.credential(idToken);
-
           setloggedIn(true);
           alert('signed in');
           auth().signInWithCredential(googleCredential);
-          props.navigation.navigate('Home');//move to home screen
+          let data={name:userInfo._user.displayName,email:userInfo._user.email, photo:userInfo._user.photoURL}
+          console.log(data);
+          navigation.push('Home',data);//move to home screen
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow
@@ -47,30 +55,30 @@ function SignupScreen(props) {
           offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
         });
       }, []);
-      signOut = async () => {
-        try {
-          await GoogleSignin.revokeAccess();
-          await GoogleSignin.signOut();
-          setloggedIn(false);
-          setuserInfo([]);
-          alert('signed out');
-        } catch (error) {
-          console.error(error);
-        }
-      };
+      
+    signOut = async () => {
+      try {
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
+        auth()
+          .signOut()
+          .then(() => alert('Your are signed out!'));
+        setloggedIn(false);
+        // setuserInfo([]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     return (
-    <ImageBackground
+      <ImageBackground
         source={IMAGEASSETS.backgroundImage}
         style={stylesheet.backgroundImage}>
         <View style={stylesheet.bgView}>
             <Logo ctop='15'/>
             <Text style={styles.text}>
-                Sign-up using your gmail
+              Sign-up using your gmail
             </Text>
-            {/* <Icon  imageName={require("../assets/gmail.png")} />
-            <GoogleSigninButton
-              onPress={this._signIn}
-            /> */}
             <View style={styles.sectionContainer}>
               <GoogleSigninButton
                 style={{width: 192, height: 48}}
@@ -80,18 +88,14 @@ function SignupScreen(props) {
               />
             </View>
             <View style={styles.buttonContainer}>
-              {!loggedIn && <Text>You are currently logged out</Text>}
-              {loggedIn && (
-                <Button
-                  onPress={this.signOut}
-                  title="LogOut"
-                  color="red"></Button>
-              )}
+              <Button
+                onPress={this.signOut}
+                title="LogOut"
+                color="red">
+              </Button>
             </View>
-        
-        </View>
-
-    </ImageBackground>
+        </View>    
+      </ImageBackground>
     );
 }
 const styles = StyleSheet.create({
@@ -104,7 +108,6 @@ const styles = StyleSheet.create({
         left:wp('24%'),
         fontSize:16,
         fontWeight:'bold'
-
     }
 })
 

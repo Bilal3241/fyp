@@ -1,3 +1,5 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, HeaderTitle} from '@react-navigation/stack';
 import React from 'react';
 import Home from './screens/Home';
 import Splash from './screens/Splash';
@@ -6,19 +8,26 @@ import EditProfile from './screens/EditProfile';
 import AdsList from './screens/AdsList';
 import SignupScreen from './screens/SignupScreen';
 import AdsDetails from './screens/AdsDetails';
-import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator} from '@react-navigation/drawer';
-import {Header,Container,Left,Icon} from 'native-base';
 import ReserveRoom from './screens/ReserveRoom';
 import  DrawerScreen  from './screens/DrawerScreen';
-import auth from '@react-native-firebase/auth';
 
-
-const Drawer = createDrawerNavigator();
+const Stack=createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator  drawerContent={props => <DrawerScreen {...props}/>}>
+      <Stack.Navigator >
+        <Stack.Screen name='SignupScreen' component={SignupScreen}  />
+        <Stack.Screen name='Home' component={Home}  />
+        <Stack.Screen name='Splash' component={Splash}  />
+        <Stack.Screen name='PostAd' component={PostAd}  />
+        <Stack.Screen name='EditProfile' component={EditProfile}  />
+        <Stack.Screen name='AdsList' component={AdsList}  />
+        <Stack.Screen name='AdsDetails' component={AdsDetails}  />
+        <Stack.Screen name='ReserveRoom' component={ReserveRoom}  />
+      </Stack.Navigator>
+
+
+      {/* <Drawer.Navigator  drawerContent={props => <DrawerScreen {...props}/>}>
         <Drawer.Screen name="EditProfile" component={EditProfile} />
         <Drawer.Screen name="Splash" component={Splash}/>
         <Drawer.Screen name="PostAd" component={PostAd} />
@@ -27,7 +36,7 @@ const App = () => {
         <Drawer.Screen name="ReserveRoom" component={ReserveRoom} />
         <Drawer.Screen name="SignupScreen" component={SignupScreen} />
         <Drawer.Screen name="Home" component={Home} />
-      </Drawer.Navigator>
+      </Drawer.Navigator> */}
    </NavigationContainer>
     
   );

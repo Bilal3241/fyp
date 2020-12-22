@@ -7,8 +7,13 @@ import colors from '../config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
 import {IMAGEASSETS} from "../assets/images";
 import stylesheet from '../assets/stylesheet/stylesheet';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function Home({navigation}) {
+function Home({route, navigation}) {
+    let show = () => {
+        console.warn(route);
+    };
+
     return (
         <ImageBackground style={stylesheet.backgroundImage}  source={IMAGEASSETS.backgroundImage} resizeMode="stretch">
             <View style={stylesheet.bgView}>
@@ -16,19 +21,19 @@ function Home({navigation}) {
                     <Icon name="menu-outline" size={50} color="white" onPress={() => navigation.openDrawer()}></Icon> 
                 </View>
                 <View style={styles.hotelnRes}>
-                    <Circle  title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
+                    <Circle fn={show} title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
                 </View> 
                 <View style={styles.logo}>
                     <CircleImage color="rgba(21,66,107,0.7)" size="40%" image={IMAGEASSETS.logo}/>
                 </View>
                 <View style={styles.destinations}>
-                    <Circle title="Destinations" color="rgba(33,127,214,0.7)" size="20%" />
+                    <Circle fn={show} title="Destinations" color="rgba(33,127,214,0.7)" size="20%" />
                 </View> 
                 <View style={styles.nearby}>
-                    <Circle  title="Nearby Attractions" color="rgba(56,162,222,0.7)" size="25%"></Circle>
+                    <Circle fn={show} title="Nearby Attractions" color="rgba(56,162,222,0.7)" size="25%"></Circle>
                 </View>
                 <View style={styles.reservations}>
-                    <Circle  title="Reservations" color="rgba(29,208,248,0.7)" size="20%"></Circle>
+                    <Circle fn={show} title="Reservations" color="rgba(29,208,248,0.7)" size="20%"></Circle>
                 </View> 
             </View>
         </ImageBackground>
