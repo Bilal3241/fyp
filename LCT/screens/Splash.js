@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {ImageBackground,StyleSheet, View,Image} from 'react-native';
 import Circle from '../components/Circle';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -7,7 +7,12 @@ import colors from '../config/colors';
 import { IMAGEASSETS } from '../assets/images';
 import stylesheet from '../assets/stylesheet/stylesheet';
 
-function Splash(props) {
+function Splash({navigation}) {
+    useEffect(()=>{
+        setTimeout(()=>{
+            navigation.replace('Home')
+        },2000);
+    },[])
     return (
         <ImageBackground style={stylesheet.backgroundImage} source={IMAGEASSETS.backgroundImage}>
             <View style={stylesheet.bgView}>

@@ -15,10 +15,10 @@ const Stack=createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator >
+      <Stack.Navigator initialRouteName={Splash}>
+        <Stack.Screen name='Splash' component={Splash} options={{headerShown:false}} />
         <Stack.Screen name='SignupScreen' component={SignupScreen} />
-        <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Splash' component={Splash} />
+        <Stack.Screen name='Home' component={Home} options={{headerShown:false}}/>
         <Stack.Screen name='PostAd' component={PostAd} />
         <Stack.Screen name='EditProfile' component={EditProfile} />
         <Stack.Screen name='AdsList' component={AdsList} />
