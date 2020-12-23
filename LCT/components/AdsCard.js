@@ -9,19 +9,19 @@ function AdsCard( {apartment}){//{img, title, noOfRooms, location, price}) {
     //console.log(img);source={apartment.img}
     return (
         <Card style={{ backgroundColor: "transparent" }}>
-            <CardItem style={styles.card} button onPress={()=>alert(apartment.title)}>
+            <CardItem style={styles.card} button onPress={()=>alert(apartment.Title)}>
                 <Left>
                 <Thumbnail
-                source={apartment.img}
+                source={apartment.Image}
                 style={styles.pic}/>
                 <View style={styles.details}>
-                    <Title style={styles.heading}>{apartment.title}</Title>
-                    <Subtitle><IonIcons size={15} name="bed-sharp"></IonIcons> {apartment.noOfRooms}</Subtitle>
-                    <Subtitle><IonIcons size={15} name="location"></IonIcons> {apartment.location}</Subtitle>
+                    <Title style={styles.heading}>{apartment.Title}</Title>
+                    <Subtitle><IonIcons size={15} name="bed-sharp"></IonIcons> {apartment.NoOfRooms}</Subtitle>
+                    <Subtitle><IonIcons size={15} name="location"></IonIcons> {apartment.Location}</Subtitle>
                 </View>
                 </Left>
                 <Right>
-                    <Subtitle style={styles.fare}> ${apartment.price}</Subtitle>
+                    <Subtitle style={styles.fare}> ${apartment.Charges}</Subtitle>
                 </Right>
             </CardItem>
         </Card>
