@@ -1,6 +1,6 @@
 import Firestore, { firebase } from '@react-native-firebase/firestore';
 import React, { useEffect, useState } from 'react';
-export async function GetAllAds(roomsRetrevived) {
+export async function getAllAds(roomsRetrevived) {
 //     const [objLoop,seObjLoop]=useState([]);
     
 //     Firestore().collection("Rooms").get().then((snapshot)=> {
@@ -9,15 +9,18 @@ export async function GetAllAds(roomsRetrevived) {
 //       });
 //       seObjLoop(objLoop)
 //   })
-const [objLoop,seObjLoop]=useState([]);
+
+
+const roomsList=[];
 var snapshot = await firebase.firestore()
-.collection('Rooms')
-.get()
+.collection('Rooms').get()
 
-snapshot.forEach((doc)=>{
-    objLoop.push(doc.data());
-});
-console.log(objLoop);
-roomsRetrevived(objLoop);
+ snapshot.forEach((doc)=>{
+    roomsList.push(doc.data());
+ });
+console.log(roomsList);
+roomsRetrevived(roomsList);
+
+
+
 }
-

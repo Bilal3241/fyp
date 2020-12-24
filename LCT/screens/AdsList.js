@@ -7,24 +7,44 @@ import AdsCard from '../components/AdsCard';
 import SearchBox from '../components/SearchBox';
 import { IMAGEASSETS } from '../assets/images';
 import Firestore from '@react-native-firebase/firestore';
-import GetAllAds from '../controller/AdsController/GetAllAds';
+import {getAllAds} from '../controller/AdsController/GetAllAds';
 
 function AdsList(props) {
     const [search,setSeacrh]=useState('');
-       const [objLoop,seObjLoop]=useState([]);
-    useEffect(() => {
-      Firestore().collection("Rooms").get().then((snapshot)=> {
-        snapshot.docs.forEach(doc=> {
-        objLoop.push(doc.data())
-        });
-        seObjLoop(objLoop)
-    })
+    //    const [objLoop,seObjLoop]=useState([]);
+    // useEffect(() => {
+    //   Firestore().collection("Rooms").get().then((snapshot)=> {
+    //     snapshot.docs.forEach(doc=> {
+    //     objLoop.push(doc.data())
+    //     });
+    //     seObjLoop(objLoop)
+    // })
+    // }, []);    
+    // console.warn(objLoop)
+    // const [groceryList, setGroceryList] = useState();
+    // const [error, setError] = useState();
+
+    const [roomsList,setRoomsList]=useState([]);
+    const onRoomsRecieved=(roomsList)=>{
+      console.log(roomsList);
+      setRoomsList(roomsList)
+      
+  }
+  useEffect(() => {
+     getAllAds(onRoomsRecieved)
     }, []);
-    
-    console.warn(objLoop)
-   
+
+
+
+
+
+
+
+
+
+
       const list = () => {
-        return objLoop.map((element) => {
+        return roomsList.map((element) => {
           return (
             <AdsCard apartment={element}></AdsCard>
           );
