@@ -17,6 +17,7 @@ function EditProfile({route, navigation}) {
     function Users() {
         var data={name:route.params.name,email:route.params.email,acc:accountNum,num:contact,photo:route.params.photo};
         PostUsers(data);
+        navigation.navigate("Home")
     }
     return (
         <ImageBackground

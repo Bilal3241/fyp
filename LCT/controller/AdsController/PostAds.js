@@ -1,6 +1,7 @@
 import Firestore from '@react-native-firebase/firestore';
 
 function PostAds(adData,edit, adPosted) {
+        
         Firestore().collection("Rooms").where("Location","==",adData.Location).get()
         .then(snap => {
             console.warn("size"+snap.size)

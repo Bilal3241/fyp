@@ -8,7 +8,7 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 function AdsCard( {apartment,nav,path}){
     const EditIcon=() =>{
         if (path=="myrooms") {
-            return( <IonIcons size={25} name="create-sharp" onPress={() => nav.push('PostAd',{apartment,path})} ></IonIcons>);
+            return(<IonIcons size={25} name="create-sharp" onPress={() => nav.push('PostAd',{apartment,path})} ></IonIcons>);
         } else {
             return null;
         }
