@@ -1,26 +1,39 @@
 import Firestore from '@react-native-firebase/firestore';
 
-function PostAds(adData, adPosted) {
-    return (
-        Firestore().collection('Rooms').doc(adData.longitude+adData.latitude).set({
-            Charges: adData.Charges,
-            Description: adData.Description,
-            Images: adData.Images,
-            IsAvailable: adData.IsAvailable,
-            Location:adData.longitude+','+adData.latitude,
-            NoOfRooms:adData.NoOfRooms,
-            Owner: "Bilal",
-            Title:adData.Title,
+function PostAds(adData,edit, adPosted) {
+        Firestore().collection("Rooms").where("Location","==",adData.Location).get()
+        .then(snap => {
+            console.warn("size"+snap.size)
+        if(snap.size==0 || edit=="myrooms")
+        {
+            
+            Firestore().collection('Rooms').doc(adData.Location).set({
+                Charges: adData.Charges,
+                Description: adData.Description,
+                Images: adData.Images,
+                IsAvailable: adData.IsAvailable,
+                Location:adData.Location,
+                NoOfRooms:adData.NoOfRooms,
+                Owner: "anzala",
+                Title:adData.Title,
 
-        }).then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        })
-    );
+            }).then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            })
+           
+        }else{
+            console.warn("already exist")
+        }
+     })
+            
+    
+    return;
+    
 }
-
+        
 export default PostAds;
 /*fireauth.onAuthStateChanged(function(user) {
            if (user) {

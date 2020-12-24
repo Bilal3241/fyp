@@ -1,2 +1,2 @@
 import PostAds from './PostAds';
-import PostUsers from './PostUsers';
+import GetAllAds from './GetAllAds';

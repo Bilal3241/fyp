@@ -1,34 +1,52 @@
 import { Item, View } from 'native-base';
-import React, { useState } from 'react';
-import {FlatList, ImageBackground, ScrollView, StyleSheet} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {ImageBackground, ScrollView, StyleSheet} from 'react-native';
 import AppButton from '../components/AppButton';
 import colors from '../config/colors';
 import AdsCard from '../components/AdsCard';
 import SearchBox from '../components/SearchBox';
 import { IMAGEASSETS } from '../assets/images';
-function AdsList(props) {
+import {getAllAds} from '../controller/AdsController/GetAllAds';
+import {MyRooms} from '../controller/AdsController/MyRooms';
+
+function AdsList({navigation,route}) {
     const [search,setSeacrh]=useState('');
-    let obj={};
-    var objLoop=[];
-    for(let i=0;i<10;i++){
-        obj={img:IMAGEASSETS.listImg, title:('Room '+i), noOfRooms:(i), location:('location '+i), price:('3'+i)}
-        objLoop.push(<AdsCard apartment={obj}></AdsCard>)
+    const [roomsList,setRoomsList]=useState([]);
+    const onRoomsRecieved=(roomsList)=>{
+      setRoomsList(roomsList)
+  }
+  useEffect(() => {
+    if(route.params.page=="allRooms"){
+      getAllAds(onRoomsRecieved)
     }
+    else{
+      MyRooms(onRoomsRecieved)
+    }
+    }, []);
+
+      const list = () => {
+        return roomsList.map((element) => {
+          return (
+            <AdsCard apartment={element} nav={navigation} path={route.params.page}></AdsCard>
+          );
+        });
+      };
+    
     return (
+       
         <ImageBackground 
         source={IMAGEASSETS.museumBg}
         style={styles.background}>
             <View style={styles.bg}>
-                <AppButton title='Post your Ad' press={()=>alert("pressed")}></AppButton>
+                <AppButton title='Post your Ad' onPress={()=>navigation.navigate('PostAd',{apartment:""})}></AppButton>
                 <SearchBox st={search} setSt={setSeacrh}/>
                 <ScrollView> 
-                    {objLoop}
+                   {list()}
                 </ScrollView>
                </View>
         </ImageBackground>
     );
 }
-export default AdsList;
 const styles = StyleSheet.create({
     background:{
         flex: 1,
@@ -43,3 +61,4 @@ const styles = StyleSheet.create({
         paddingHorizontal:'5%',
     },
 })
+export default AdsList;

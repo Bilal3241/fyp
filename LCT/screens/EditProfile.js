@@ -10,7 +10,6 @@ import stylesheet from '../assets/stylesheet/stylesheet';
 import PostUsers from '../controller/AdsController/PostUsers';
 
 function EditProfile({route, navigation}) {
-
     const [userName, setUsr]=useState(route.params.name);
     const [email, setMail]=useState(route.params.email);
     const [accountNum, setAccontNum]=useState('');
