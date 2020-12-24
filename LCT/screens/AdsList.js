@@ -7,6 +7,7 @@ import AdsCard from '../components/AdsCard';
 import SearchBox from '../components/SearchBox';
 import { IMAGEASSETS } from '../assets/images';
 import {getAllAds} from '../controller/AdsController/GetAllAds';
+import {MyRooms} from '../controller/AdsController/MyRooms';
 
 function AdsList({navigation}) {
     const [search,setSeacrh]=useState('');
@@ -17,7 +18,8 @@ function AdsList({navigation}) {
       
   }
   useEffect(() => {
-     getAllAds(onRoomsRecieved)
+    getAllAds(onRoomsRecieved)
+    //MyRooms(onRoomsRecieved)
     }, []);
 
       const list = () => {

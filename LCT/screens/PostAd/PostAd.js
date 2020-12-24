@@ -18,8 +18,6 @@ import PostAds from '../../controller/AdsController/PostAds';
 
 
 function PostAd({route}){
-    console.warn(route)
-    
     const [owner,setOwner]=useState(route.params.apartment.Owner);
    // const [long,setLong]=useState('');
   //  const [lat,setLat]=useState('');
