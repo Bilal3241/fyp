@@ -1,13 +1,9 @@
-import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title ,Text} from 'native-base';
+import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title ,Text,Alert} from 'native-base';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-
-
 
 function AdsCard( {apartment,nav,path}){
     const EditIcon=() =>{
@@ -19,7 +15,7 @@ function AdsCard( {apartment,nav,path}){
     }
     const DeleteIcon=() =>{
         if (path=="myrooms") {
-            return(<IonIcons size={25} name="trash-sharp"></IonIcons>);
+            return(<IonIcons size={25} name="trash-sharp"onPress={()=>alert("are you sure you want to delete")}></IonIcons>);
         } else {
             return null;
         }

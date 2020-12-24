@@ -1,6 +1,6 @@
 import { Item, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import {FlatList, ImageBackground, ScrollView, StyleSheet} from 'react-native';
+import {ImageBackground, ScrollView, StyleSheet} from 'react-native';
 import AppButton from '../components/AppButton';
 import colors from '../config/colors';
 import AdsCard from '../components/AdsCard';
@@ -10,11 +10,9 @@ import {getAllAds} from '../controller/AdsController/GetAllAds';
 import {MyRooms} from '../controller/AdsController/MyRooms';
 
 function AdsList({navigation,route}) {
-  console.warn(route)
     const [search,setSeacrh]=useState('');
     const [roomsList,setRoomsList]=useState([]);
     const onRoomsRecieved=(roomsList)=>{
-      console.log(roomsList);
       setRoomsList(roomsList)
   }
   useEffect(() => {
