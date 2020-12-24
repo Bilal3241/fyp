@@ -5,14 +5,13 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
-function AdsCard( {apartment}){//{img, title, noOfRooms, location, price}) {
-    //console.log(img);source={apartment.img}
+function AdsCard( {apartment,nav}){
     return (
         <Card style={{ backgroundColor: "transparent" }}>
-            <CardItem style={styles.card} button onPress={()=>alert(apartment.Title)}>
+            <CardItem style={styles.card} button onPress={() => nav.push('PostAd',{apartment})}>
                 <Left>
                 <Thumbnail
-                source={apartment.Image}
+               // source={apartment.Image}
                 style={styles.pic}/>
                 <View style={styles.details}>
                     <Title style={styles.heading}>{apartment.Title}</Title>

@@ -16,16 +16,20 @@ import stylesheet from '../../assets/stylesheet/stylesheet';
 import PostAds from '../../controller/AdsController/PostAds';
 
 
-function PostAd(){
-    const [accountNum,setAccountNum]=useState('');
-    const [long,setLong]=useState('');
-    const [lat,setLat]=useState('');
-    const [desc,setDesc]=useState('');
+
+function PostAd({route}){
+    console.warn(route)
+    
+    const [owner,setOwner]=useState(route.params.apartment.Owner);
+   // const [long,setLong]=useState('');
+  //  const [lat,setLat]=useState('');
+    const [location,setLocation]=useState(route.params.apartment.Location)
+    const [desc,setDesc]=useState(route.params.apartment.Description);
     const [images,setImages]=useState('');
-    const [rent,setRent]=useState('');
-    const [title,setTitle]=useState('');
-    const [availability,setAvailability]=useState('');
-    const [rooms, setRooms]=useState('');
+    const [rent,setRent]=useState(route.params.apartment.Charges);
+    const [title,setTitle]=useState(route.params.apartment.Title);
+    const [availability,setAvailability]=useState(route.params.apartment.IsAvailable);
+    const [rooms, setRooms]=useState(route.params.apartment.NoOfRooms);
     const selectFromGallery=()=>{
         ImagePicker.openPicker({
             cropping: true
@@ -38,7 +42,7 @@ function PostAd(){
     }
     const postMyAd=()=>{
         var data={
-            Charges: rent, Description: desc, Images: images,  IsAvailable: availability,longitude: long, latitude: lat, NoOfRooms: rooms, Title: title, //account: accountNum, //owner: current User
+            Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title, //account: accountNum, //owner: current User
         }
         PostAds(data, adPosted);
     }
@@ -48,12 +52,14 @@ function PostAd(){
                 <View style={stylesheet.bgView}>
                 <Text style={styles.heading}>Post Your Add</Text>
                 <InputField st={title} setSt={setTitle} pholder='Title'></InputField>
-                <InputField st={accountNum} setSt={setAccountNum} pholder='Account Number' keyboardType="numeric"></InputField>
+                {/* <InputField st={accountNum} setSt={setAccountNum} pholder='Account Number' keyboardType="numeric"></InputField> */}
                 <InputField st={rooms} setSt={setRooms} pholder='No. of Rooms' keyboardType="numeric"></InputField>
-                <InputField st={lat} setSt={setLat} pholder='Latitude' keyboardType="numeric"></InputField>
-                <InputField st={long} setSt={setLong} pholder='Longitude' keyboardType="numeric"></InputField>
+                {/* <InputField st={lat} setSt={setLat} pholder='Latitude' keyboardType="numeric"></InputField>
+                <InputField st={long} setSt={setLong} pholder='Longitude' keyboardType="numeric"></InputField> */}
+                <InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric"></InputField>
                 <InputField cheight='20' st={desc} setSt={setDesc} pholder='Description'></InputField>
                 <InputField st={rent} setSt={setRent} pholder='Rent' keyboardType="numeric"></InputField>
+                <InputField st={owner} setSt={setOwner} pholder='Owner'></InputField>
                 <InputField st={availability} setSt={setAvailability} pholder='Is the apartment available(Y/N)?' ></InputField>
                 <TouchableOpacity onPress={selectFromGallery}>
                 <View style={styles.imgbg}> 
@@ -62,7 +68,7 @@ function PostAd(){
                     style={styles.img}/>
                 </View>
                 </TouchableOpacity>
-                <AppButton title="Post Ad" onPress={postMyAd}></AppButton>
+                <AppButton title="Submit Ad" onPress={postMyAd}></AppButton>
             </View>
             </ScrollView>
         </ImageBackground>

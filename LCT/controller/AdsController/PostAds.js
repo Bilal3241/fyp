@@ -2,12 +2,12 @@ import Firestore from '@react-native-firebase/firestore';
 
 function PostAds(adData, adPosted) {
     return (
-        Firestore().collection('Rooms').doc(adData.longitude+adData.latitude).set({
+        Firestore().collection('Rooms').doc(adData.Location).set({
             Charges: adData.Charges,
             Description: adData.Description,
             Images: adData.Images,
             IsAvailable: adData.IsAvailable,
-            Location:adData.longitude+','+adData.latitude,
+            Location:adData.Location,
             NoOfRooms:adData.NoOfRooms,
             Owner: "Bilal",
             Title:adData.Title,

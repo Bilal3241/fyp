@@ -9,7 +9,8 @@ import { IMAGEASSETS } from '../assets/images';
 import stylesheet from '../assets/stylesheet/stylesheet';
 
 
-function EditProfile({navigation}) {
+function EditProfile({route,navigation}) {
+    
 
     const [usrImg, setImg]=useState('');
     const [userName, setUsr]=useState('');

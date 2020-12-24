@@ -6,10 +6,9 @@ import colors from '../config/colors';
 import AdsCard from '../components/AdsCard';
 import SearchBox from '../components/SearchBox';
 import { IMAGEASSETS } from '../assets/images';
-import Firestore from '@react-native-firebase/firestore';
 import {getAllAds} from '../controller/AdsController/GetAllAds';
 
-function AdsList(props) {
+function AdsList({navigation}) {
     const [search,setSeacrh]=useState('');
     const [roomsList,setRoomsList]=useState([]);
     const onRoomsRecieved=(roomsList)=>{
@@ -24,7 +23,7 @@ function AdsList(props) {
       const list = () => {
         return roomsList.map((element) => {
           return (
-            <AdsCard apartment={element}></AdsCard>
+            <AdsCard apartment={element} nav={navigation}></AdsCard>
           );
         });
       };
