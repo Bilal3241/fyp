@@ -1,12 +1,12 @@
 import Firestore from '@react-native-firebase/firestore';
 
-function PostAds(adData, adPosted) {
-    
+function PostAds(adData,edit, adPosted) {
         Firestore().collection("Rooms").where("Location","==",adData.Location).get()
         .then(snap => {
             console.warn("size"+snap.size)
-        if(snap.size==0)
+        if(snap.size==0 || edit=="myrooms")
         {
+            
             Firestore().collection('Rooms').doc(adData.Location).set({
                 Charges: adData.Charges,
                 Description: adData.Description,
@@ -23,10 +23,12 @@ function PostAds(adData, adPosted) {
             .catch(function(error) {
                 console.error("Error writing document: ", error);
             })
+           
         }else{
             console.warn("already exist")
         }
-    })
+     })
+            
     
     return;
     

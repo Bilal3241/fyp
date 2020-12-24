@@ -38,7 +38,7 @@ function AdsList({navigation,route}) {
         source={IMAGEASSETS.museumBg}
         style={styles.background}>
             <View style={styles.bg}>
-                <AppButton title='Post your Ad' press={()=>alert("pressed")}></AppButton>
+                <AppButton title='Post your Ad' onPress={()=>navigation.navigate('PostAd',{apartment:""})}></AppButton>
                 <SearchBox st={search} setSt={setSeacrh}/>
                 <ScrollView> 
                    {list()}

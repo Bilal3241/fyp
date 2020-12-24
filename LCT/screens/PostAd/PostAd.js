@@ -18,6 +18,7 @@ import PostAds from '../../controller/AdsController/PostAds';
 
 
 function PostAd({route}){
+    //console.warn("params"+route.params.path)
     const [owner,setOwner]=useState(route.params.apartment.Owner);
    // const [long,setLong]=useState('');
   //  const [lat,setLat]=useState('');
@@ -39,10 +40,11 @@ function PostAd({route}){
     const adPosted=()=>{
     }
     const postMyAd=()=>{
+        var edit=route.params.path
         var data={
             Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title, //account: accountNum, //owner: current User
         }
-        PostAds(data, adPosted);
+        PostAds(data,edit, adPosted);
     }
     return(
         <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}> 
