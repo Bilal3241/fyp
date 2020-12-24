@@ -1,6 +1,6 @@
 import React from 'react';
 import CircleImage from '../components/CircleImage';
-import {ImageBackground,StyleSheet, View} from 'react-native';
+import {ImageBackground,StyleSheet, View,Button} from 'react-native';
 import Circle from '../components/Circle';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import colors from '../config/colors';
@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {IMAGEASSETS} from "../assets/images";
 import stylesheet from '../assets/stylesheet/stylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AppButton from '../components/AppButton';
 
 function Home({route, navigation}) {
     var show = () => {
@@ -19,6 +20,8 @@ function Home({route, navigation}) {
             <View style={stylesheet.bgView}>
                 <View style={styles.icon}>
                     <Icon name="menu-outline" size={50} color="white"></Icon> 
+                    <Button title="My Rooms" onPress={()=>navigation.navigate('AdsList',{page:"myrooms"})} ></Button>
+
                 </View>
                 <View style={styles.hotelnRes}>
                     <Circle fn={show} title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
@@ -33,7 +36,7 @@ function Home({route, navigation}) {
                     <Circle fn={show} title="Nearby Attractions" color="rgba(56,162,222,0.7)" size="25%"></Circle>
                 </View>
                 <View style={styles.reservations}>
-                    <Circle fn={show} title="Reservations" color="rgba(29,208,248,0.7)" size="20%"></Circle>
+                    <Circle fn={()=>navigation.navigate('AdsList',{page:"allRooms"})} title="Reservations" color="rgba(29,208,248,0.7)" size="20%"></Circle>
                 </View> 
             </View>
         </ImageBackground>

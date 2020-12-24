@@ -5,7 +5,7 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
-function AdsCard( {apartment,nav}){
+function AdsCard( {apartment,nav,path}){
     return (
         <Card style={{ backgroundColor: "transparent" }}>
             <CardItem style={styles.card} button onPress={() => nav.push('PostAd',{apartment})}>

@@ -9,23 +9,27 @@ import { IMAGEASSETS } from '../assets/images';
 import {getAllAds} from '../controller/AdsController/GetAllAds';
 import {MyRooms} from '../controller/AdsController/MyRooms';
 
-function AdsList({navigation}) {
+function AdsList({navigation,route}) {
+  console.warn(route)
     const [search,setSeacrh]=useState('');
     const [roomsList,setRoomsList]=useState([]);
     const onRoomsRecieved=(roomsList)=>{
       console.log(roomsList);
       setRoomsList(roomsList)
-      
   }
   useEffect(() => {
-    getAllAds(onRoomsRecieved)
-    //MyRooms(onRoomsRecieved)
+    if(route.params.page=="allRooms"){
+      getAllAds(onRoomsRecieved)
+    }
+    else{
+      MyRooms(onRoomsRecieved)
+    }
     }, []);
 
       const list = () => {
         return roomsList.map((element) => {
           return (
-            <AdsCard apartment={element} nav={navigation}></AdsCard>
+            <AdsCard apartment={element} nav={navigation} path={route}></AdsCard>
           );
         });
       };
