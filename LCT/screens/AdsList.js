@@ -11,19 +11,6 @@ import {getAllAds} from '../controller/AdsController/GetAllAds';
 
 function AdsList(props) {
     const [search,setSeacrh]=useState('');
-    //    const [objLoop,seObjLoop]=useState([]);
-    // useEffect(() => {
-    //   Firestore().collection("Rooms").get().then((snapshot)=> {
-    //     snapshot.docs.forEach(doc=> {
-    //     objLoop.push(doc.data())
-    //     });
-    //     seObjLoop(objLoop)
-    // })
-    // }, []);    
-    // console.warn(objLoop)
-    // const [groceryList, setGroceryList] = useState();
-    // const [error, setError] = useState();
-
     const [roomsList,setRoomsList]=useState([]);
     const onRoomsRecieved=(roomsList)=>{
       console.log(roomsList);
@@ -33,15 +20,6 @@ function AdsList(props) {
   useEffect(() => {
      getAllAds(onRoomsRecieved)
     }, []);
-
-
-
-
-
-
-
-
-
 
       const list = () => {
         return roomsList.map((element) => {
