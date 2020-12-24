@@ -7,27 +7,29 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import ImgPicker from '../components/ImgPicker';
 import { IMAGEASSETS } from '../assets/images';
 import stylesheet from '../assets/stylesheet/stylesheet';
+import PostUsers from '../controller/AdsController/PostUsers';
 
-
-function EditProfile({route,navigation}) {
-    
-
-    const [usrImg, setImg]=useState('');
-    const [userName, setUsr]=useState('');
-    const [email, setMail]=useState('');
+function EditProfile({route, navigation}) {
+    const [userName, setUsr]=useState(route.params.name);
+    const [email, setMail]=useState(route.params.email);
     const [accountNum, setAccontNum]=useState('');
     const [contact, setContact]=useState('');
+    function Users() {
+        var data={name:route.params.name,email:route.params.email,acc:accountNum,num:contact,photo:route.params.photo};
+        PostUsers(data);
+    }
     return (
         <ImageBackground
         source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>
             <View style={stylesheet.bgView}>
             <Text style={styles.heading}>Edit Profile</Text>
-            <ImgPicker/>
-            <InputField pholder='name' st={userName} setSt={setUsr} ></InputField>
-            <InputField pholder='email' st={email} setSt={setMail} keyboardType="email-address" ></InputField>
-            <InputField pholder='Contact number' st={accountNum} setSt={setAccontNum} keyboardType="numeric" ></InputField>
-            <InputField pholder='Account number' st={contact} setSt={setContact} ></InputField>
-            <AppButton title="Update" press={()=>alert("pressed")}></AppButton>
+            {/* <ImgPicker/> */}
+            <Image style={{height:100, width:100,borderRadius:50}} source={{uri:route.params.photo}} />
+            <InputField pholder='name' st={userName} setSt={setUsr} editable={false} ></InputField>
+            <InputField pholder='email' st={email} setSt={setMail} keyboardType="email-address" editable={false}></InputField>
+            <InputField pholder='Account number' st={accountNum} setSt={setAccontNum}  ></InputField>
+            <InputField pholder='Contact number' st={contact} setSt={setContact} keyboardType="numeric" ></InputField>
+            <AppButton title="Update" onPress={Users}></AppButton>
             </View>
          </ImageBackground>
     );

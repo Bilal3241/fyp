@@ -10,7 +10,7 @@ import stylesheet from '../assets/stylesheet/stylesheet';
 function Splash({navigation}) {
     useEffect(()=>{
         setTimeout(()=>{
-            navigation.replace('Home')
+            navigation.replace('SignupScreen')
         },2000);
     },[])
     return (

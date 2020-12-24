@@ -21,18 +21,22 @@ function SignupScreen({navigation}) {
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     }, []);
-
+    useEffect(() => {
+      GoogleSignin.configure({
+        webClientId:
+          '784726338195-haen1toc5ficjmv64ssp31mtet4sa3vk.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+        offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+      });
+    }, []);
     _signIn = async () => {
         try {
           await GoogleSignin.hasPlayServices();
           const {accessToken, idToken} = await GoogleSignin.signIn();
           const googleCredential=auth.GoogleAuthProvider.credential(idToken);
           setloggedIn(true);
-          alert('signed in');
           auth().signInWithCredential(googleCredential);
           let data={name:userInfo._user.displayName,email:userInfo._user.email, photo:userInfo._user.photoURL};
-          console.log(data);
-          navigation.push('Home',data);//move to home screen
+          navigation.replace('EditProfile',data);//move to home screen
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow
@@ -48,14 +52,6 @@ function SignupScreen({navigation}) {
           }
         }
       };
-      useEffect(() => {
-        GoogleSignin.configure({
-          webClientId:
-            '784726338195-haen1toc5ficjmv64ssp31mtet4sa3vk.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-          offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-        });
-      }, []);
-      
     signOut = async () => {
       try {
         await GoogleSignin.revokeAccess();
