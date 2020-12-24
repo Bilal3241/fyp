@@ -27,7 +27,7 @@ const App = () => {
         <Stack.Screen name='ReserveRoom' component={ReserveRoom} />
       </Stack.Navigator>
 
-
+  
       {/* <Drawer.Navigator  drawerContent={props => <DrawerScreen {...props}/>}>
         <Drawer.Screen name="EditProfile" component={EditProfile} />
         <Drawer.Screen name="Splash" component={Splash}/>

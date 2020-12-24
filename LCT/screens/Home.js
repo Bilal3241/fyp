@@ -18,7 +18,7 @@ function Home({route, navigation}) {
         <ImageBackground style={stylesheet.backgroundImage}  source={IMAGEASSETS.backgroundImage} resizeMode="stretch">
             <View style={stylesheet.bgView}>
                 <View style={styles.icon}>
-                    <Icon name="menu-outline" size={50} color="white" onPress={() => navigation.openDrawer()}></Icon> 
+                    <Icon name="menu-outline" size={50} color="white"></Icon> 
                 </View>
                 <View style={styles.hotelnRes}>
                     <Circle fn={show} title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
