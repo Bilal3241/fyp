@@ -29,7 +29,7 @@ function AdsList({navigation,route}) {
       const list = () => {
         return roomsList.map((element) => {
           return (
-            <AdsCard apartment={element} nav={navigation} path={route}></AdsCard>
+            <AdsCard apartment={element} nav={navigation} path={route.params.page}></AdsCard>
           );
         });
       };

@@ -1,14 +1,33 @@
-import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title } from 'native-base';
+import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title ,Text} from 'native-base';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
+
 
 function AdsCard( {apartment,nav,path}){
+    const EditIcon=() =>{
+        if (path=="myrooms") {
+            return( <IonIcons size={25} name="create-sharp" onPress={() => nav.push('PostAd',{apartment})} ></IonIcons>);
+        } else {
+            return null;
+        }
+    }
+    const DeleteIcon=() =>{
+        if (path=="myrooms") {
+            return(<IonIcons size={25} name="trash-sharp"></IonIcons>);
+        } else {
+            return null;
+        }
+    }
+  
     return (
         <Card style={{ backgroundColor: "transparent" }}>
-            <CardItem style={styles.card} button onPress={() => nav.push('PostAd',{apartment})}>
+            <CardItem style={styles.card} button onPress={() => alert("pressed")}>
                 <Left>
                 <Thumbnail
                // source={apartment.Image}
@@ -21,6 +40,9 @@ function AdsCard( {apartment,nav,path}){
                 </Left>
                 <Right>
                     <Subtitle style={styles.fare}> ${apartment.Charges}</Subtitle>
+                    <View>
+                    <EditIcon></EditIcon><DeleteIcon></DeleteIcon>
+                    </View>
                 </Right>
             </CardItem>
         </Card>
