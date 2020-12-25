@@ -1,11 +1,21 @@
-import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title ,Text,Alert} from 'native-base';
+import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title } from 'native-base';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View,Alert} from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
 function AdsCard( {apartment,nav,path}){
+    const alertButton=()=>{
+        Alert.alert(
+            'Delete Ad',
+            'Are you sure you want to delete?',
+            [
+              {text: 'NO'},
+              {text: 'YES', onPress: () => console.warn('YES Pressed')},
+            ]
+          );
+        }
     const EditIcon=() =>{
         if (path=="myrooms") {
             return(<IonIcons size={25} name="create-sharp" onPress={() => nav.push('PostAd',{apartment,path})} ></IonIcons>);
@@ -15,12 +25,11 @@ function AdsCard( {apartment,nav,path}){
     }
     const DeleteIcon=() =>{
         if (path=="myrooms") {
-            return(<IonIcons size={25} name="trash-sharp"onPress={()=>alert("are you sure you want to delete")}></IonIcons>);
+            return(<IonIcons size={25} name="trash-sharp"onPress={alertButton}></IonIcons>);
         } else {
             return null;
         }
     }
-  
     return (
         <Card style={{ backgroundColor: "transparent" }}>
             <CardItem style={styles.card} button onPress={() => alert("pressed")}>
