@@ -14,13 +14,21 @@ import { IMAGEASSETS } from '../assets/images';
 
 function SignupScreen({navigation}) {
     const [loggedIn, setloggedIn] = useState(false);
-    const [userInfo, setuserInfo] = useState([]);
+    const [userInfo, setuserInfo] = useState(null);
     function onAuthStateChanged(userInfo) {
       setuserInfo(userInfo);
     }
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    }, []);
+      console.log('subscriber');
+    }, [loggedIn]);
+    useEffect(() => {
+      if (userInfo !== null) {
+        let data={name:userInfo._user.displayName,email:userInfo._user.email, photo:userInfo._user.photoURL};
+        navigation.replace('EditProfile',data);//move to home screen
+      }
+      else{console.log(userInfo);}
+    }, [userInfo]);
     useEffect(() => {
       GoogleSignin.configure({
         webClientId:
@@ -35,8 +43,6 @@ function SignupScreen({navigation}) {
           const googleCredential=auth.GoogleAuthProvider.credential(idToken);
           setloggedIn(true);
           auth().signInWithCredential(googleCredential);
-          let data={name:userInfo._user.displayName,email:userInfo._user.email, photo:userInfo._user.photoURL};
-          navigation.replace('EditProfile',data);//move to home screen
         } catch (error) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // user cancelled the login flow
