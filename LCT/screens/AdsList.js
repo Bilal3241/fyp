@@ -13,7 +13,8 @@ function AdsList({navigation,route}) {
     const [search,setSeacrh]=useState('');
     const [roomsList,setRoomsList]=useState([]);
     const onRoomsRecieved=(roomsList)=>{
-      setRoomsList(roomsList)
+     
+     setRoomsList(roomsList)
   }
   useEffect(() => {
     if(route.params.page=="allRooms"){

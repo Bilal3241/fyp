@@ -1,18 +1,23 @@
 import { Card, CardItem, Left, Right, Subtitle, Thumbnail, Title } from 'native-base';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {StyleSheet, View,Alert} from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import DeleteAd from '../controller/AdsController/DeleteAd';
 
 function AdsCard( {apartment,nav,path}){
-    const alertButton=()=>{
+        const deleteAd=()=>{
+            var loc=apartment.Location;
+            DeleteAd(loc);
+        }
+        const alertButton=()=>{
         Alert.alert(
             'Delete Ad',
             'Are you sure you want to delete?',
             [
               {text: 'NO'},
-              {text: 'YES', onPress: () => console.warn('YES Pressed')},
+              {text: 'YES', onPress:deleteAd()},
             ]
           );
         }
@@ -25,7 +30,7 @@ function AdsCard( {apartment,nav,path}){
     }
     const DeleteIcon=() =>{
         if (path=="myrooms") {
-            return(<IonIcons size={25} name="trash-sharp"onPress={alertButton}></IonIcons>);
+            return(<IonIcons size={25} name="trash-sharp" onPress={alertButton}></IonIcons>);
         } else {
             return null;
         }
