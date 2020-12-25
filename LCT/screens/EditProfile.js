@@ -16,8 +16,10 @@ function EditProfile({route, navigation}) {
     const [contact, setContact]=useState('');
     function Users() {
         var data={name:route.params.name,email:route.params.email,acc:accountNum,num:contact,photo:route.params.photo};
-        PostUsers(data);
-        navigation.navigate("Home")
+        PostUsers(data).then(function() {
+            navigation.navigate("Home");
+        }) 
+       
     }
     return (
         <ImageBackground

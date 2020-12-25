@@ -22,14 +22,14 @@ function PostAd({route}){
         if (route.params.path=="myrooms") {
             return(<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric" editable={false}></InputField>)
         }else{
-            return (<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric" keyboardShouldPersistTaps='handled'></InputField>)
+            return (<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric"></InputField>)
         }
     }
     var user=firebase.auth().currentUser;
     const [owner,setOwner]=useState(user.email);
    // const [long,setLong]=useState('');
   //  const [lat,setLat]=useState('');
-    const [location,setLocation]=useState(route.params.apartment.Location)
+    const [location,setLocation]=useState(route.params.apartment.Location);
     const [desc,setDesc]=useState(route.params.apartment.Description);
     const [images,setImages]=useState('');
     const [rent,setRent]=useState(route.params.apartment.Charges);
@@ -47,7 +47,7 @@ function PostAd({route}){
     const adPosted=()=>{
     }
     const postMyAd=()=>{
-        var edit=route.params.path
+        var edit=route.params.path;
         var data={
             Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title, //account: accountNum, //owner: current User
         }

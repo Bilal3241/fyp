@@ -9,10 +9,10 @@ function PostUsers(data) {
             PhoneNo:data.num,
             AccountNo:data.acc,
         }).then(function() {
-            alert("Document successfully written!");
+            console.log("Document successfully written!");
         })
         .catch(function(error) {
-            alert("Error writing document: ", error);
+            console.log("Error writing document: ", error);
         })
     );
 }

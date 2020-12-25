@@ -1,7 +1,6 @@
 import Firestore from '@react-native-firebase/firestore';
 
 function DeleteAd(location) {
-    console.warn("delete"+location)
     return (
         
         Firestore().collection("Rooms").doc(location).delete().then(function() {
