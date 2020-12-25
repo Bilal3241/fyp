@@ -14,15 +14,22 @@ import {
 import colors from '../../config/colors';
 import stylesheet from '../../assets/stylesheet/stylesheet';
 import PostAds from '../../controller/AdsController/PostAds';
-
+import { firebase } from '@react-native-firebase/firestore';
 
 
 function PostAd({route}){
-    //console.warn("params"+route.params.path)
-    const [owner,setOwner]=useState(route.params.apartment.Owner);
+    const LocRead=() =>{
+        if (route.params.path=="myrooms") {
+            return(<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric" editable={false}></InputField>)
+        }else{
+            return (<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric"></InputField>)
+        }
+    }
+    var user=firebase.auth().currentUser;
+    const [owner,setOwner]=useState(user.email);
    // const [long,setLong]=useState('');
   //  const [lat,setLat]=useState('');
-    const [location,setLocation]=useState(route.params.apartment.Location)
+    const [location,setLocation]=useState(route.params.apartment.Location);
     const [desc,setDesc]=useState(route.params.apartment.Description);
     const [images,setImages]=useState('');
     const [rent,setRent]=useState(route.params.apartment.Charges);
@@ -40,7 +47,7 @@ function PostAd({route}){
     const adPosted=()=>{
     }
     const postMyAd=()=>{
-        var edit=route.params.path
+        var edit=route.params.path;
         var data={
             Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title, //account: accountNum, //owner: current User
         }
@@ -56,10 +63,10 @@ function PostAd({route}){
                 <InputField st={rooms} setSt={setRooms} pholder='No. of Rooms' keyboardType="numeric"></InputField>
                 {/* <InputField st={lat} setSt={setLat} pholder='Latitude' keyboardType="numeric"></InputField>
                 <InputField st={long} setSt={setLong} pholder='Longitude' keyboardType="numeric"></InputField> */}
-                <InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric"></InputField>
+                <LocRead></LocRead>
                 <InputField cheight='20' st={desc} setSt={setDesc} pholder='Description'></InputField>
                 <InputField st={rent} setSt={setRent} pholder='Rent' keyboardType="numeric"></InputField>
-                <InputField st={owner} setSt={setOwner} pholder='Owner'></InputField>
+                <InputField st={owner} setSt={setOwner} pholder='Owner' editable={false}></InputField>
                 <InputField st={availability} setSt={setAvailability} pholder='Is the apartment available(Y/N)?' ></InputField>
                 <TouchableOpacity onPress={selectFromGallery}>
                 <View style={styles.imgbg}> 

@@ -1,6 +1,6 @@
 import { Item, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import {ImageBackground, ScrollView, StyleSheet} from 'react-native';
+import {ImageBackground, ScrollView, StyleSheet,FlatList} from 'react-native';
 import AppButton from '../components/AppButton';
 import colors from '../config/colors';
 import AdsCard from '../components/AdsCard';
@@ -12,8 +12,10 @@ import {MyRooms} from '../controller/AdsController/MyRooms';
 function AdsList({navigation,route}) {
     const [search,setSeacrh]=useState('');
     const [roomsList,setRoomsList]=useState([]);
+    const [deleteAd,isDeletedAd]=useState(false);
     const onRoomsRecieved=(roomsList)=>{
-      setRoomsList(roomsList)
+     
+     setRoomsList(roomsList)
   }
   useEffect(() => {
     if(route.params.page=="allRooms"){
@@ -22,17 +24,8 @@ function AdsList({navigation,route}) {
     else{
       MyRooms(onRoomsRecieved)
     }
-    }, []);
-
-      const list = () => {
-        return roomsList.map((element) => {
-          return (
-            <AdsCard apartment={element} nav={navigation} path={route.params.page}></AdsCard>
-          );
-        });
-      };
-    
-    return (
+    }, [deleteAd]);
+      return (
        
         <ImageBackground 
         source={IMAGEASSETS.museumBg}
@@ -40,9 +33,12 @@ function AdsList({navigation,route}) {
             <View style={styles.bg}>
                 <AppButton title='Post your Ad' onPress={()=>navigation.navigate('PostAd',{apartment:""})}></AppButton>
                 <SearchBox st={search} setSt={setSeacrh}/>
-                <ScrollView> 
-                   {list()}
-                </ScrollView>
+                  <FlatList 
+                    keyExtractor={(item)=>item.Location}
+                    data={roomsList}
+                    renderItem={({item})=>(
+                      <AdsCard apartment={item} nav={navigation} path={route.params.page} deleteStatefn={isDeletedAd} deleteState={deleteAd}></AdsCard>
+                  )}/>
                </View>
         </ImageBackground>
     );
