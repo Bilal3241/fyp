@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import AppButton from '../components/AppButton';
 import InputField from '../components/InputField';
@@ -8,6 +8,7 @@ import ImgPicker from '../components/ImgPicker';
 import { IMAGEASSETS } from '../assets/images';
 import stylesheet from '../assets/stylesheet/stylesheet';
 import PostUsers from '../controller/AdsController/PostUsers';
+import Firestore from '@react-native-firebase/firestore';
 
 function EditProfile({route, navigation}) {
     const [userName, setUsr]=useState(route.params.name);
@@ -17,10 +18,19 @@ function EditProfile({route, navigation}) {
     function Users() {
         var data={name:route.params.name,email:route.params.email,acc:accountNum,num:contact,photo:route.params.photo};
         PostUsers(data).then(function() {
-            navigation.navigate("Home");
+            navigation.push("Home");
         }) 
-       
     }
+    useEffect(() => {
+        var currentUser= Firestore().collection('Users').doc(route.params.email);
+        currentUser.get()
+        .then((docSnapshot) => {
+        if (docSnapshot.exists && route.params.edit == false)
+            {
+            navigation.push("Home");
+            }
+        })
+    }, []);
     return (
         <ImageBackground
         source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>
