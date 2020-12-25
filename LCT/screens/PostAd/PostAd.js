@@ -22,7 +22,7 @@ function PostAd({route}){
         if (route.params.path=="myrooms") {
             return(<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric" editable={false}></InputField>)
         }else{
-            return (<InputField st={location} setSt={setLocation} pholder='Location'keyboardType="numeric" ></InputField>)
+            return (<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric" keyboardShouldPersistTaps='handled'></InputField>)
         }
     }
     var user=firebase.auth().currentUser;

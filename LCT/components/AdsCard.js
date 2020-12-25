@@ -6,10 +6,15 @@ import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import DeleteAd from '../controller/AdsController/DeleteAd';
 
-function AdsCard( {apartment,nav,path}){
+function AdsCard({apartment,nav,path,deleteStatefn,deleteState}){
         const deleteAd=()=>{
             var loc=apartment.Location;
             DeleteAd(loc);
+            if(deleteState==true){
+                deleteStatefn(false);
+            }else{
+                deleteStatefn(true);
+            }
         }
         const alertButton=()=>{
         Alert.alert(
@@ -17,7 +22,7 @@ function AdsCard( {apartment,nav,path}){
             'Are you sure you want to delete?',
             [
               {text: 'NO'},
-              {text: 'YES', onPress:deleteAd()},
+              {text: 'YES', onPress:deleteAd},
             ]
           );
         }
