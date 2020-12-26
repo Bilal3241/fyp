@@ -29,6 +29,12 @@ function EditProfile({route, navigation}) {
             {
             navigation.push("Home");
             }
+        else {
+            if (docSnapshot.exists && route.params.edit == true) {
+                setAccontNum(route.params.accountNo);
+                setContact(route.params.contactNo);
+            }
+        }
         })
     }, []);
     return (
