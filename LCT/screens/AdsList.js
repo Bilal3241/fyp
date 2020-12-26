@@ -1,6 +1,6 @@
 import { Item, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import {ImageBackground, ScrollView, StyleSheet,FlatList} from 'react-native';
+import {ImageBackground, StyleSheet,FlatList} from 'react-native';
 import AppButton from '../components/AppButton';
 import colors from '../config/colors';
 import AdsCard from '../components/AdsCard';
@@ -32,14 +32,16 @@ function AdsList({navigation,route}) {
         style={styles.background}>
             <View style={styles.bg}>
                 <AppButton title='Post your Ad' onPress={()=>navigation.navigate('PostAd',{apartment:""})}></AppButton>
-                <SearchBox st={search} setSt={setSeacrh}/>
-                  <FlatList 
+                <View style={styles.margin}>
+                  <SearchBox/>
+                </View>
+                <FlatList 
                     keyExtractor={(item)=>item.Location}
                     data={roomsList}
                     renderItem={({item})=>(
                       <AdsCard apartment={item} nav={navigation} path={route.params.page} deleteStatefn={isDeletedAd} deleteState={deleteAd}></AdsCard>
                   )}/>
-               </View>
+                </View>
         </ImageBackground>
     );
 }
@@ -56,5 +58,8 @@ const styles = StyleSheet.create({
         height:'100%',
         paddingHorizontal:'5%',
     },
+    margin:{
+      marginBottom:"2%",
+    }
 })
 export default AdsList;

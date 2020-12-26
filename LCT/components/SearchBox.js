@@ -1,19 +1,25 @@
 import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
+import {Header,Item,Input, View} from 'native-base';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import { View } from 'native-base';
-function SearchBox(st, setSt) {
+function SearchBox(props) {
     return (
-        <View style={styles.view}>
-            <TextInput
-            style={styles.search}
-            placeholder='Seacrh'
-            placeholderTextColor={colors.white}  
-            onChangeText={st=>setSt(st)}
-            defaultValue={st}/>
-            <IonIcons style={styles.icon} color={colors.white} size={25} name="search-outline"></IonIcons>
+        // <View style={styles.view}>
+        //     <TextInput
+        //     style={styles.search}
+        //     placeholder='Seacrh'
+        //     placeholderTextColor={colors.white}  
+        //     onChangeText={st=>setSt(st)}
+        //     defaultValue={st}/>
+        //     <IonIcons style={styles.icon} color={colors.white} size={25} name="search-outline"></IonIcons>
+        // </View>
+        <View rounded searchBar style={styles.view} >
+            <Item>
+            <IonIcons style={styles.icon} size={30} name="search-outline"></IonIcons>
+            <Input  placeholder="Search here" style={styles.search}></Input>
+            </Item>
         </View>
         
     );
@@ -21,20 +27,16 @@ function SearchBox(st, setSt) {
 
 export default SearchBox;
 const styles = StyleSheet.create({
-    view:{
-        flexDirection:'row',
+    icon:{
+        color:colors.black,
+        paddingLeft:"3%",
     },
     search:{
-        borderBottomWidth:2,
-        borderColor: colors.white,
-        paddingLeft:'3%',
-        marginVertical:'2%',
-        color:colors.white,
-        width: widthPercentageToDP('80%'),
-        height: heightPercentageToDP('6%'),
+        color:colors.black,
     },
-    icon:{
-        top:heightPercentageToDP('2%')
+    view:{
+        backgroundColor:colors.white,
     }
+   
     
 })
