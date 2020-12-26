@@ -8,8 +8,9 @@ import SearchBox from '../components/SearchBox';
 import { IMAGEASSETS } from '../assets/images';
 import {getAllAds} from '../controller/AdsController/GetAllAds';
 import {MyRooms} from '../controller/AdsController/MyRooms';
-
+import Firestore, { firebase } from '@react-native-firebase/firestore';
 function AdsList({navigation,route}) {
+  
     const [search,setSeacrh]=useState('');
     const [roomsList,setRoomsList]=useState([]);
     const [deleteAd,isDeletedAd]=useState(false);
@@ -37,7 +38,12 @@ function AdsList({navigation,route}) {
                     keyExtractor={(item)=>item.Location}
                     data={roomsList}
                     renderItem={({item})=>(
-                      <AdsCard apartment={item} nav={navigation} path={route.params.page} deleteStatefn={isDeletedAd} deleteState={deleteAd}></AdsCard>
+                      <AdsCard 
+                      apartment={item} 
+                      nav={navigation} 
+                      path={route.params.page} 
+                      deleteStatefn={isDeletedAd} 
+                      deleteState={deleteAd}></AdsCard>
                   )}/>
                </View>
         </ImageBackground>
