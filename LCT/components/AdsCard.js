@@ -40,11 +40,9 @@ function AdsCard({apartment,nav,path,deleteStatefn,deleteState}){
             return null;
         }
     }
-    //const data={apartment};
-   
     return (
         <Card style={{ backgroundColor: "transparent" }}>
-            <CardItem style={styles.card} button  onPress={()=>nav.navigate('AdsDetails',{apartment})}>
+            <CardItem style={styles.card} button onPress={() => alert("pressed")}>
                 <Left>
                 <Thumbnail
                // source={apartment.Image}
