@@ -18,10 +18,6 @@ function AdsList({navigation,route}) {
       setRoomsList(roomsList)
       setSearch(roomsList)
   }
-//   const searchFilter=(textToSearch)=>{
-//      setSearch(roomsList.filter(i=>i.Title.toLowerCase().includes(textToSearch.toLowerCase()),),
-//    )
-// };
   useEffect(() => {
     if(route.params.page=="allRooms"){
       getAllAds(onRoomsRecieved)
