@@ -17,7 +17,7 @@ function Home({route, navigation}) {
 
     return (
         <ImageBackground style={stylesheet.backgroundImage}  source={IMAGEASSETS.backgroundImage} resizeMode="stretch">
-            <View style={stylesheet.bgView}>
+            <View style={stylesheet.bgView} resizeMode="contain">
                 <View style={styles.icon}>
                     <Icon name="menu-outline" size={50} color="white"></Icon> 
                     <Button title="My Rooms" onPress={()=>navigation.navigate('AdsList',{page:"myrooms"})} ></Button>
