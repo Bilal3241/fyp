@@ -44,8 +44,12 @@ function AdsList({navigation,route}) {
                     keyExtractor={(item)=>item.Location}
                     data={search}
                     renderItem={({item})=>(
-                      <AdsCard apartment={item} nav={navigation} path={route.params.page} deleteStatefn={isDeletedAd} deleteState={deleteAd}></AdsCard>
-                  )}/>
+                      <AdsCard 
+                      apartment={item} 
+                      nav={navigation} 
+                      path={route.params.page} 
+                      deleteStatefn={isDeletedAd} 
+                      deleteState={deleteAd}></AdsCard>                  )}/>
                 </View>
         </ImageBackground>
     );
