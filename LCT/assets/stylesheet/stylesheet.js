@@ -10,6 +10,7 @@ const styles=StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems:"center",
+      
     },
     bgView:{
         flex:1,
@@ -18,7 +19,8 @@ const styles=StyleSheet.create({
         alignItems:'center',
         width:'100%',
         height:'100%',
-        paddingHorizontal:widthPercentageToDP('10%'),
+      
+       paddingHorizontal:widthPercentageToDP('10%'),
     }
 });
 export default styles;

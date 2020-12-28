@@ -16,5 +16,4 @@ function PostReview(data) {
         })
     );
 }
-
 export default PostReview;

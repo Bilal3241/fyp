@@ -18,7 +18,7 @@ function EditProfile({route, navigation}) {
     function Users() {
         var data={name:route.params.name,email:route.params.email,acc:accountNum,num:contact,photo:route.params.photo};
         PostUsers(data).then(function() {
-            navigation.push("Home");
+            navigation.replace("Home");
         }) 
     }
     useEffect(() => {
@@ -27,7 +27,7 @@ function EditProfile({route, navigation}) {
         .then((docSnapshot) => {
         if (docSnapshot.exists && route.params.edit == false)
             {
-            navigation.push("Home");
+                navigation.replace("Home");
             }
         else {
             if (docSnapshot.exists && route.params.edit == true) {
