@@ -10,7 +10,6 @@ var snapshot = await firebase.firestore()
  snapshot.forEach((doc)=>{
     roomsList.push(doc.data());
  });
-console.warn(roomsList);
 roomsRetrevived(roomsList);
 
 }
