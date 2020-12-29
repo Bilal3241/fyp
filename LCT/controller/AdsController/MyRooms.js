@@ -5,7 +5,7 @@ var user=firebase.auth().currentUser;
 
 const roomsList=[];
 var snapshot = await firebase.firestore()
-.collection('Rooms').where("Owner", "==", "anzala").get()
+.collection('Rooms').where("Owner", "==", user.email).get()
 
  snapshot.forEach((doc)=>{
     roomsList.push(doc.data());

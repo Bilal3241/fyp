@@ -49,7 +49,7 @@ function PostAd({route}){
     const postMyAd=()=>{
         var edit=route.params.path;
         var data={
-            Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title, //account: accountNum, //owner: current User
+            Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title,email:user.email, //account: accountNum, //owner: current User
         }
         PostAds(data,edit, adPosted);
     }

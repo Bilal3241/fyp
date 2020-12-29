@@ -11,6 +11,7 @@ import PostUsers from '../controller/AdsController/PostUsers';
 import Firestore from '@react-native-firebase/firestore';
 
 function EditProfile({route, navigation}) {
+    console.log(route);
     const [userName, setUsr]=useState(route.params.name);
     const [email, setMail]=useState(route.params.email);
     const [accountNum, setAccontNum]=useState('');
@@ -21,22 +22,21 @@ function EditProfile({route, navigation}) {
             navigation.replace("Home");
         }) 
     }
-    useEffect(() => {
-        var currentUser= Firestore().collection('Users').doc(route.params.email);
-        currentUser.get()
-        .then((docSnapshot) => {
-        if (docSnapshot.exists && route.params.edit == false)
-            {
+    var currentUser= Firestore().collection('Users').doc(route.params.email);
+    currentUser.get()
+    .then((docSnapshot) => {
+        if (docSnapshot.exists && route.params.edit == false){
+                console.log('moving to home');
                 navigation.replace("Home");
-            }
+        }
         else {
             if (docSnapshot.exists && route.params.edit == true) {
+                console.log('edit triggered');
                 setAccontNum(route.params.accountNo);
                 setContact(route.params.contactNo);
             }
         }
-        })
-    }, []);
+    })
     return (
         <ImageBackground
         source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>

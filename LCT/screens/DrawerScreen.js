@@ -7,11 +7,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import Logo from '../components/Logo';
-import EditProfile from '../controller/AdsController/EditProfile';
+import Firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 
 function DrawerScreen(props) {
-    var userData=EditProfile();
+    
     
     return (
         <View style={styles.container}>
@@ -29,7 +30,20 @@ function DrawerScreen(props) {
                 <Icon name="person-outline" color={color} size={size}/>
                 )}
                 label="Profile"
-                onPress={() => {props.navigation.navigate('EditProfile',userData)}}/>
+                onPress={() => {
+                    // var userData=EditProfileFn();
+                    var data={};
+                    var user = auth().currentUser;
+                    var ref= Firestore().collection('Users').doc(user.email);
+                    ref.get().then((docSnapshot) => {
+                        if (docSnapshot.exists) {
+                            var userData=docSnapshot.data();
+                            data={name:userData.Name,email:userData.Email,photo:userData.Image,accountNo:userData.AccountNo,contactNo:userData.PhoneNo,edit:true};
+                            console.log(data);
+                            props.navigation.navigate('EditProfile',data);
+                        }
+                    });
+                }}/>
             <DrawerItem
                 icon={({color, size}) => (
                 <Icon name="call-outline" color={color} size={size}/>
