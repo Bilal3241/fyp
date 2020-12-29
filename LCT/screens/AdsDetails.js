@@ -29,6 +29,10 @@ function AdsDetails({route, navigation}) {
        
     }
 
+    function onpress() {
+        setModalOpen(false);
+    }
+
     const [modalOpen, setModalOpen] = useState(false);
     return (
         
@@ -43,7 +47,7 @@ function AdsDetails({route, navigation}) {
                 Post a Review
             </Text>
             <InputField style={styles.reviewBox} st={desc} setSt={setDesc} cheight='30' pholder='Type your review'></InputField>
-            <AppButton  title="Post" onPress={Reviews}></AppButton>
+            <AppButton  title="Post" onPress={()=> {Reviews();onpress();setDesc("")} }></AppButton>
             </View>
         </Modal>
             <TouchableOpacity style={styles.button} onPress={()=>{alert("Go to back bage... hahahhahahaha")}}>
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
     modal:{
         top:hp('25%'),
         flex:0.5,
-        justifyContent:'space-around'
+        justifyContent:'center'
     },
    
    
