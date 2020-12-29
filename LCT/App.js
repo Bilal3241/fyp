@@ -25,7 +25,7 @@ let HomeScreenAction =   CommonActions.reset({
 function DrawerStackfn() {
   return (
   <DrawerStack.Navigator initialRouteName="Home" options={{headerShown:false}} drawerContent={props => <DrawerScreen {...props}/>}>
-    <DrawerStack.Screen name="Home" component={Home} /> 
+    <DrawerStack.Screen name="Home" component={Home} options={{headerShown:false}} /> 
   </DrawerStack.Navigator>
    );
 }
@@ -51,8 +51,8 @@ const App = () => {
       }>
         <HomeStack.Screen name='Splash' component={Splash} options={{headerShown:false}} />
         <HomeStack.Screen name="SignupScreen" component={SignupScreen} options={{headerShown:false}}/>
-        <HomeStack.Screen name="EditProfile" component={EditProfile} />
-        <HomeStack.Screen name='Home' component={DrawerStackfn} />
+        <HomeStack.Screen name="EditProfile" component={EditProfile} options={{headerShown:false}}/>
+        <HomeStack.Screen name='Home' component={DrawerStackfn} options={{headerShown:false}}/>
         <HomeStack.Screen name='AdsList' component={AdsList} />
         <HomeStack.Screen name='PostAd' component={PostAd} />
         <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
