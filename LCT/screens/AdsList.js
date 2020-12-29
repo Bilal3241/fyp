@@ -9,8 +9,16 @@ import { IMAGEASSETS } from '../assets/images';
 import {getAllAds} from '../controller/AdsController/GetAllAds';
 import {MyRooms} from '../controller/AdsController/MyRooms';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import { NavigationEvents } from 'react-navigation';
 
 function AdsList({navigation,route}) {
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     console.log('Refreshed!');
+  //   });
+  //   return unsubscribe;
+  // }, [navigation]);
+
     const [search,setSearch]=useState([]);
     const [roomsList,setRoomsList]=useState([]);
     const [deleteAd,isDeletedAd]=useState(false);
@@ -18,6 +26,7 @@ function AdsList({navigation,route}) {
       setRoomsList(roomsList)
       setSearch(roomsList)
   }
+  
   useEffect(() => {
     if(route.params.page=="allRooms"){
       getAllAds(onRoomsRecieved)
@@ -25,9 +34,10 @@ function AdsList({navigation,route}) {
     else{
       MyRooms(onRoomsRecieved)
     }
-    }, [deleteAd,roomsList]);
+    }, [deleteAd]);
     
       return (
+       
       <ImageBackground 
         source={IMAGEASSETS.museumBg}
         style={styles.background}>

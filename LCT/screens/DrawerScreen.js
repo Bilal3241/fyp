@@ -24,7 +24,11 @@ function DrawerScreen(props) {
                 <Icon name="home-outline" color={color} size={size}/>
                 )}
                 label="My Rooms"
-                onPress={()=>props.navigation.navigate('AdsList',{page:"myrooms"})}/>
+                onPress={()=>{
+                    props.navigation.closeDrawer();
+                    props.navigation.navigate('AdsList',{page:"myrooms"})
+                }
+            }/>
             <DrawerItem
                 icon={({color, size}) => (
                 <Icon name="person-outline" color={color} size={size}/>
@@ -39,7 +43,7 @@ function DrawerScreen(props) {
                         if (docSnapshot.exists) {
                             var userData=docSnapshot.data();
                             data={name:userData.Name,email:userData.Email,photo:userData.Image,accountNo:userData.AccountNo,contactNo:userData.PhoneNo,edit:true};
-                            console.log(data);
+                            props.navigation.closeDrawer();
                             props.navigation.navigate('EditProfile',data);
                         }
                     });
