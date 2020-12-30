@@ -31,34 +31,35 @@ function DrawerStackfn() {
 }
 const App = () => {
   return (
-    <NavigationContainer>
-      <HomeStack.Navigator initialRouteName="Splash" screenOptions={(nav) =>({
-         headerRight: () => (
-          <Icon
-            name="home" color={colors.white} style={{borderColor:"black", paddingRight:"2%"}} size={25}
-            onPress={() => nav.navigation.dispatch(HomeScreenAction)}
-          />),
-        headerStyle: {
-         
-          backgroundColor: colors.btnBlue ,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          alignSelf: 'center',
-        },
-      })
-      }>
-        <HomeStack.Screen name='Splash' component={Splash} options={{headerShown:false}} />
-        <HomeStack.Screen name="SignupScreen" component={SignupScreen} options={{headerShown:false}}/>
-        <HomeStack.Screen name="EditProfile" component={EditProfile} options={{headerShown:false}}/>
-        <HomeStack.Screen name='Home' component={DrawerStackfn} options={{headerShown:false}}/>
-        <HomeStack.Screen name='AdsList' component={AdsList} />
-        <HomeStack.Screen name='PostAd' component={PostAd} />
-        <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
-        <HomeStack.Screen name='ReserveRoom' component={ReserveRoom} />
-      </HomeStack.Navigator>
-    </NavigationContainer>
+    <React.StrictMode>
+      <NavigationContainer>
+        <HomeStack.Navigator initialRouteName="Splash" screenOptions={(nav) =>({
+           headerRight: () => (
+            <Icon
+              name="home" color={colors.white} style={{borderColor:"black", paddingRight:"2%"}} size={25}
+              onPress={() => nav.navigation.dispatch(HomeScreenAction)}
+            />),
+          headerStyle: {
+            backgroundColor: colors.btnBlue ,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            alignSelf: 'center',
+          },
+        })
+        }>
+          <HomeStack.Screen name='Splash' component={Splash} options={{headerShown:false}} />
+          <HomeStack.Screen name="SignupScreen" component={SignupScreen} options={{headerShown:false}}/>
+          <HomeStack.Screen name="EditProfile" component={EditProfile} options={{headerShown:false}}/>
+          <HomeStack.Screen name='Home' component={DrawerStackfn} options={{headerShown:false}}/>
+          <HomeStack.Screen name='AdsList' component={AdsList} />
+          <HomeStack.Screen name='PostAd' component={PostAd} />
+          <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
+          <HomeStack.Screen name='ReserveRoom' component={ReserveRoom} />
+        </HomeStack.Navigator>
+      </NavigationContainer>
+    </React.StrictMode>
     );
 }
 export default App;

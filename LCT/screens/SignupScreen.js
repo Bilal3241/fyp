@@ -59,19 +59,7 @@ function SignupScreen({navigation}) {
           }
         }
       };
-    signOut = async () => {
-      try {
-        await GoogleSignin.revokeAccess();
-        await GoogleSignin.signOut();
-        auth()
-          .signOut()
-          .then(() => alert('Your are signed out!'));
-        setloggedIn(false);
-        // setuserInfo([]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    
 
     return (
       <ImageBackground

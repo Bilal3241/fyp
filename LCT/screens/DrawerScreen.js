@@ -9,10 +9,25 @@ import colors from '../config/colors';
 import Logo from '../components/Logo';
 import Firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-
+import {GoogleSignin} from '@react-native-community/google-signin';
 
 function DrawerScreen(props) {
-    
+    signOut = async () => {
+        try {
+          await GoogleSignin.revokeAccess();
+          await GoogleSignin.signOut();
+          auth()
+            .signOut()
+            .then(() => {
+                alert('Your are signed out!');
+                props.navigation.replace('SignupScreen');
+            });
+        //   setloggedIn(false);
+          // setuserInfo([]);
+        } catch (error) {
+          console.error(error);
+        }
+      };
     
     return (
         <View style={styles.container}>
@@ -54,7 +69,9 @@ function DrawerScreen(props) {
                 icon={({color, size}) => (
                 <Icon name="log-out-outline" color={color} size={size}/>
                 )}
-                label="Log Out"/>
+                label="Log Out"
+                onPress={this.signOut}
+                />
         </View>
     );
 }
