@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import React from 'react';
-import {Alert,Modal,ScrollView,View,StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
+import {Linking,TouchableHighlight,Alert,Modal,ScrollView,View,StyleSheet,Text,Image,TouchableOpacity} from 'react-native';
 import PicSlider from  '../components/PicSlider';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import AppButton from '../components/AppButton';
@@ -29,21 +29,34 @@ function AdsDetails({route, navigation}) {
        
     }
 
+    function onpress() {
+        setModalOpen(false);
+    }
+
+    function redirectGoogleMaps(){
+      Linking.openURL('https://www.google.com/maps')
+    }
     const [modalOpen, setModalOpen] = useState(false);
     return (
         
         <ScrollView style={styles.background}> 
            <Modal
-            animationType="slide"
+           animationType="slide"
+           transparent={true}
             visible={modalOpen}>
             <View style={styles.modal}>
-            <Icon name="close-outline" onPress={()=> setModalOpen(false)} size={50} color="black"></Icon>
+            <Icon name="close-outline" style={styles.icon} style onPress={()=> setModalOpen(false)} size={50} color="black"></Icon>
 
             <Text style={styles.postReviewText} >
                 Post a Review
             </Text>
             <InputField style={styles.reviewBox} st={desc} setSt={setDesc} cheight='30' pholder='Type your review'></InputField>
-            <AppButton  title="Post" onPress={Reviews}></AppButton>
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={()=> {Reviews();onpress();setDesc("")} }>
+              <Text style={styles.textStyle}>Post Review</Text>
+            </TouchableHighlight>
+            {/* <AppButton  title="Post" onPress={()=> {Reviews();onpress();setDesc("")} }></AppButton> */}
             </View>
         </Modal>
             <TouchableOpacity style={styles.button} onPress={()=>{alert("Go to back bage... hahahhahahaha")}}>
@@ -71,12 +84,12 @@ function AdsDetails({route, navigation}) {
             <View style={styles.btn}>
             <AppButton  title="Reserve Room" press={()=>alert("Reserve Room")}></AppButton>
             <AppButton title="Start Chat" press={()=>alert("Start Chat")}></AppButton>
-            <AppButton  title="Get Direction" press={()=>alert("Get Direction")}></AppButton>
+            <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q='+route.params.apartment.Location)}></AppButton>
             <AppButton  title="Post a Review" onPress={()=> setModalOpen(true)}></AppButton>
             </View>
         </ScrollView>
         
-    
+      
     );
 }
 const styles = StyleSheet.create({
@@ -131,21 +144,39 @@ const styles = StyleSheet.create({
    
     postReviewText:{
        
-        left:wp('10%'),
+       
         color:'#000000',
         fontSize:20,
     },
     reviewBox:{ 
         backgroundColor:'#ffffff',
-        left:wp('15%'),
+        
       },
     modal:{
-        top:hp('25%'),
-        flex:0.5,
-        justifyContent:'space-around'
+            width:wp('70%'),
+            height:hp('40%'),
+            marginTop:hp('25%') ,
+            marginLeft:wp('15%'),
+            backgroundColor: "white",
+            borderRadius: 20,
+            padding: 35,
+            alignItems: 'center',
+            shadowColor: "#000",
     },
-   
-   
+    openButton: {
+        marginTop:hp("5%"),
+        backgroundColor: "#F194FF",
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+      },
+      textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+      }
 })
 
 export default AdsDetails;
+
+

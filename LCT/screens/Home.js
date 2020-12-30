@@ -18,7 +18,7 @@ function Home({route, navigation}) {
         <ImageBackground style={stylesheet.backgroundImage}  source={IMAGEASSETS.backgroundImage} resizeMode="stretch">
             <View style={stylesheet.bgView} resizeMode="contain">
                 <View style={styles.icon}>
-                    <Icon name="menu-outline" size={50} color="white"></Icon> 
+                    <Icon name="menu-outline" size={50} color="white" onPress={() => navigation.toggleDrawer()}></Icon> 
                     {/* <Button title="My Rooms" onPress={()=>navigation.navigate('AdsList',{page:"myrooms"})} ></Button> */}
                 </View>
                 <View style={styles.hotelnRes}>

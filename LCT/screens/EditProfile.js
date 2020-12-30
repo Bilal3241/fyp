@@ -3,12 +3,13 @@ import { Button, Image, ImageBackground, StyleSheet, Text, View } from 'react-na
 import AppButton from '../components/AppButton';
 import InputField from '../components/InputField';
 import colors from '../config/colors';
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ImgPicker from '../components/ImgPicker';
 import { IMAGEASSETS } from '../assets/images';
 import stylesheet from '../assets/stylesheet/stylesheet';
 import PostUsers from '../controller/AdsController/PostUsers';
 import Firestore from '@react-native-firebase/firestore';
+import Icon from 'react-native-vector-icons/Ionicons';  
 
 function EditProfile({route, navigation}) {
     console.log(route);
@@ -41,14 +42,17 @@ function EditProfile({route, navigation}) {
         <ImageBackground
         source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>
             <View style={stylesheet.bgView}>
-            <Text style={styles.heading}>Edit Profile</Text>
+                <View style={styles.icon}>
+                        <Icon name="arrow-back-sharp" size={40} color="white" onPress={() => navigation.goBack()}></Icon> 
+                </View>
+                <Text style={styles.heading}>Edit Profile</Text>
             {/* <ImgPicker/> */}
-            <Image style={{height:100, width:100,borderRadius:50}} source={{uri:route.params.photo}} />
-            <InputField pholder='name' st={userName} setSt={setUsr} editable={false} ></InputField>
-            <InputField pholder='email' st={email} setSt={setMail} keyboardType="email-address" editable={false}></InputField>
-            <InputField pholder='Account number' st={accountNum} setSt={setAccontNum}  ></InputField>
-            <InputField pholder='Contact number' st={contact} setSt={setContact} keyboardType="numeric" ></InputField>
-            <AppButton title="Update" onPress={Users}></AppButton>
+                <Image style={{height:100, width:100,borderRadius:50}} source={{uri:route.params.photo}} />
+                <InputField pholder='name' st={userName} setSt={setUsr} editable={false} ></InputField>
+                <InputField pholder='email' st={email} setSt={setMail} keyboardType="email-address" editable={false}></InputField>
+                <InputField pholder='Account number' st={accountNum} setSt={setAccontNum}  ></InputField>
+                <InputField pholder='Contact number' st={contact} setSt={setContact} keyboardType="numeric" ></InputField>
+                <AppButton title="Update" onPress={Users}></AppButton>
             </View>
          </ImageBackground>
     );
@@ -56,10 +60,15 @@ function EditProfile({route, navigation}) {
 
 const styles=StyleSheet.create({
     heading:{
-        fontSize:heightPercentageToDP('6%'),
+        fontSize:hp('6%'),
         color:colors.white,
         textAlign:'center',
         marginVertical: '3%',
-    }    
+    },
+    icon:{
+        position:"absolute",
+        top:hp('1%'),
+        left:wp('2%')
+    } 
 })
 export default EditProfile;

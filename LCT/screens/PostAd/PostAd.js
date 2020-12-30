@@ -17,7 +17,7 @@ import PostAds from '../../controller/AdsController/PostAds';
 import { firebase } from '@react-native-firebase/firestore';
 
 
-function PostAd({route}){
+function PostAd({route,navigation}){
     const LocRead=() =>{
         if (route.params.path=="myrooms") {
             return(<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric" editable={false}></InputField>)
@@ -52,6 +52,7 @@ function PostAd({route}){
             Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title,email:user.email, //account: accountNum, //owner: current User
         }
         PostAds(data,edit, adPosted);
+        navigation.goBack('AdsList',{page:edit});
     }
     return(
         <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}> 
