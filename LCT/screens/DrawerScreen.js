@@ -7,9 +7,28 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import colors from '../config/colors';
 import Logo from '../components/Logo';
-
+import Firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-community/google-signin';
 
 function DrawerScreen(props) {
+    signOut = async () => {
+        try {
+          await GoogleSignin.revokeAccess();
+          await GoogleSignin.signOut();
+          auth()
+            .signOut()
+            .then(() => {
+                alert('Your are signed out!');
+                props.navigation.replace('SignupScreen');
+            });
+        //   setloggedIn(false);
+          // setuserInfo([]);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
     return (
         <View style={styles.container}>
             <View style={styles.topBorder}>
@@ -19,26 +38,44 @@ function DrawerScreen(props) {
                 icon={({color, size}) => (
                 <Icon name="home-outline" color={color} size={size}/>
                 )}
-                label="Home"
-                onPress={() => {props.navigation.navigate('Home')}}/>
+                label="My Rooms"
+                onPress={()=>{
+                    props.navigation.closeDrawer();
+                    props.navigation.navigate('AdsList',{page:"myrooms"})
+                }
+            }/>
             <DrawerItem
                 icon={({color, size}) => (
                 <Icon name="person-outline" color={color} size={size}/>
                 )}
                 label="Profile"
-                onPress={() => {props.navigation.navigate('EditProfile')}}/>
+                onPress={() => {
+                    // var userData=EditProfileFn();
+                    var data={};
+                    var user = auth().currentUser;
+                    var ref= Firestore().collection('Users').doc(user.email);
+                    ref.get().then((docSnapshot) => {
+                        if (docSnapshot.exists) {
+                            var userData=docSnapshot.data();
+                            data={name:userData.Name,email:userData.Email,photo:userData.Image,accountNo:userData.AccountNo,contactNo:userData.PhoneNo,edit:true};
+                            props.navigation.closeDrawer();
+                            props.navigation.navigate('EditProfile',data);
+                        }
+                    });
+                }}/>
             <DrawerItem
                 icon={({color, size}) => (
                 <Icon name="call-outline" color={color} size={size}/>
                 )}
                 label="Contact Us"
-                onPress={() => {props.navigation.navigate('SignupScreen')}}
-               />
+                />
             <DrawerItem
                 icon={({color, size}) => (
                 <Icon name="log-out-outline" color={color} size={size}/>
                 )}
-                label="Log Out"/>
+                label="Log Out"
+                onPress={this.signOut}
+                />
         </View>
     );
 }

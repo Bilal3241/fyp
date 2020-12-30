@@ -15,7 +15,7 @@ function PostAds(adData,edit, adPosted) {
                 IsAvailable: adData.IsAvailable,
                 Location:adData.Location,
                 NoOfRooms:adData.NoOfRooms,
-                Owner: "anzala",
+                Owner:adData.email,
                 Title:adData.Title,
 
             }).then(function() {

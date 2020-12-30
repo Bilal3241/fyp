@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { ImageBackground ,StyleSheet,View,Button, TouchableOpacity,Text,Image} from 'react-native';
+import { ImageBackground ,StyleSheet,View,Button,TouchableOpacity,Text,Image} from 'react-native';
 import Icon from  '../components/Icon';
 import auth from '@react-native-firebase/auth';
 import Logo from '../components/Logo';
@@ -11,6 +11,7 @@ import {
     import stylesheet from '../assets/stylesheet/stylesheet';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { IMAGEASSETS } from '../assets/images';
+import Firestore from '@react-native-firebase/firestore';
 
 function SignupScreen({navigation}) {
     const [loggedIn, setloggedIn] = useState(false);
@@ -20,12 +21,12 @@ function SignupScreen({navigation}) {
     }
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      console.log('subscriber');
+      //console.log('subscriber');
     }, [loggedIn]);
     useEffect(() => {
       if (userInfo !== null) {
         let data={name:userInfo._user.displayName,email:userInfo._user.email,edit:false, photo:userInfo._user.photoURL};
-        navigation.push('EditProfile',data);//move to home screen
+        navigation.replace('EditProfile',data);//move to home screen
       }
       else{console.log(userInfo);}
     }, [userInfo]);
@@ -58,19 +59,7 @@ function SignupScreen({navigation}) {
           }
         }
       };
-    signOut = async () => {
-      try {
-        await GoogleSignin.revokeAccess();
-        await GoogleSignin.signOut();
-        auth()
-          .signOut()
-          .then(() => alert('Your are signed out!'));
-        setloggedIn(false);
-        // setuserInfo([]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    
 
     return (
       <ImageBackground

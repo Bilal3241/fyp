@@ -28,14 +28,14 @@ function AdsCard({apartment,nav,path,deleteStatefn,deleteState}){
         }
     const EditIcon=() =>{
         if (path=="myrooms") {
-            return(<IonIcons size={25} name="create-sharp" onPress={() => nav.push('PostAd',{apartment,path})} ></IonIcons>);
+            return(<IonIcons size={25} name="create-sharp" color={colors.white} onPress={() => nav.push('PostAd',{apartment,path})} ></IonIcons>);
         } else {
             return null;
         }
     }
     const DeleteIcon=() =>{
         if (path=="myrooms") {
-            return(<IonIcons size={25} name="trash-sharp" onPress={alertButton}></IonIcons>);
+            return(<IonIcons size={25} name="trash-sharp" color={colors.white} onPress={alertButton}></IonIcons>);
         } else {
             return null;
         }

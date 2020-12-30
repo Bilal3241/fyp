@@ -7,10 +7,9 @@ import colors from '../config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
 import {IMAGEASSETS} from "../assets/images";
 import stylesheet from '../assets/stylesheet/stylesheet';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import AppButton from '../components/AppButton';
 
 function Home({route, navigation}) {
+    
     var show = () => {
         console.warn(route);
     };
@@ -19,9 +18,8 @@ function Home({route, navigation}) {
         <ImageBackground style={stylesheet.backgroundImage}  source={IMAGEASSETS.backgroundImage} resizeMode="stretch">
             <View style={stylesheet.bgView} resizeMode="contain">
                 <View style={styles.icon}>
-                    <Icon name="menu-outline" size={50} color="white"></Icon> 
-                    <Button title="My Rooms" onPress={()=>navigation.navigate('AdsList',{page:"myrooms"})} ></Button>
-
+                    <Icon name="menu-outline" size={50} color="white" onPress={() => navigation.toggleDrawer()}></Icon> 
+                    {/* <Button title="My Rooms" onPress={()=>navigation.navigate('AdsList',{page:"myrooms"})} ></Button> */}
                 </View>
                 <View style={styles.hotelnRes}>
                     <Circle fn={show} title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
