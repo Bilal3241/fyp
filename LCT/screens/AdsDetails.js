@@ -34,7 +34,7 @@ function AdsDetails({route, navigation}) {
     }
 
     function redirectGoogleMaps(){
-      Linking.openURL('https://www.google.com/maps')
+       //when we have longitude and latitude from we will get them and join in a query and send to google maps from this function
     }
     const [modalOpen, setModalOpen] = useState(false);
     return (
@@ -59,10 +59,7 @@ function AdsDetails({route, navigation}) {
             {/* <AppButton  title="Post" onPress={()=> {Reviews();onpress();setDesc("")} }></AppButton> */}
             </View>
         </Modal>
-            <TouchableOpacity style={styles.button} onPress={()=>{alert("Go to back bage... hahahhahahaha")}}>
-                <Image 
-                    source={IMAGEASSETS.leftArrow}/>
-            </TouchableOpacity>
+           
             <Text style={styles.text}>
                 {route.params.apartment.Title}
             </Text>
@@ -70,7 +67,10 @@ function AdsDetails({route, navigation}) {
             <PicSlider style={styles.picslider}>
 
             </PicSlider>
-          
+            <Text style={styles.text}>
+                {route.params.apartment.Title}
+            </Text>
+
             <Text style={styles.location}>
                  {route.params.apartment.Location}
             </Text>
@@ -98,16 +98,12 @@ const styles = StyleSheet.create({
         backgroundColor:"rgb(192,192,192)",
         
     },
-    button:{
-        position:'absolute',
-        top:hp('2%'),
-        left:wp('8%'),
-    },
+   
     text:{
         color:'#ffffff',
         position:'absolute',
-        top:hp('2%'),
-        left:wp('20%'),
+        top:hp('36%'),
+        left:wp('10%'),
         fontSize:25,
         fontWeight:'bold'
 

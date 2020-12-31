@@ -1,96 +1,77 @@
-import React from 'react';
-import {View,StyleSheet,Text,Image,ScrollView,Dimensions} from 'react-native';
-import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
-const images=[
-    "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-]
-const width=wp('90%');
-const height= width * 0.6; //60%
-const state={
-    active:0
-};
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  useWindowDimensions,
+  StyleSheet,
+} from 'react-native';
 
-function PicSlider(props) {
-    change=({nativeEvent})=>{
-        const slide= Math.ceil(nativeEvent.contentOffset.x/nativeEvent.layoutMeasurement.width);
-        if(slide !== this.state.active){
-            this.setState({active:slide});
-        }
-    }   
-    return (
-       
-        <View style={styles.container}>
-         
-            <ScrollView 
-             style={styles.slider}
-             pagingEnabled
-             horizontal
-             //onScroll={this.change}
-             showsHorizontalScrollIndicator={false}
-              >
-            {
-                images.map((image,index) =>(
-                    <Image 
-                    key={index}
-                    source={{uri:image}}
-                    style={styles.image}
-                    ></Image> 
-                 
-                ))
-            }
-           </ScrollView>
-           <View style={styles.pagination}>
-               {
-               images.map((i,k)=>(
-               <Text 
-               key={k}
-               style={k == state.active ? styles.paginationActiveText : styles.paginationText} > 
-               ⬤
-               </Text>
-               ))
-                }
-           </View>
-        </View>
-        
-    
-    );
-}
 const styles = StyleSheet.create({
-    
-    container:{
-        width,
-        height,
-        marginTop:65,
-        justifyContent:'center',
-        alignItems:'center',
-        
-    },
-    image:{
-        width,
-        height,
-        borderRadius:hp('5%')
-    },
-    slider:{
-        left:wp("6%"),
-    },
-    pagination:{
-        flexDirection:"row", 
-        position:'absolute',
-        bottom:0,
-        left:wp("45%"),
-    },
-    paginationText:{
-        color:'#fff',
-        margin:3
-    },
-    paginationActiveText:{
-        color:'#888',
-        margin:3
+  pagination: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: -15,
+    alignSelf: 'center',
+  },
+  dot: {
+    color: '#888',
+    fontSize: 50,
+  },
+  activeDot: {
+    color: '#FFF',
+    fontSize: 50,
+  },
+});
+export default function ImageSwipe({img}) {
+  const width = useWindowDimensions().width;
+  const height = width * 0.6;
+
+  const [active, setActive] = useState(0);
+
+  const images = [
+    'https://i.pinimg.com/236x/09/66/4f/09664f3441de659f26bf604a2f1f8f43.jpg',
+ 'https://i.pinimg.com/236x/1f/9a/44/1f9a4405c1db5d23a13d8608dfba6850.jpg',
+    'https://i.pinimg.com/236x/28/b9/43/28b94382c8bea2d56afbabe1369d3b68.jpg',
+    'https://i.pinimg.com/564x/9c/40/ac/9c40acb5931b72b8ace4cb446ee0d068.jpg',
+    'https://i.pinimg.com/236x/0d/a7/3b/0da73b6592ba04b63385c12280d1bf6a.jpg',
+  ];
+
+  const change = ({nativeEvent}) => {
+    const slide = Math.ceil(
+      nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width,
+    );
+    if (slide !== active) {
+      setActive(slide);
     }
+  };
+  return (
+    <View>
+      <ScrollView
+        pagingEnabled
+        horizontal
+        onScroll={change}
+        showHorizontalScrollIndicator={false}
+        style={{width, height}}>
+        {images.map((image, index) => (
+          <Image
+            key={index}
+            source={{uri: image}}
+            style={{width, height, resizeMode: 'cover'}}
+          />
+        ))}
+      </ScrollView>
+      <View style={styles.pagination}>
+        {images.map((i, k) => (
+          <Text key={k} style={k == active ? styles.activeDot : styles.dot}>
+            •
+          </Text>
+        ))}
+      </View>
+    </View>
+  );
+}
 
 
-})
 
-export default PicSlider;
