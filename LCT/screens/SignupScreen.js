@@ -78,13 +78,6 @@ function SignupScreen({navigation}) {
                 onPress={this._signIn}
               />
             </View>
-            <View style={styles.buttonContainer}>
-              <Button
-                onPress={this.signOut}
-                title="LogOut"
-                color="red">
-              </Button>
-            </View>
         </View>    
       </ImageBackground>
     );

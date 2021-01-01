@@ -10,7 +10,11 @@ import InputField from '../components/InputField';
 import Firestore, { firebase } from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/Ionicons';  
 import PostReview from '../controller/AdsController/PostReview';
+
+
 function AdsDetails({route, navigation}) {
+    console.warn(route);
+    const apart=route.params.apartment;
     var user=firebase.auth().currentUser;
 
     const [desc,setDesc]=useState(route.params.description);
@@ -82,8 +86,8 @@ function AdsDetails({route, navigation}) {
                  Charges: {route.params.apartment.Charges}  No of Rooms: {route.params.apartment.NoOfRooms}
             </Text>
             <View style={styles.btn}>
-            <AppButton  title="Reserve Room" press={()=>alert("Reserve Room")}></AppButton>
-            <AppButton title="Start Chat" press={()=>alert("Start Chat")}></AppButton>
+            <AppButton  title="Reserve Room" onPress={()=>alert("Reserve Room")}></AppButton>
+            <AppButton title="Start Chat" onPress={()=>navigation.navigate('Chat',{apart})}></AppButton>
             <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q='+route.params.apartment.Location)}></AppButton>
             <AppButton  title="Post a Review" onPress={()=> setModalOpen(true)}></AppButton>
             </View>

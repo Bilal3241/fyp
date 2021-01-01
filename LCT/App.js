@@ -12,6 +12,7 @@ import SignupScreen from './screens/SignupScreen';
 import AdsDetails from './screens/AdsDetails';
 import ReserveRoom from './screens/ReserveRoom';
 import DrawerScreen  from './screens/DrawerScreen';
+import Chat from './screens/Chat';
 import colors from './config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
 import { View } from 'native-base';
@@ -31,7 +32,7 @@ function DrawerStackfn() {
 }
 const App = () => {
   return (
-    <React.StrictMode>
+    
       <NavigationContainer>
         <HomeStack.Navigator initialRouteName="Splash" screenOptions={(nav) =>({
            headerRight: () => (
@@ -57,9 +58,10 @@ const App = () => {
           <HomeStack.Screen name='PostAd' component={PostAd} />
           <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
           <HomeStack.Screen name='ReserveRoom' component={ReserveRoom} />
+          <HomeStack.Screen name='Chat' component={Chat}/>
         </HomeStack.Navigator>
       </NavigationContainer>
-    </React.StrictMode>
+    
     );
 }
 export default App;
