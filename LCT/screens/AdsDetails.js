@@ -16,7 +16,14 @@ function AdsDetails({route, navigation}) {
     console.warn(route);
     const apart=route.params.apartment;
     var user=firebase.auth().currentUser;
-
+    function setChatNav(){
+        if(user==apart.Owner){
+            navigation.navigate('MeassageList',{apart})
+        }
+        else{
+            navigation.navigate('Chat',{apart})
+        }
+    }
     const [desc,setDesc]=useState(route.params.description);
     const [displayName, setdisplayName]=useState(user.displayName);
     const [email, setMail]=useState(user.email);
