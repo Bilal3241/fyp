@@ -32,6 +32,14 @@ function AdsDetails({route, navigation}) {
         PostReview(data);
        
     }
+    function setChatNav(){
+        if(user==apart.Owner){
+            navigation.navigate('MeassageList',{apart})
+        }
+        else{
+            navigation.navigate('Chat',{apart})
+        }
+    }
 
     function onpress() {
         setModalOpen(false);
@@ -87,7 +95,7 @@ function AdsDetails({route, navigation}) {
             </Text>
             <View style={styles.btn}>
             <AppButton  title="Reserve Room" onPress={()=>alert("Reserve Room")}></AppButton>
-            <AppButton title="Start Chat" onPress={()=>navigation.navigate('Chat',{apart})}></AppButton>
+            <AppButton title="Start Chat" onPress={setChatNav}></AppButton>
             <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q='+route.params.apartment.Location)}></AppButton>
             <AppButton  title="Post a Review" onPress={()=> setModalOpen(true)}></AppButton>
             </View>
