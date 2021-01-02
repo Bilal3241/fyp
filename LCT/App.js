@@ -16,6 +16,7 @@ import Chat from './screens/Chat';
 import colors from './config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
 import { View } from 'native-base';
+import MessageList from './screens/MessageList';
 
 const HomeStack=createStackNavigator();
 const DrawerStack=createDrawerNavigator();
@@ -59,6 +60,7 @@ const App = () => {
           <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
           <HomeStack.Screen name='ReserveRoom' component={ReserveRoom} />
           <HomeStack.Screen name='Chat' component={Chat}/>
+          <HomeStack.Screen name="Messages" component={MessageList}/>
         </HomeStack.Navigator>
       </NavigationContainer>
     

@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
     item:{
         height:hp('20%'),
         borderBottomColor:'black',
-        borderBottomWidth:'1px',
+        borderBottomWidth:1,
     }
 })

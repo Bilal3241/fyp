@@ -17,8 +17,8 @@ function AdsDetails({route, navigation}) {
     const apart=route.params.apartment;
     var user=firebase.auth().currentUser;
     function setChatNav(){
-        if(user==apart.Owner){
-            navigation.navigate('MeassageList',{apart})
+        if(user.email==route.params.apartment.Owner){
+            navigation.navigate('Messages',{apart})
         }
         else{
             navigation.navigate('Chat',{apart})
@@ -39,14 +39,7 @@ function AdsDetails({route, navigation}) {
         PostReview(data);
        
     }
-    function setChatNav(){
-        if(user==apart.Owner){
-            navigation.navigate('MeassageList',{apart})
-        }
-        else{
-            navigation.navigate('Chat',{apart})
-        }
-    }
+   
 
     function onpress() {
         setModalOpen(false);
