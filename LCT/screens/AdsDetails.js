@@ -16,7 +16,14 @@ function AdsDetails({route, navigation}) {
     console.warn(route);
     const apart=route.params.apartment;
     var user=firebase.auth().currentUser;
-
+    function setChatNav(){
+        if(user==apart.Owner){
+            navigation.navigate('MeassageList',{apart})
+        }
+        else{
+            navigation.navigate('Chat',{apart})
+        }
+    }
     const [desc,setDesc]=useState(route.params.description);
     const [displayName, setdisplayName]=useState(user.displayName);
     const [email, setMail]=useState(user.email);
@@ -87,7 +94,7 @@ function AdsDetails({route, navigation}) {
             </Text>
             <View style={styles.btn}>
             <AppButton  title="Reserve Room" onPress={()=>alert("Reserve Room")}></AppButton>
-            <AppButton title="Start Chat" onPress={()=>navigation.navigate('Chat',{apart})}></AppButton>
+            <AppButton title="Start Chat" onPress={setChatNav}></AppButton>
             <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q='+route.params.apartment.Location)}></AppButton>
             <AppButton  title="Post a Review" onPress={()=> setModalOpen(true)}></AppButton>
             </View>
