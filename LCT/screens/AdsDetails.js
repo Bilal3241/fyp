@@ -34,7 +34,6 @@ function AdsDetails({route, navigation}) {
     }
 
     function redirectGoogleMaps(){
-       //when we have longitude and latitude from we will get them and join in a query and send to google maps from this function
     }
     const [modalOpen, setModalOpen] = useState(false);
     return (
@@ -84,7 +83,7 @@ function AdsDetails({route, navigation}) {
             <View style={styles.btn}>
             <AppButton  title="Reserve Room" press={()=>alert("Reserve Room")}></AppButton>
             <AppButton title="Start Chat" press={()=>alert("Start Chat")}></AppButton>
-            <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q='+route.params.apartment.Location)}></AppButton>
+            <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q=100+101')}></AppButton>
             <AppButton  title="Post a Review" onPress={()=> setModalOpen(true)}></AppButton>
             </View>
         </ScrollView>
