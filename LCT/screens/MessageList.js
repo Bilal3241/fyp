@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react'
 import { StyleSheet, Text, View,ScrollView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';

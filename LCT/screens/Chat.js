@@ -11,9 +11,9 @@ function Chat({navigation,route}) {
     var owner=route.params.apart.Owner;
     var location=route.params.apart.Location;
     var currentuser=usernow.email;
-    if(currentuser==owner){
+    // if(currentuser==owner){
         
-    }
+    // }
     const chatref= Firestore().collection('Chat').doc(owner).collection(usernow.email+"-"+owner+"-"+location);
     const [messages,setMessages]=useState([]);
    useEffect(()=>{
@@ -64,3 +64,4 @@ function Chat({navigation,route}) {
 }
 
 export default Chat;
+
