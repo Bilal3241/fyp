@@ -11,9 +11,6 @@ function Chat({navigation,route}) {
     var owner=route.params.apart.Owner;
     var location=route.params.apart.Location;
     var currentuser=usernow.email;
-    // if(currentuser==owner){
-        
-    // }
     const chatref= Firestore().collection('Chat').doc(owner).collection(usernow.email+"-"+owner+"-"+location);
     const [messages,setMessages]=useState([]);
    useEffect(()=>{
@@ -34,30 +31,30 @@ function Chat({navigation,route}) {
     },
     [messages]
 )
-
-
-   async function handleSend(messages){
-       const writes=messages.map(m=>chatref.add(m))
-       await Promise.all(writes)
-
-   }
-    function sendMessage(msg){
-     
-    let data={
-        Owner:route.params.apart.Owner,
-        Location:route.params.apart.Location,
-        Message:msg,
-    }
-   
-    PostMessages(data); 
-   }
+   function updateArray(messages){
+    const listref= Firestore().collection('Chat').doc(owner);
+    listref.get().then(function(doc){
+        if (doc.exists) {
+            const customerList=doc.data().collections;
+            const newElement=usernow.email+"-"+owner+"-"+location;
+            if (customerList.includes(newElement) === false) customerList.push(newElement);
+            listref.set({
+               collections:customerList, 
+            }).then(function(){
+                (async () => {
+                    console.log("List updated successfully");
+                    const writes=messages.map(m=>chatref.add(m))
+                    await Promise.all(writes)
+                })();
+            })
+        }
+    })
+  }
     return (
         <GiftedChat 
         messages={messages} 
-        user={usernow.email} 
-        //onSend={messages => sendMessage(messages)}
-        onSend={handleSend}
-
+        user={{email:usernow.email}} 
+        onSend={updateArray}
         />
         
     );
