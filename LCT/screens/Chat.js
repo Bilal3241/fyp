@@ -37,12 +37,17 @@ function Chat({navigation,route}) {
         if (doc.exists) {
             const customerList=doc.data().collections;
             const newElement=usernow.email+"-"+owner+"-"+location;
-            if (customerList.includes(newElement) === false) customerList.push(newElement);
+            const item={collection:newElement,customerName:usernow.displayName,customerId:usernow.email}
+            // if (customerList.includes(newElement) === false) 
+            //     {customerList.push(newElement);}
+            if (!(customerList.some(elem => elem.collection === newElement))) {
+                customerList.push(item);
+            }
             listref.set({
                collections:customerList, 
             }).then(function(){
                 (async () => {
-                    console.log("List updated successfully");
+                    console.log(customerList);
                     const writes=messages.map(m=>chatref.add(m))
                     await Promise.all(writes)
                 })();
