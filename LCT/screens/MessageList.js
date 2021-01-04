@@ -12,10 +12,9 @@ export default function MessageList({route,navigaton}) {
     //         console.log(doc.data())
     //     }
     // })
-
+    const msgList=[];
     useEffect(() => {
-        const msgList=[];
-        const listref= Firestore().collection('Chat').doc(owner);
+        const listref= Firestore().collection('Chat').doc(route.params.apart.Owner);
         listref.get().then(function(doc){
             if (doc.exists) {
                 msgList=doc.data().collections;
