@@ -12,10 +12,10 @@ export default function MessageList({route,navigaton}) {
     //         console.log(doc.data())
     //     }
     // })
-
+    var msgList=[];
     useEffect(() => {
-        const msgList=[];
-        const listref= Firestore().collection('Chat').doc(owner);
+        
+        const listref= Firestore().collection('Chat').doc(route.params.apart.Owner);
         listref.get().then(function(doc){
             if (doc.exists) {
                 msgList=doc.data().collections;
@@ -24,7 +24,7 @@ export default function MessageList({route,navigaton}) {
     }, [])
 
     return (
-        <ScrollView>
+        
             <FlatList  
                 keyExtractor={(customer) => customer.collection}
                 data={msgList}
@@ -32,7 +32,7 @@ export default function MessageList({route,navigaton}) {
                     <Message username={customer.customerName} />
                 )}
             />
-        </ScrollView>
+        
     )
 }
 
