@@ -3,10 +3,11 @@ import {GiftedChat} from 'react-native-gifted-chat';
 import { firebase } from '@react-native-firebase/firestore';
 import PostMessages from '../controller/AdsController/PostMessages';
 import Firestore from '@react-native-firebase/firestore';
+import { findWhere } from 'underscore';
 
 function Chat({navigation,route}) {
     console.log(route);
-    
+    var cList=[];
     var usernow=firebase.auth().currentUser;
     var owner=route.params.apart.Owner;
     var location=route.params.apart.Location;
@@ -35,23 +36,31 @@ function Chat({navigation,route}) {
     const listref= Firestore().collection('Chat').doc(owner);
     listref.get().then(function(doc){
         if (doc.exists) {
-            const customerList=doc.data().collections;
-            const newElement=usernow.email+"-"+owner+"-"+location;
-            const item={collection:newElement,customerName:usernow.displayName,customerId:usernow.email}
+            console.log(typeof(cList));
+            if (doc.data().collections) {
+                cList=doc.data().collections;
+            }
+            
+            console.log(typeof(cList));
+            var newElement=usernow.email+"-"+owner+"-"+location;
+            var item={collection:newElement, customerName:usernow.displayName, customerId:usernow.email}
             // if (customerList.includes(newElement) === false) 
             //     {customerList.push(newElement);}
-            if (!(customerList.some(elem => elem.collection === newElement))) {
-                customerList.push(item);
+            if (findWhere(cList, item) == null) {
+                cList.push(item);
             }
             listref.set({
-               collections:customerList, 
+               collections:cList, 
             }).then(function(){
                 (async () => {
-                    console.log(customerList);
+                    console.log(cList);
                     const writes=messages.map(m=>chatref.add(m))
                     await Promise.all(writes)
                 })();
             })
+        }
+        else{
+            console.log('no doc');
         }
     })
   }
