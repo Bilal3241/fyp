@@ -4,14 +4,18 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 
 
 export default function Message({username,nav,apartment,userEmail}) {
-    apart={
-        'Location':apartment.Location,
-        'Owner':apartment.Owner,
-        'Customer':userEmail,
-    }
+    
     return (
         
-        <TouchableOpacity style={styles.item} onPress={()=>nav.navigate('Chat',{apart})}>
+        <TouchableOpacity style={styles.item} onPress={()=>{
+            apart={
+                'Location':apartment.Location,
+                'Owner':apartment.Owner,
+                'Customer':userEmail,
+            };
+            nav.navigate('Chat',{apart});
+        }
+            }>
             <Text>{username}</Text>
         </TouchableOpacity>
         

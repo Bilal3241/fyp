@@ -13,7 +13,16 @@ function MessageList({route,navigation}) {
         const listref= Firestore().collection('Chat').doc(route.params.apart.Owner);
         listref.get().then(function(doc){
             if (doc.exists) {
-                setMsgList(doc.data().collections);
+                var lst=doc.data().collections;
+                console.log(lst);
+                var newLst=[];
+                lst.forEach(key => {
+                    if (key.location == route.params.apart.Location) {
+                        newLst.push(key);  
+                    }
+                });
+                setMsgList(newLst);
+                console.log(msgList);
             }
         })
     }, []);

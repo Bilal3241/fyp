@@ -49,7 +49,8 @@ function Chat({navigation,route}) {
         })();
     }
     else{
-        const listref= Firestore().collection('Chat').doc(owner);
+        const listset= Firestore().collection('Chat').doc(owner).set({exist:true});
+        const listref=Firestore().collection('Chat').doc(owner);
         listref.get().then(function(doc){
             if (doc.exists) {
                 console.log(typeof(cList));
@@ -58,7 +59,7 @@ function Chat({navigation,route}) {
                 }
                 console.log(typeof(cList));
                 var newElement=usernow.email+"-"+owner+"-"+location;
-                var item={collection:newElement, customerName:usernow.displayName, customerId:usernow.email}
+                var item={collection:newElement, customerName:usernow.displayName, customerId:usernow.email, location:route.params.apart.Location}
                 // if (customerList.includes(newElement) === false) 
                 //     {customerList.push(newElement);}
                 if (findWhere(cList, item) == null) {
@@ -97,7 +98,7 @@ function Chat({navigation,route}) {
     return (
         <GiftedChat 
         messages={messages} 
-        user={{email:usernow.email}} 
+        user={{_id:usernow.email}} 
         onSend={updateArray}
         />  
     );
