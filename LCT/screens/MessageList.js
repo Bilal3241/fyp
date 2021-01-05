@@ -1,38 +1,38 @@
 import React, {useState, useEffect} from 'react'
-import { StyleSheet, Text, View,ScrollView } from 'react-native';
+import { StyleSheet, Text, View,ScrollView,SafeAreaView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Message from '../components/Message';
 import Firestore,{firebase} from '@react-native-firebase/firestore';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import colors from '../config/colors';
 
 export default function MessageList({route,navigaton}) {
-    // const collectionList= [];
-    // var docref= firebase.firestore().collection('Chat').doc(route.params.apart.Owner);
-    // docref.get().then(function (doc){
-    //     if (doc.exists) {
-    //         console.log(doc.data())
-    //     }
-    // })
-    const msgList=[];
+    const [msgList,setMsgList]=useState([]);
     useEffect(() => {
         const listref= Firestore().collection('Chat').doc(route.params.apart.Owner);
         listref.get().then(function(doc){
             if (doc.exists) {
-                msgList=doc.data().collections;
+                setMsgList(doc.data().collections);
             }
         })
-    }, [])
+    }, []);
 
     return (
-        <ScrollView>
+        <SafeAreaView style={styles.container}>
             <FlatList  
-                keyExtractor={(customer) => customer.collection}
+                keyExtractor={(item) => item.collection}
                 data={msgList}
-                renderItem={({customer}) =>(
-                    <Message username={customer.customerName} />
-                )}
-            />
-        </ScrollView>
+                renderItem={({item}) =>(
+                     <Message username={item.customerName} nav={navigaton} />
+                )}/>
+            </SafeAreaView>
+        
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+       // marginTop: heightPercentageToDP("10%"),
+      },
+})

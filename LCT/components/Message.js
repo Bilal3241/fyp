@@ -2,17 +2,18 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
-export default function Message(username) {
+export default function Message({nav,username}) {
+    console.log(nav);
     return (
         <View style={styles.item}>
-            <Text>username</Text>
+            <Text>{username}</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     item:{
-        height:hp('20%'),
+        height:hp('10%'),
         borderBottomColor:'black',
         borderBottomWidth:1,
     }

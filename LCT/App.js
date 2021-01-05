@@ -60,7 +60,7 @@ const App = () => {
           <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
           <HomeStack.Screen name='ReserveRoom' component={ReserveRoom} />
           <HomeStack.Screen name='Chat' component={Chat}/>
-          <HomeStack.Screen name="Messages" component={MessageList}/>
+          <HomeStack.Screen name="MessageList" component={MessageList}/>
         </HomeStack.Navigator>
       </NavigationContainer>
     

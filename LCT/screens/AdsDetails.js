@@ -18,7 +18,7 @@ function AdsDetails({route, navigation}) {
     var user=firebase.auth().currentUser;
     function setChatNav(){
         if(user.email==route.params.apartment.Owner){
-            navigation.navigate('Messages',{apart})
+            navigation.navigate('MessageList',{apart})
         }
         else{
             navigation.navigate('Chat',{apart})
