@@ -41,7 +41,6 @@ function PostAd({route,navigation}){
             cropping: true
           }).then(image => {
             setImages({uri: image.path});
-            console.log(images);
           });
     }
     const adPosted=()=>{
