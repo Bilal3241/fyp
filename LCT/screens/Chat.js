@@ -51,7 +51,7 @@ function Chat({navigation,route}) {
         listref.get().then(function(doc){
             if (!(doc.exists)) {
                 console.log('no doc');
-                const listset= Firestore().collection('Chat').doc(owner).set({exist:true});
+                listref= Firestore().collection('Chat').doc(owner).set({exist:true});
             }
             if (doc.data().collections) {
                 cList=doc.data().collections;
