@@ -6,7 +6,6 @@ import Firestore from '@react-native-firebase/firestore';
 import { findWhere } from 'underscore';
 
 function Chat({navigation,route}) {
-    console.log(route);
     var cList=[];
     var usernow=firebase.auth().currentUser;
     var owner=route.params.apart.Owner;
@@ -15,11 +14,9 @@ function Chat({navigation,route}) {
     var chatref;
     if (usernow.email===owner) {
         chatref= Firestore().collection('Chat').doc(owner).collection(route.params.apart.Customer+"-"+owner+"-"+location);
-        console.log(route.params.apart.Customer+"-"+owner+"-"+location);
     }
     else{
         chatref= Firestore().collection('Chat').doc(owner).collection(usernow.email+"-"+owner+"-"+location);
-        console.log(usernow.email+"-"+owner+"-"+location);
     }
     
     const [messages,setMessages]=useState([]);
@@ -49,44 +46,36 @@ function Chat({navigation,route}) {
         })();
     }
     else{
-        const listset= Firestore().collection('Chat').doc(owner).set({exist:true});
+        
         const listref=Firestore().collection('Chat').doc(owner);
         listref.get().then(function(doc){
-            if (doc.exists) {
-                console.log(typeof(cList));
-                if (doc.data().collections) {
-                    cList=doc.data().collections;
-                }
-                console.log(typeof(cList));
-                var newElement=usernow.email+"-"+owner+"-"+location;
-                var item={collection:newElement, customerName:usernow.displayName, customerId:usernow.email, location:route.params.apart.Location}
-                // if (customerList.includes(newElement) === false) 
-                //     {customerList.push(newElement);}
-                if (findWhere(cList, item) == null) {
-                    cList.push(item);
-                    listref.set({
-                        collections:cList, 
-                     }).then(function(){
-                         (async () => {
-                             console.log(cList);
-                             const writes=messages.map(m=>chatref.add(m))
-                             await Promise.all(writes)
-                         })();
-                     })
-                }
-                else{
+            if (!(doc.exists)) {
+                console.log('no doc');
+                const listset= Firestore().collection('Chat').doc(owner).set({exist:true});
+            }
+            if (doc.data().collections) {
+                cList=doc.data().collections;
+            }
+            var newElement=usernow.email+"-"+owner+"-"+location;
+            var item={collection:newElement, customerName:usernow.displayName, customerId:usernow.email, location:route.params.apart.Location}
+            if (findWhere(cList, item) == null) {
+                cList.push(item);
+                listref.set({
+                    collections:cList, 
+                }).then(function(){
                     (async () => {
-                        console.log(cList);
                         const writes=messages.map(m=>chatref.add(m))
                         await Promise.all(writes)
                     })();
-                }
-
+                 })
             }
             else{
-                console.log('no doc');
+                (async () => {
+                    const writes=messages.map(m=>chatref.add(m))
+                    await Promise.all(writes)
+                })();
             }
-        })
+            })
     }
 
 

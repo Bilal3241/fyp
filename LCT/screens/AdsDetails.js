@@ -13,7 +13,6 @@ import PostReview from '../controller/AdsController/PostReview';
 
 
 function AdsDetails({route, navigation}) {
-    console.log(route);
     const apart=route.params.apartment;
     var user=firebase.auth().currentUser;
     function setChatNav(){

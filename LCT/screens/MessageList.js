@@ -14,7 +14,6 @@ function MessageList({route,navigation}) {
         listref.get().then(function(doc){
             if (doc.exists) {
                 var lst=doc.data().collections;
-                console.log(lst);
                 var newLst=[];
                 lst.forEach(key => {
                     if (key.location == route.params.apart.Location) {
@@ -22,7 +21,6 @@ function MessageList({route,navigation}) {
                     }
                 });
                 setMsgList(newLst);
-                console.log(msgList);
             }
         })
     }, []);

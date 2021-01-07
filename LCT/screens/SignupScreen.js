@@ -21,14 +21,12 @@ function SignupScreen({navigation}) {
     }
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      //console.log('subscriber');
     }, [loggedIn]);
     useEffect(() => {
       if (userInfo !== null) {
         let data={name:userInfo._user.displayName,email:userInfo._user.email,edit:false, photo:userInfo._user.photoURL};
         navigation.replace('EditProfile',data);//move to home screen
       }
-      else{console.log(userInfo);}
     }, [userInfo]);
     useEffect(() => {
       GoogleSignin.configure({
