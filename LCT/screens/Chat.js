@@ -46,8 +46,7 @@ function Chat({navigation,route}) {
         })();
     }
     else{
-        
-        const listref=Firestore().collection('Chat').doc(owner);
+        var listref=Firestore().collection('Chat').doc(owner);
         listref.get().then(function(doc){
             if (!(doc.exists)) {
                 console.log('no doc');
@@ -75,14 +74,8 @@ function Chat({navigation,route}) {
                     await Promise.all(writes)
                 })();
             }
-            })
-    }
-
-
-
-
-
-    
+        })
+    }  
   }
     return (
         <GiftedChat 

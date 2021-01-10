@@ -9,6 +9,7 @@ import colors from '../config/colors';
 function MessageList({route,navigation}) {
     const apart=route.params.apart;
     const [msgList,setMsgList]=useState([]);
+    const [fetchDone,setFetchDone]=useState(false);
     useEffect(() => {
         const listref= Firestore().collection('Chat').doc(route.params.apart.Owner);
         listref.get().then(function(doc){
@@ -21,10 +22,17 @@ function MessageList({route,navigation}) {
                     }
                 });
                 setMsgList(newLst);
+                setFetchDone(true);
             }
         })
     }, []);
-
+    if (msgList.length==0 && fetchDone) {
+        return(
+            <SafeAreaView>
+                <Text style={{textAlign:'center',justifyContent:'center'}}>You have no new messages</Text>
+            </SafeAreaView>
+        )
+    }
     return (
         <SafeAreaView style={styles.container}>
             <FlatList  
