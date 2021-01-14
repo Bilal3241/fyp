@@ -2,7 +2,7 @@ import Firestore from '@react-native-firebase/firestore';
 
 function PostReview(data) {
     return (
-        Firestore().collection('Reviews').doc().set({
+        Firestore().collection('Reviews').add({
             name: data.name,
             profile: data.photo,
             email: data.email,

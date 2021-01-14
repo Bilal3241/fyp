@@ -4,10 +4,10 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nati
 import colors from '../config/colors';
 
 
-function InputField({pholder, st, setSt, cheight='6', ...otherProps}) {
+function InputField({pholder, st, setSt, cheight='6', cwidth='85', ...otherProps}) {
     return (
         <TextInput
-        style={[styles.input, {height: hp(cheight+'%')} ]}
+        style={[styles.input, {height: hp(cheight+'%')}, {width: wp(cwidth+'%')} ]}
         placeholder= {pholder}
         onChangeText={st=>setSt(st)}
         defaultValue={st}
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
         paddingHorizontal:'3%',
         marginVertical:'2%',
         borderRadius:30,
-        width: wp('85%'),
     }
 })
 
