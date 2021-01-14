@@ -1,27 +1,29 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import colors from '../config/colors';
 import {
     widthPercentageToDP as wp
   } from 'react-native-responsive-screen';
 
-function AppButton({title, onPress }) {
+function AppButton({title, onPress, width="85" }) {
     return (
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <View style={styles.btnContainer}><TouchableOpacity style={[styles.button, {width: wp(width+'%')} ]} onPress={onPress}>
             <Text style={styles.text}>{title}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity></View>
     );
 }
 
 const styles = StyleSheet.create({
+    btnContainer:{
+        alignItems:'center',
+    },
     button:{
         backgroundColor: colors.btnBlue,
         borderRadius: 30,
         justifyContent:"center",
         alignItems:"center",
-        margin: '5%',
+        margin: '3%',
         padding:'3%',
-        width: wp("85%"),
     },
     text:{
         color: colors.white,

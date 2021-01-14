@@ -9,9 +9,9 @@ import PostAd from './screens/PostAd/PostAd';
 import EditProfile from './screens/EditProfile';
 import AdsList from './screens/AdsList';
 import SignupScreen from './screens/SignupScreen';
-import AdsDetails from './screens/AdsDetails';
-import ReserveRoom from './screens/ReserveRoom';
+import AdsDetails from './screens/AdsDetals/AdsDetails';
 import DrawerScreen  from './screens/DrawerScreen';
+import StripePayment from './screens/StripePayment';
 import Chat from './screens/Chat';
 import colors from './config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
@@ -57,9 +57,9 @@ const App = () => {
           <HomeStack.Screen name="EditProfile" component={EditProfile} options={{headerShown:false}}/>
           <HomeStack.Screen name='Home' component={DrawerStackfn} options={{headerShown:false}}/>
           <HomeStack.Screen name='AdsList' component={AdsList} />
+          <HomeStack.Screen name='StripePayment' component={StripePayment} />
           <HomeStack.Screen name='PostAd' component={PostAd} />
           <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
-          <HomeStack.Screen name='ReserveRoom' component={ReserveRoom} />
           <HomeStack.Screen name='Chat' component={Chat}/>
           <HomeStack.Screen name="Messages" component={MessageList}/>
           <HomeStack.Screen name="Customers" component={MyCustomers}/>
