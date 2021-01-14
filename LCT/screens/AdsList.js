@@ -12,13 +12,7 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 import { NavigationEvents } from 'react-navigation';
 
 function AdsList({navigation,route}) {
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener('focus', () => {
-  //     console.log('Refreshed!');
-  //   });
-  //   return unsubscribe;
-  // }, [navigation]);
-
+  
     const [search,setSearch]=useState([]);
     const [roomsList,setRoomsList]=useState([]);
     const [deleteAd,isDeletedAd]=useState(false);

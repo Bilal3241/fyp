@@ -25,12 +25,10 @@ function EditProfile({route, navigation}) {
     currentUser.get()
     .then((docSnapshot) => {
         if (docSnapshot.exists && route.params.edit == false){
-                //console.log('moving to home');
                 navigation.replace("Home");
         }
         else {
             if (docSnapshot.exists && route.params.edit == true) {
-                console.log('edit triggered');
                 setAccontNum(route.params.accountNo);
                 setContact(route.params.contactNo);
             }

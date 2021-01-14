@@ -17,7 +17,16 @@ import colors from '../../config/colors';
 function AdsDetails({route, navigation}) {
     var user=firebase.auth().currentUser;
 
-    const [desc,setDesc]=useState(route.params.description);
+    const apart=route.params.apartment;
+    var user=firebase.auth().currentUser;
+    function setChatNav(){
+        if(user.email==route.params.apartment.Owner){
+            navigation.navigate('Messages',{apart})
+        }
+        else{
+            navigation.navigate('Chat',{apart})
+        }
+    }
 
     const [tabIndex, setTabIndex]=useState(0);
 
@@ -48,13 +57,9 @@ function AdsDetails({route, navigation}) {
         }
       };
       const doReservation=()=>{
-        console.log(checkOut.getTime());
          var NoOfDays=(checkOut.getTime()-checkIn.getTime())/86400000;
          var price=NoOfDays*route.params.apartment.Charges;
-         console.log(price);
-         console.log(NoOfDays);
         var reservationData={apartmentDetails: route.params.apartment, totalFare: price, daysOfStay: NoOfDays, inDate: checkIn.toDateString(), outDate: checkOut.toDateString()} //checkIn, outDate: checkOut }
-        console.log(reservationData);
         setReservationModal(false);
         navigation.navigate("StripePayment", {reservationData});
       };
@@ -137,7 +142,10 @@ function AdsDetails({route, navigation}) {
         <ReviewsView apartmentId={route.params.apartment.Location}/>
       )}
         </View>
-            <AppButton  title="Reserve Room" onPress={()=> setReservationModal(true)}></AppButton>
+        <View style={styles.btn}>
+            <AppButton title="Start Chat" width='45' onPress={setChatNav}></AppButton>
+            <AppButton  title="Reserve Room" width='45' onPress={()=> setReservationModal(true)}></AppButton>
+            </View>
         </ScrollView>
         
       
@@ -188,6 +196,12 @@ const styles = StyleSheet.create({
         padding: 35,
         alignItems: 'center',
         shadowColor: "#000",
+},
+btn:{
+  flex:1,
+  flexDirection:'row',
+  justifyContent:"center",
+  marginTop:'3%',
 },
     openButton: {
         marginTop:hp("5%"),

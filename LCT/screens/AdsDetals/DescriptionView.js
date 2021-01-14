@@ -21,10 +21,7 @@ function DescriptionView({apartment}) {
             <Text style={styles.description}>
                  Charges: {apartment.Charges}  No of Rooms: {apartment.NoOfRooms}
             </Text>
-            <View style={styles.btn}>
-            <AppButton title="Start Chat" width='40' onPress={()=>alert("Start Chat")}></AppButton>
-            <AppButton  title="Get Direction" width='40' onPress={() => Linking.openURL('google.navigation:q=100+101')}></AppButton>
-            </View>
+            <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q=100+101')}></AppButton>
         </View>
     );
 }
@@ -47,11 +44,6 @@ const styles = StyleSheet.create({
         fontSize: hp('2%'),
        
     },
-    btn:{
-        flex:1,
-        flexDirection:'row',
-        justifyContent:"center",
-        marginTop:'3%',
-    },
+    
 })
 export default DescriptionView;

@@ -46,6 +46,16 @@ function DrawerScreen(props) {
             }/>
             <DrawerItem
                 icon={({color, size}) => (
+                <Icon name="checkbox-outline" color={color} size={size}/>
+                )}
+                label="Reservations"
+                onPress={()=>{
+                    props.navigation.closeDrawer();
+                    props.navigation.navigate('Customers',{owner:auth().currentUser.email})
+                }
+            }/>
+            <DrawerItem
+                icon={({color, size}) => (
                 <Icon name="person-outline" color={color} size={size}/>
                 )}
                 label="Profile"
