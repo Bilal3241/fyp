@@ -6,7 +6,7 @@ import { IMAGEASSETS } from '../assets/images';
 import colors from '../config/colors';
 
 function ImgPicker(props) {
-const [usrImg, setImg]=useState(IMAGEASSETS.userIcon);
+const [ximg, setImg]=useState(IMAGEASSETS.userIcon);
 const selectFromGallery=()=>{
     ImagePicker.openPicker({
         cropping: true
@@ -19,7 +19,7 @@ const selectFromGallery=()=>{
         <TouchableOpacity onPress={selectFromGallery}>
             <View style={styles.imgbg}> 
                 <ImageBackground
-                source={usrImg}
+                source={ximg}
                 style={styles.img}/>
             </View>
         </TouchableOpacity>

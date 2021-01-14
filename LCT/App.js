@@ -9,7 +9,7 @@ import PostAd from './screens/PostAd/PostAd';
 import EditProfile from './screens/EditProfile';
 import AdsList from './screens/AdsList';
 import SignupScreen from './screens/SignupScreen';
-import AdsDetails from './screens/AdsDetails';
+import AdsDetails from './screens/AdsDetals/AdsDetails';
 import ReserveRoom from './screens/ReserveRoom';
 import DrawerScreen  from './screens/DrawerScreen';
 import StripePayment from './screens/StripePayment';

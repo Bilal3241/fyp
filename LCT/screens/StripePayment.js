@@ -3,35 +3,34 @@ import {ScrollView,View} from 'react-native';
 import {CreditCardInput} from 'react-native-credit-card-input';
 import Stripe from 'react-native-stripe-api';
 import AppButton from '../components/AppButton';
+import { firebase } from '@react-native-firebase/firestore';
+import DoReservation from '../controller/AdsController/DoReservation'
+import { Text } from 'native-base';
+import { TextInput } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import colors from '../config/colors';
 //import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-// import localStorage from '../../../auth/storage';
-// import apiAuth from '../../../auth/useAuth';
-//import ActivityIndicator from './../../../components/ActivityIndicator';
-//import LottieView from 'lottie-react-native';
-//import ErrorMessage from './../../../components/form/ErrorMessage';
 export default function StripePayment(props) {
-//   const {user} = apiAuth();
-//   const [response, setResponse] = useState();
-//   const [makePayment, setMakePayment] = useState(false);
-//   const [paymentStatus, setPaymentStatus] = useState('');
+  var user=firebase.auth().currentUser;
+
   const [values, setValues] = useState({});
-  const [showActivityIndicator, setActivityIndicator] = useState(false);
   const [showPopUp, setshowPopUp] = useState(false);
-  const [varificationFailed, setvarificationFailed] = useState(false);
   const [error, setError] = useState();
   const [show, setShow] = useState(false);
-//   const cartInfo = {
-//     id: '5eruyt35eggr76476236523t3',
-//     description: 'T Shirt - With react Native Logo',
-//     amount: 1,
-//   };
+
+  const saveOnlinePaymentDefaults=(tokenValue)=>{
+    var adAvailability=false;
+    var reservationTableData={Owner: props.route.params.reservationData.apartmentDetails.Owner, RoomID: props.route.params.reservationData.apartmentDetails.Location, CheckIn:props.route.params.reservationData.inDate, CheckOut: props.route.params.reservationData.outDate, RenterID: user.email , RenterName: user.displayName};
+    DoReservation(reservationTableData, adAvailability);
+  }
+
   const _onChange = (formData) => setValues(formData);
   const _onFocus = (field) => console.log('focusing', field);
+
   const payment = async () => {
-    setActivityIndicator(true);
     var expiry = values.values.expiry;
     var month = expiry.split('/');
-    console.log(month.length);
     const apiKey =
       'pk_test_51I5OlbGkYHUqna05zpZxNLOPqU7VabiSekiHuZhYi7akmTNJApDRxOteYgLtiUwehI3T9PDZqHgiTewc43G3huXY00jO1gC9YQ';
     const client = new Stripe(apiKey);
@@ -44,22 +43,16 @@ export default function StripePayment(props) {
         address_zip: values.values.postalCode,
       })
       .then((value) => {
-       // setActivityIndicator(false);
-        console.log(value);
         const myObjStr = JSON.stringify(value);
-        console.log(myObjStr);
         if (myObjStr.includes('error')) {
           setShow(true);
           setError(value.error);
         } else {
           setshowPopUp(true);
-          localStorage.saveJSONOnlinePaymentDefaults(
-            constants.KEY_USER_ORDER_ONLINE,
-            value,
-          );
+          saveOnlinePaymentDefaults(value);
           setTimeout(() => {
             props.navigation.goBack();
-          }, 3000);
+          }, 8000);
         }
       })
       .catch((error) => console.log(error));
@@ -74,29 +67,27 @@ export default function StripePayment(props) {
           height: '100%',
         }}
         showsVerticalScrollIndicator={false}>
-        {/* <ActivityIndicator visible={showActivityIndicator} />
-        {showPopUp && (
-          <View style={styles.overlay}>
-            <LottieView
-              autoPlay
-              loop
-              source={require('../../../assets/animations/3409-done.json')}
-            />
-          </View>
-        )} */}
         <CreditCardInput
           autoFocus
           requiresName
           requiresCVC
           requiresPostalCode
-        //   labelStyle={styles.label}
-        //   inputStyle={styles.input}
           validColor={'black'}
           invalidColor={'red'}
           placeholderColor={'darkgray'}
           onFocus={_onFocus}
           onChange={_onChange}
         />
+        <View>
+          <Text style={styles.heading}>Reservation Details</Text>
+          <Text><Text style={styles.attr}>Title: </Text> {props.route.params.reservationData.apartmentDetails.Title}</Text>
+          <Text><Text style={styles.attr}>Location: </Text> {props.route.params.reservationData.apartmentDetails.Location}</Text>
+          <Text><Text style={styles.attr}>Owner: </Text> {props.route.params.reservationData.apartmentDetails.Owner}</Text>
+          <Text><Text style={styles.attr}>CheckIn: </Text> {props.route.params.reservationData.inDate}</Text>
+          <Text><Text style={styles.attr}>CheckOut: </Text> {props.route.params.reservationData.outDate}</Text>
+          <Text><Text style={styles.attr}>Total days of stay:</Text> {props.route.params.reservationData.daysOfStay}</Text>
+          <Text><Text style={styles.attr}>Price: </Text> {props.route.params.reservationData.totalFare}</Text>
+        </View>
         <View style={{alignItems: 'center', marginBottom: 20}}>
           <AppButton
             width={'60%'}
@@ -105,17 +96,21 @@ export default function StripePayment(props) {
             onPress={() => payment()}
           />
         </View>
-        {/* {show && (
-          <View style={{alignItems: 'center'}}>
-            <ErrorMessage error={error.code} visible={varificationFailed} />
-            <ErrorMessage error={error.doc_url} visible={varificationFailed} />
-            <ErrorMessage
-              error={'Message :' + error.message}
-              visible={varificationFailed}
-            />
-          </View>
-        )} */}
+        
       </ScrollView>
     </>
   );
 }
+
+const styles=StyleSheet.create({
+  heading:{
+    fontSize:heightPercentageToDP('4%'),
+    color:colors.black,
+    textAlign:'center',
+    marginVertical: '3%',
+},
+attr:{
+  margin: '2%',
+  fontWeight: 'bold',
+}
+})
