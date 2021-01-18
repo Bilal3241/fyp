@@ -154,7 +154,7 @@ function AdsDetails({route, navigation}) {
 const styles = StyleSheet.create({
     background:{
         flex:1,
-        backgroundColor:colors.lightBg,
+        backgroundColor:colors.white,
     },
     segmentTabStyle: {
       backgroundColor: 'transparent',
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         height:hp('70%'),
         marginTop:hp('15%') ,
         marginLeft:wp('10%'),
-        backgroundColor: "white",
+        backgroundColor: 'rgba(190,190,190,0.9)',
         borderRadius: 20,
         padding: 35,
         alignItems: 'center',

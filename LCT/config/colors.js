@@ -5,5 +5,6 @@ export default {
     white: '#FFFFFF',
     black: '#000000',
     cardBg: 'rgba(103,185,232,0.7)',
-    lightBg:'rgb(200,200,225)',
+    lightBg:'rgb(192, 192, 192)',
+    teal: 'rgba(103,185,232,1)',
 };

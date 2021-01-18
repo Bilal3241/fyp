@@ -3,7 +3,7 @@ import AppButton from '../../components/AppButton';
 import InputField from '../../components/InputField'; 
 import { getReviews } from '../../controller/AdsController/GetReviews';
 import Icon from 'react-native-vector-icons/Ionicons';  
-import {FlatList, TouchableHighlight,Modal,View,StyleSheet,Text} from 'react-native';
+import {FlatList, ScrollView, TouchableHighlight,Modal,View,StyleSheet,Text} from 'react-native';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { firebase } from '@react-native-firebase/firestore';
 import PostReview from '../../controller/AdsController/PostReview';
@@ -29,21 +29,21 @@ function ReviewsView(apartmentId) {
             email:user.email,
             des:desc,
             photo:user.photoURL,
-            item:{apartmentId}
+            item:apartmentId.apartmentId,
         };
         PostReview(data);   }
     function onpress() {                                                                                                                                                                        
         setReviewModal(false);
     }
-    
     return (
         <View>
             <Modal //review modal
            animationType="slide"
            transparent={true}
-            visible={ReviewModal}>
+            visible={ReviewModal}
+            style={styles.modalBg}>
             <View style={styles.modal}>
-            <Icon name="close-outline" onPress={()=> setReviewModal(false)} size={50} color="black"></Icon>
+            <Icon name="close-outline" onPress={()=> setReviewModal(false)} size={30} color="white"></Icon>
 
             <Text style={styles.postReviewText} >
                 Add a Review
@@ -70,21 +70,25 @@ function ReviewsView(apartmentId) {
 const styles = StyleSheet.create({
     reviewContainer:{
         padding: '4%',
-        borderRadius:20,
         margin: '2%',
-        elevation:15,
         backgroundColor:colors.white,
+        borderBottomColor: colors.btnBlue,
+        borderBottomWidth: 2,
     },
     postReviewText:{
-        color:colors.black,
+        color:colors.white,
         fontSize:hp('4%'),
+    },
+    modalBg:{
+        backgroundColor: 'rgba(0,0,0,0.4)'
     },
     modal:{
             width:wp('70%'),
             height:hp('40%'),
             marginTop:hp('25%') ,
             marginLeft:wp('15%'),
-            backgroundColor: "white",
+            backgroundColor: 'rgba(120,120,120,0.9)'
+            ,
             borderRadius: 20,
             padding: '5%',
             alignItems: 'center',

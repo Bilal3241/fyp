@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
         margin:'2%',
     },
     text:{
-        color:colors.white,
+        color:colors.black,
         fontSize: hp('5%'),
         fontWeight:'bold'
 
     },
     location:{
-        color:colors.white,
+        color:colors.black,
         fontSize: hp('3%'),
     },
     description:{
