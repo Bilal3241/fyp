@@ -8,62 +8,61 @@ import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-nat
 import { firebase } from '@react-native-firebase/firestore';
 import PostReview from '../../controller/AdsController/PostReview';
 import colors from '../../config/colors';
-function ReviewsView(apartmentId) {
+function ReviewsView({apartmentId}) {
     var user=firebase.auth().currentUser;
-
     const [desc,setDesc]=useState('');
-    
     const [ReviewModal, setReviewModal] = useState(false);
-
     const [reviewList,setReviewList]=useState([]);
     const onReviewsRecieved=(reviewList)=>{
-        console.log(reviewList);
         setReviewList(reviewList);
     }
     useEffect(() => {
-          getReviews(apartmentId, onReviewsRecieved);
+        console.log(apartmentId.Location);
+          getReviews(apartmentId.Location, onReviewsRecieved);
         },[]);
-    
     function Reviews() {
-            var data={name:user.displayName,
+        var data={name:user.displayName,
             email:user.email,
             des:desc,
             photo:user.photoURL,
-            item:apartmentId.apartmentId,
+            item:apartmentId.apartmentId.Location,
         };
-        PostReview(data);   }
+        PostReview(data);
+    }
     function onpress() {                                                                                                                                                                        
         setReviewModal(false);
     }
     return (
         <View>
             <Modal //review modal
-           animationType="slide"
-           transparent={true}
-            visible={ReviewModal}
-            style={styles.modalBg}>
-            <View style={styles.modal}>
-            <Icon name="close-outline" onPress={()=> setReviewModal(false)} size={30} color="white"></Icon>
-
-            <Text style={styles.postReviewText} >
-                Add a Review
-            </Text>
-            <InputField st={desc} setSt={setDesc} cwidth='50' pholder='Type your review'></InputField>
-            <AppButton title="Post a Review" onPress={()=> {Reviews();onpress();setDesc("")} } width="50">
-            </AppButton>
-            </View>
-        </Modal>
-
+                animationType="slide"
+                transparent={true}
+                visible={ReviewModal}
+                style={styles.modalBg}>
+                <View style={styles.modal}>
+                    <Icon name="close-outline" onPress={()=> setReviewModal(false)} size={30} color="white"></Icon>
+                    <Text style={styles.postReviewText} >
+                        Add a Review
+                    </Text>
+                    <InputField st={desc} setSt={setDesc} cwidth='50' pholder='Type your review'></InputField>
+                    <AppButton title="Post a Review" onPress={()=> {Reviews();onpress();setDesc("")} } width="50">
+                    </AppButton>
+                </View>
+            </Modal>
             <FlatList
-                    keyExtractor={(item)=>item.id}
-                    data={reviewList}
-                    renderItem={({item})=>(
-                        <View style={styles.reviewContainer}>
-                            <Text>{item.data.name}</Text>
-                            <Text>{item.data.comment}</Text>
-                        </View>               
-                    )}/>
-            <AppButton  title="Post a Review" onPress={()=> setReviewModal(true)}></AppButton>
+                keyExtractor={(item)=>item.id}
+                data={reviewList}
+                renderItem={({item})=>(
+                    <View style={styles.reviewContainer}>
+                        <Text>{item.data.name}</Text>
+                        <Text>{item.data.comment}</Text>
+                    </View>               
+                )}/>
+            {
+                user.email !=apartmentId.Owner?
+                <AppButton  title="Post a Review" onPress={()=> setReviewModal(true)}></AppButton>
+                :<View />
+            }
         </View>
     );
 }
@@ -83,16 +82,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.4)'
     },
     modal:{
-            width:wp('70%'),
-            height:hp('40%'),
-            marginTop:hp('25%') ,
-            marginLeft:wp('15%'),
-            backgroundColor: 'rgba(120,120,120,0.9)'
-            ,
-            borderRadius: 20,
-            padding: '5%',
-            alignItems: 'center',
-            elevation:15,
+        width:wp('70%'),
+        height:hp('40%'),
+        marginTop:hp('25%') ,
+        marginLeft:wp('15%'),
+        backgroundColor: 'rgba(120,120,120,0.9)',
+        borderRadius: 20,
+        padding: '5%',
+        alignItems: 'center',
+        elevation:15,
     },
     openButton: {
         marginTop:hp("5%"),
@@ -100,11 +98,11 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 10,
         elevation: 2
-      },
-      textStyle: {
+    },
+    textStyle: {
         color: "white",
         fontWeight: "bold",
         textAlign: "center"
-      }
+    }
 })
 export default ReviewsView;
