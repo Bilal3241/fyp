@@ -67,55 +67,43 @@ function AdsDetails({route, navigation}) {
     return (
         
         <ScrollView style={styles.background}> 
-           <Modal
-           animationType="slide"
-           transparent={true}
-            visible={ReservationModal}>
+          <Modal
+          animationType="slide"
+          transparent={true}
+          visible={ReservationModal}>
          
-            <View style={styles.modal2}>
-            <Icon name="close-outline" style={styles.icon} style onPress={()=> setReservationModal(false)} size={50} color="black"></Icon>
-           
-            <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={showDatePicker}>
-              <Text style={styles.textStyle}>Check In</Text>
-              <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode='date'
-                  onConfirm={handleConfirm}
-                  onCancel={hideDatePicker}
-                  minimumDate={new Date()}
-                />
-            </TouchableOpacity>
-                
-                
-                
-                <TouchableOpacity
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={showDatePicker}>
-              <Text style={styles.textStyle}>Check Out</Text>
-              <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  mode='date'
-                  onConfirm={handleConfirm}
-                  onCancel={hideDatePicker}
-                  minimumDate={new Date(checkIn)}
-            />
-            </TouchableOpacity>
-                
-                                
-                <Text>No. of Rooms: {route.params.apartment.NoOfRooms}</Text>
-                <Text>chekIn: {checkIn.toDateString()}</Text>
-                <Text>checkOut: {checkOut.toDateString()}</Text>
-                {/*<Text>Days of Stay: {}</Text>
-                <Text>Fare: {Fare} {}</Text>*/}
-               
-                
-                <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}>
-              
-              <Text style={styles.textStyle} onPress={doReservation}>Proceed to Payment</Text>
+          <View style={styles.modal2}>
+
+                    <Icon name="close-outline" style={styles.icon} style onPress={()=> setReservationModal(false)} size={50} color="black"></Icon>
+              <View style={styles.chkInchkOutBTn}>  
+                    <View>
+                      <AppButton title="Check In" width='25'    onPress={showDatePicker}></AppButton>
+                      <Text style={styles.date}>{checkIn.toDateString()}</Text>
+                      <DateTimePickerModal
+                          isVisible={isDatePickerVisible}
+                          mode='date'
+                          onConfirm={handleConfirm}
+                          onCancel={hideDatePicker}
+                          minimumDate={new Date()}/>
+                   </View>
+                   <View>
+                    <AppButton title="Check Out" width='30'    onPress={showDatePicker}></AppButton>
+                    <Text style={styles.date}>{checkOut.toDateString()}</Text>
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode='date'
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                        minimumDate={new Date(checkIn)}/>
+                  </View>
+              </View>    
+
+                 
+    
+              <TouchableHighlight style={styles.openButton}>
+                  <Text   onPress={doReservation}>Proceed to Payment</Text>
                 </TouchableHighlight>
+            
             </View>
         </Modal>
 
@@ -187,15 +175,24 @@ const styles = StyleSheet.create({
     },
     
     modal2:{
-        width:wp('80%'),
-        height:hp('70%'),
-        marginTop:hp('15%') ,
-        marginLeft:wp('10%'),
+        flex:0.8,
+        width:wp('65%'),
+        marginTop:hp('25%') ,
+        marginBottom:hp('25%'),
+        marginLeft:wp('17%'),
         backgroundColor: 'rgba(190,190,190,0.9)',
         borderRadius: 20,
-        padding: 35,
         alignItems: 'center',
-        shadowColor: "#000",
+},
+chkInchkOutBTn:{
+  flex:1,
+  flexDirection:'row',
+  justifyContent:"center"
+},
+date:{
+  padding:wp('1%'),
+  margin: wp('2%'),
+  fontSize:15,
 },
 btn:{
   flex:1,
@@ -203,18 +200,27 @@ btn:{
   justifyContent:"center",
   marginTop:'3%',
 },
-    openButton: {
-        marginTop:hp("5%"),
-        backgroundColor: "#F194FF",
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
-      },
-      textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-      }
+
+openButton:{
+  marginTop:hp("10%"),
+  marginRight:wp('4%'),
+  marginBottom:hp("10%"),
+  backgroundColor: "#F194FF",
+  borderRadius: 20,
+  padding: 10,
+  
+},
+// chkOutBtn:{
+//   marginTop:hp("3%"),
+//   marginLeft:wp('25%'),
+  
+//   backgroundColor: "#F194FF",
+//   borderRadius: 20,
+//   padding: 10,
+//   elevation: 2
+// },
+  
+     
 })
 
 export default AdsDetails;
