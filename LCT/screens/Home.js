@@ -28,7 +28,7 @@ function Home({route, navigation}) {
                     <CircleImage color="rgba(21,66,107,0.7)" size="40%" image={IMAGEASSETS.logo}/>
                 </View>
                 <View style={styles.destinations}>
-                    <Circle fn={show} title="Destinations" color="rgba(33,127,214,0.7)" size="20%" />
+                    <Circle fn={()=>navigation.navigate('DestinationScreen')} title="Destinations" color="rgba(33,127,214,0.7)" size="20%" />
                 </View> 
                 <View style={styles.nearby}>
                     <Circle fn={show} title="Nearby Attractions" color="rgba(56,162,222,0.7)" size="25%"></Circle>
