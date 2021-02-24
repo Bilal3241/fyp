@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
         textAlign:'center',
         fontWeight:'bold',
         fontSize:18,
-
-
     }
 })
 export default HRList;

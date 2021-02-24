@@ -16,31 +16,28 @@ function HotelList({navigation,route}) {
         hotel={Title:('Hotel'+i)}
         objhotel.push(hotel)
     }
+    const [hotelList,setHotelList]=useState(objhotel);
     const [search,setSearch]=useState(objhotel)
 
 
     return (
-       
-       
-        <ImageBackground 
+    <ImageBackground 
           source={IMAGEASSETS.museumBg}
           style={styles.background}>
-              <View style={styles.bg}>
-                   <View style={styles.margin}>
-                    <SearchBox  list={objhotel} searchStatefn={setSearch}/>
-                  </View>  
-                  <FlatList 
-                      keyExtractor={(item)=>item.Title}
-                      data={objhotel}
-                      renderItem={({item})=>(
-                        <HRList 
-                        hotel={item} 
-                        nav={navigation} 
-                        ></HRList>
-                      )}/>
-                </View> 
-               
-          </ImageBackground>
+          <View style={styles.bg}>
+              <View style={styles.margin}>
+                <SearchBox  list={hotelList} searchStatefn={setSearch}/>
+              </View>  
+              <FlatList 
+                keyExtractor={(item)=>item.Title}
+                data={search}
+                renderItem={({item})=>(
+                  <HRList 
+                    hotel={item} 
+                    nav={navigation} 
+                  ></HRList>)}/>
+          </View> 
+      </ImageBackground>
       );
     
   }
