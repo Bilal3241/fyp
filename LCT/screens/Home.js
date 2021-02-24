@@ -22,7 +22,7 @@ function Home({route, navigation}) {
                     {/* <Button title="My Rooms" onPress={()=>navigation.navigate('AdsList',{page:"myrooms"})} ></Button> */}
                 </View>
                 <View style={styles.hotelnRes}>
-                    <Circle fn={show} title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
+                    <Circle fn={()=>navigation.navigate('HotelList')} title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
                 </View> 
                 <View style={styles.logo}>
                     <CircleImage color="rgba(21,66,107,0.7)" size="40%" image={IMAGEASSETS.logo}/>
