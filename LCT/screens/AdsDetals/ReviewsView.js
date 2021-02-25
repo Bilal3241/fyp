@@ -25,7 +25,7 @@ function ReviewsView({apartmentId}) {
             email:user.email,
             des:desc,
             photo:user.photoURL,
-            item:apartmentId.apartmentId.Location,
+            item:apartmentId.Location,
         };
         PostReview(data);
     }

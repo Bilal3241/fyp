@@ -10,8 +10,10 @@ import {getAllAds} from '../controller/AdsController/GetAllAds';
 import {MyRooms} from '../controller/AdsController/MyRooms';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import { NavigationEvents } from 'react-navigation';
+import { DatePickerIOSBase } from 'react-native';
 
 function AdsList() {
+  
   const data = [
     { Title: 'Iqbal Town' },
     { Title: 'Johar Town' },
@@ -27,7 +29,8 @@ function AdsList() {
     { Title: 'Shadman' },
   ];
   
-  
+  const [search,setSearch]=useState(data);
+  const [destList,setDestList]=useState(data);
 
       return (
        
@@ -39,12 +42,12 @@ function AdsList() {
             <SearchBox  list={data} searchStatefn={setSearch}/>
                 </View>
                 <FlatList
-            data={ data }
+            data={ search }
             renderItem={ ({item}) =>
               <View style={styles.GridViewContainer}>
                <Text style={styles.GridViewTextLayout}  > {item.Title} </Text>
               </View> }
-            numColumns={2}
+            numColumns={3}
          />
             </View>
         </ImageBackground>
