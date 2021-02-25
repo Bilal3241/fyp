@@ -13,6 +13,7 @@ import ReviewsView from './ReviewsView';
 import DescriptionView from './DescriptionView';
 import { onChange } from 'react-native-reanimated';
 import colors from '../../config/colors';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 
 function AdsDetails({route, navigation}) {
     var user=firebase.auth().currentUser;
@@ -131,8 +132,20 @@ function AdsDetails({route, navigation}) {
       )}
         </View>
         <View style={styles.btn}>
-            <AppButton title="Start Chat" width='45' onPress={setChatNav}></AppButton>
-            <AppButton  title="Reserve Room" width='45' onPress={()=> setReservationModal(true)}></AppButton>
+            {/* <AppButton title="Start Chat" width='45' onPress={setChatNav}></AppButton> */}
+            <View style={styles.icons}>
+              <IonIcons size={50}  name="chatbubbles-sharp" color={colors.btnBlue} onPress={setChatNav} ></IonIcons>
+              <Text>Start Chat</Text>
+            </View>
+            <View>
+              <IonIcons size={50}  name="bed-sharp" color={colors.btnBlue} onPress={()=> setReservationModal(true)} ></IonIcons>
+              <Text>Reserve Room</Text>
+            </View>
+
+
+
+
+            {/* <AppButton  title="Reserve Room" width='45' onPress={()=> setReservationModal(true)}></AppButton> */}
             </View>
         </ScrollView>
         
@@ -210,6 +223,9 @@ openButton:{
   padding: 10,
   
 },
+icons:{
+  padding:'2%'
+}
 // chkOutBtn:{
 //   marginTop:hp("3%"),
 //   marginLeft:wp('25%'),
