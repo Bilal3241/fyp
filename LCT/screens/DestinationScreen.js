@@ -10,24 +10,27 @@ import {getAllAds} from '../controller/AdsController/GetAllAds';
 import {MyRooms} from '../controller/AdsController/MyRooms';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import { NavigationEvents } from 'react-navigation';
+import { DatePickerIOSBase } from 'react-native';
 
 function AdsList() {
+  
   const data = [
-    { key: 'Iqbal Town' },
-    { key: 'Johar Town' },
-    { key: 'Muslim Town' },
-    { key: 'Township' },
-    { key: 'Model Town' },
-    { key: 'Gulberg' },
-    { key: 'Ichra' },
-    { key: 'Cantt' },
-    { key: 'Mall Road' },
-    { key: 'Defence' },
-    { key: 'Bhatti Gate' },
-    { key: 'Shadman' },
+    { Title: 'Iqbal Town' },
+    { Title: 'Johar Town' },
+    { Title: 'Muslim Town' },
+    { Title: 'Township' },
+    { Title: 'Model Town' },
+    { Title: 'Gulberg' },
+    { Title: 'Ichra' },
+    { Title: 'Cantt' },
+    { Title: 'Mall Road' },
+    { Title: 'Defence' },
+    { Title: 'Bhatti Gate' },
+    { Title: 'Shadman' },
   ];
   
-  
+  const [search,setSearch]=useState(data);
+  const [destList,setDestList]=useState(data);
 
       return (
        
@@ -36,15 +39,15 @@ function AdsList() {
         style={styles.background}>
             <View style={styles.bg}>
             <View style={styles.margin}>
-                  <SearchBox />
+            <SearchBox  list={data} searchStatefn={setSearch}/>
                 </View>
                 <FlatList
-            data={ data }
+            data={ search }
             renderItem={ ({item}) =>
               <View style={styles.GridViewContainer}>
-               <Text style={styles.GridViewTextLayout}  > {item.key} </Text>
+               <Text style={styles.GridViewTextLayout}  > {item.Title} </Text>
               </View> }
-            numColumns={2}
+            numColumns={3}
          />
             </View>
         </ImageBackground>
