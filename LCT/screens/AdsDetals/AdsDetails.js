@@ -29,7 +29,6 @@ function AdsDetails({route, navigation}) {
             navigation.navigate('Chat',{apart})
         }
     }
-
     const [tabIndex, setTabIndex]=useState(0);
 
    
