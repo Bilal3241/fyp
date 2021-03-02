@@ -9,6 +9,7 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 import ReviewsView from './ReviewsView';
 import DescriptionView from './DescriptionView';
 import { onChange } from 'react-native-reanimated';
+import { firebase } from '@react-native-firebase/firestore';
 import colors from '../../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 

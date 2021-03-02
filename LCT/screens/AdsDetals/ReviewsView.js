@@ -17,8 +17,8 @@ function ReviewsView({apartmentId}) {
         setReviewList(reviewList);
     }
     useEffect(() => {
-        console.log(apartmentId.Location);
-          getReviews(apartmentId.Location, onReviewsRecieved);
+        console.log(apartmentId);
+          getReviews(apartmentId, onReviewsRecieved);
         },[]);
     function Reviews() {
         var data={name:user.displayName,
