@@ -9,12 +9,26 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 import ReviewsView from './ReviewsView';
 import DescriptionView from './DescriptionView';
 import { onChange } from 'react-native-reanimated';
+import { firebase } from '@react-native-firebase/firestore';
 import colors from '../../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
 function AdsDetails({route, navigation}) {
-   
-    
+    var user=firebase.auth().currentUser;
+
+    var images=[];
+    images.push({uri: "../../assets/images/badshahi mosque.jpg"});
+    images.push({uri: "../../assets/images/orange.jpg"});
+    const apart=route.params.apartment;
+    var user=firebase.auth().currentUser;
+    function setChatNav(){
+        if(user.email==route.params.apartment.Owner){
+            navigation.navigate('Messages',{apart})
+        }
+        else{
+            navigation.navigate('Chat',{apart})
+        }
+    }
     const [tabIndex, setTabIndex]=useState(0);
 
    
@@ -24,7 +38,7 @@ function AdsDetails({route, navigation}) {
           
         <View>
           
-        <PicSlider style={styles.picslider}>
+        <PicSlider style={styles.picslider} imageList={images}>
 
         </PicSlider>
         </View>

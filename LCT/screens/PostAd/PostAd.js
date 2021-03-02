@@ -1,82 +1,142 @@
 import React,{useState} from 'react';
-import{Button, ImageBackground, SafeAreaView, TouchableOpacity, StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
+import{ ImageBackground, SafeAreaView, Switch, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import InputField from '../../components/InputField';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImgPicker from '../../components/ImgPicker';
 import AppButton from '../../components/AppButton';
+import {Formik} from 'formik';
 //import styles from './style';
-import VectorIcon from 'react-native-vector-icons/Ionicons';
+import PicSlider from '../../components/PicSlider';
 import { ScrollView } from 'react-native-gesture-handler';
 import { IMAGEASSETS } from '../../assets/images';
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-  } from 'react-native-responsive-screen';
+import * as yup from'yup';
 import colors from '../../config/colors';
 import stylesheet from '../../assets/stylesheet/stylesheet';
-import PostAds from '../../controller/AdsController/PostAds';
+//import PostAds from '../../controller/AdsController/PostAds';
 import { firebase } from '@react-native-firebase/firestore';
 
-
+const adValidationScheme=yup.object({
+    title: yup.string().required().min(5),
+    location: yup.string().required(),
+    Description: yup.string().required().min(10),
+    charges: yup.string().required().test('is-num','Rent should only be numeric',(val)=>{
+        return parseInt(val)>0;
+    }),
+    noOfRooms:yup.string().required().test('is-num','No. of rooms should only be numeric',(val)=>{
+        return parseInt(val)>0;
+    }),
+    images: yup.array().of(yup.object().shape({uri: yup.string().required()})).min(1).required(),
+})
 function PostAd({route,navigation}){
-    const LocRead=() =>{
-        if (route.params.path=="myrooms") {
-            return(<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric" editable={false}></InputField>)
-        }else{
-            return (<InputField st={location} setSt={setLocation} pholder='Location' keyboardType="numeric"></InputField>)
-        }
-    }
     var user=firebase.auth().currentUser;
-    const [owner,setOwner]=useState(user.email);
-   // const [long,setLong]=useState('');
-  //  const [lat,setLat]=useState('');
-    const [location,setLocation]=useState(route.params.apartment.Location);
-    const [desc,setDesc]=useState(route.params.apartment.Description);
-    const [images,setImages]=useState('');
-    const [rent,setRent]=useState(route.params.apartment.Charges);
-    const [title,setTitle]=useState(route.params.apartment.Title);
-    const [availability,setAvailability]=useState(route.params.apartment.IsAvailable);
-    const [rooms, setRooms]=useState(route.params.apartment.NoOfRooms);
-    const selectFromGallery=()=>{
-        ImagePicker.openPicker({
-            cropping: true
-          }).then(image => {
-            setImages({uri: image.path});
-          });
-    }
+    const owner=user.email;
+    const location=route.params.apartment.Location;
+    const desc=route.params.apartment.Description;
+    const images=route.params.apartment.Images;
+    const rent=route.params.apartment.Charges;
+    const title=route.params.apartment.Title;
+    const availability=route.params.apartment.IsAvailable;
+    const rooms=route.params.apartment.NoOfRooms;
+
     const adPosted=()=>{
     }
-    const postMyAd=()=>{
+    const postMyAd=(adData)=>{
         var edit=route.params.path;
         var data={
-            Charges: rent, Description: desc, Images: images,  IsAvailable: availability, Location:location, NoOfRooms: rooms, Title: title,email:user.email, //account: accountNum, //owner: current User
-        }
-        PostAds(data,edit, adPosted);
-        navigation.goBack('AdsList',{page:edit});
+            Charges: adData.charges, Description: adData.Description, images: adData.images,  IsAvailable: adData.availability, Location:adData.location, NoOfRooms: adData.noOfRooms, Title: adData.title,email:user.email, //,account: accountNum, //owner: current User
+        }        
+        //PostAds(data,edit, adPosted);
+        //navigation.goBack('AdsList',{page:edit});
     }
     return(
-        <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}> 
-            <ScrollView>
-                <View style={stylesheet.bgView}>
-                <Text style={styles.heading}>Post Your Add</Text>
-                <InputField st={title} setSt={setTitle} pholder='Title'></InputField>
-                {/* <InputField st={accountNum} setSt={setAccountNum} pholder='Account Number' keyboardType="numeric"></InputField> */}
-                <InputField st={rooms} setSt={setRooms} pholder='No. of Rooms' keyboardType="numeric"></InputField>
-                {/* <InputField st={lat} setSt={setLat} pholder='Latitude' keyboardType="numeric"></InputField>
-                <InputField st={long} setSt={setLong} pholder='Longitude' keyboardType="numeric"></InputField> */}
-                <LocRead></LocRead>
-                <InputField cheight='20' st={desc} setSt={setDesc} pholder='Description'></InputField>
-                <InputField st={rent} setSt={setRent} pholder='Rent' keyboardType="numeric"></InputField>
-                <InputField st={owner} setSt={setOwner} pholder='Owner' editable={false}></InputField>
-                <InputField st={availability} setSt={setAvailability} pholder='Is the apartment available(Y/N)?' ></InputField>
-                <TouchableOpacity onPress={selectFromGallery}>
-                <View style={styles.imgbg}> 
-                <ImageBackground
-                    source={images}
-                    style={styles.img}/>
-                </View>
-                </TouchableOpacity>
-                <AppButton title="Submit Ad" onPress={postMyAd}></AppButton>
-            </View>
+        <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>        
+        
+            <ScrollView style={styles.bg}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={stylesheet.bgView}>
+                <Text style={stylesheet.heading}>Post Your Add</Text>
+                <Formik
+                initialValues={{title: title, Description: desc, noOfRooms: rooms, charges: rent, owner: owner, availability: availability, images: images, location: location }}
+                validationSchema={adValidationScheme}
+                onSubmit={(values)=>{
+                    //console.log(values);
+                    postMyAd(values);
+                }}>
+                    {(props)=>(
+                        <View>
+                            <InputField
+                            st={props.values.title}
+                            pholder='Title'
+                            setSt={props.handleChange('title')}
+                            onBlur={props.handleBlur('title')}></InputField>
+                            <Text style={styles.error}>{props.touched.title && props.errors.title}</Text>
+                            <InputField 
+                            st={props.values.noOfRooms} 
+                            setSt={props.handleChange('noOfRooms')} 
+                            pholder='No. of Rooms' 
+                            keyboardType="numeric"
+                            onBlur={props.handleBlur('noOfRooms')}></InputField>
+                            <Text style={styles.error}>{props.touched.noOfRooms && props.errors.noOfRooms}</Text>
+                            <InputField 
+                            cheight='20' 
+                            st={props.values.Description} 
+                            setSt={props.handleChange('Description')} 
+                            pholder='Description'
+                            multiline
+                            onBlur={props.handleBlur('Description')}></InputField>
+                            <Text style={styles.error}>{props.touched.Description && props.errors.Description}</Text>
+                            <InputField 
+                            st={props.values.charges} 
+                            setSt={props.handleChange('charges')} 
+                            pholder='Rent' 
+                            keyboardType="numeric"
+                            onBlur={props.handleBlur('charges')}></InputField>
+                            <Text style={styles.error}>{props.touched.charges && props.errors.charges}</Text>
+                            <InputField 
+                            st={props.values.owner} 
+                            setSt={props.handleChange('owner')} 
+                            pholder='Owner' 
+                            editable={false}></InputField>
+                            {
+                                route.params.path=="myrooms"?
+                                <InputField 
+                                st={props.values.location} 
+                                setSt={props.handleChange('location')} 
+                                onBlur={props.handleBlur('location')} 
+                                pholder='Location' editable={false}></InputField>        
+                                :
+                                <InputField st={props.values.location} 
+                                setSt={props.handleChange('location')} 
+                                onBlur={props.handleBlur('location')} 
+                                pholder='Location'></InputField>
+                            }
+                            <Text style={styles.error}>{props.touched.location && props.errors.location}</Text>
+                            <View style={styles.checkBoxBg}>
+                            <Text style={{color: colors.black, fontSize:15}} >Is the apartment available?</Text>
+                            <Switch
+                            trackColor={{ false: colors.gray, true: colors.cardBg }}
+                            thumbColor={props.values.availability ? colors.btnBlue : colors.white}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={(value) => {
+                                props.setFieldValue('availability', value);
+                            }}
+                            value={props.values.availability}
+                            />
+                            </View>
+                            <Text style={styles.error}>{props.touched.availability && props.errors.availability}</Text>
+                            {props.values.images?.length>0?(
+                                <PicSlider imageList={props.values.images} 
+                                height="25" width="85"></PicSlider>
+                            ):(<ImgPicker onImagesPicked={(imageList)=>{
+                                props.setFieldValue('images', imageList, false);
+                            }}/>)
+                            }
+                            <Text style={styles.error}>{props.touched.images && props.errors.images}</Text>
+                            <AppButton title="Submit Ad" onPress={props.handleSubmit}></AppButton>
+            
+                        </View>
+                    )}
+                </Formik>
+                </View></TouchableWithoutFeedback>
             </ScrollView>
         </ImageBackground>
         
@@ -87,33 +147,22 @@ const styles=StyleSheet.create({
         flex:1,
         resizeMode: "cover",
     },
-    heading:{
-        fontSize:hp('6%'),
-        color:colors.white,
-        textAlign:'center'
-    },
     bg:{
         flex:1,
-        justifyContent: "center",
-        alignItems:'center',
-        backgroundColor:colors.bgcolor,
         width:'100%',
         height:'100%',
     },
-    imgbg:{
-        height:hp('15%'),
-        width: wp('22%'),
-        resizeMode: "contain",
-        borderColor: colors.white,
-        borderWidth: 2,
-        justifyContent:'center',
+    checkBoxBg:{
+        flexDirection:'row', 
+        justifyContent:'space-around',
+        backgroundColor:colors.inpWhite,
+        borderRadius:30,
+        marginVertical:'2%',
         alignItems:'center',
-        marginVertical: '3%'
     },
-    img:{
-        height:'100%',
-        width: '100%',
-        resizeMode:'contain',
-    },
+    error:{
+        color:colors.yellow,
+        marginHorizontal:'5%'
+    }
 })
 export default PostAd;

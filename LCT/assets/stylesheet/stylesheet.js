@@ -19,8 +19,11 @@ const styles=StyleSheet.create({
         alignItems:'center',
         width:'100%',
         height:'100%',
-      
-       paddingHorizontal:widthPercentageToDP('10%'),
-    }
+    },
+    heading:{
+        fontSize:hp('6%'),
+        color:colors.white,
+        textAlign:'center'
+    },
 });
 export default styles;
