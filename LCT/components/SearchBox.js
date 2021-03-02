@@ -5,8 +5,7 @@ import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsi
 import colors from '../config/colors';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
-function SearchBox({searchState,searchStatefn,list ,listState}) {
-   
+function SearchBox({searchState,searchStatefn,list ,listState}) {   
     const searchFilter=(textToSearch)=>{
         searchStatefn(list.filter(i=>i.Title.toLowerCase().includes(textToSearch.toLowerCase()),),
       )
