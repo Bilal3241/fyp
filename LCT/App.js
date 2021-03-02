@@ -12,12 +12,15 @@ import SignupScreen from './screens/SignupScreen';
 import AdsDetails from './screens/AdsDetals/AdsDetails';
 import DrawerScreen  from './screens/DrawerScreen';
 import StripePayment from './screens/StripePayment';
+import DestinationScreen from './screens/DestinationScreen';
 import Chat from './screens/Chat';
 import colors from './config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
 import MessageList from './screens/MessageList';
 import MyCustomers from './screens/MyCustomers';
+import HotelList from './screens/HotelList';
 import { View } from 'native-base';
+import DestDetails from './screens/DestDetails';
 
 const HomeStack=createStackNavigator();
 const DrawerStack=createDrawerNavigator();
@@ -58,11 +61,16 @@ const App = () => {
           <HomeStack.Screen name='Home' component={DrawerStackfn} options={{headerShown:false}}/>
           <HomeStack.Screen name='AdsList' component={AdsList} />
           <HomeStack.Screen name='StripePayment' component={StripePayment} />
+          <HomeStack.Screen name='DestinationScreen' component={DestinationScreen} />
           <HomeStack.Screen name='PostAd' component={PostAd} />
           <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
           <HomeStack.Screen name='Chat' component={Chat}/>
           <HomeStack.Screen name="Messages" component={MessageList}/>
           <HomeStack.Screen name="Customers" component={MyCustomers}/>
+          <HomeStack.Screen name='HotelList' component={HotelList} />
+          <HomeStack.Screen name='DestDetails' component={DestDetails} />
+
+
           
         </HomeStack.Navigator>
       </NavigationContainer>
