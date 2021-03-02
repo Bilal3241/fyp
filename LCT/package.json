@@ -11,16 +11,17 @@
   },
   "dependencies": {
     "@react-native-community/cli": "^4.13.1",
-    "@react-native-community/datetimepicker": "^3.0.8",
+    "@react-native-community/datetimepicker": "^3.0.9",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/app": "^10.3.0",
     "@react-native-firebase/auth": "^10.3.0",
     "@react-native-firebase/firestore": "^10.3.1",
-    "@react-native-firebase/storage": "^10.4.1",
+    "@react-native-firebase/storage": "^10.3.0",
     "@react-navigation/drawer": "^5.11.4",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
+    "formik": "^2.2.6",
     "native-base": "^2.13.15",
     "react": "16.13.1",
     "react-native": "0.63.4",
@@ -42,8 +43,9 @@
     "react-native-stripe-api": "^0.1.0",
     "react-native-vector-icons": "^7.1.0",
     "react-navigation": "^4.4.3",
+    "underscore": "^1.12.0",
     "uuid": "^8.3.2",
-    "underscore": "^1.12.0"
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

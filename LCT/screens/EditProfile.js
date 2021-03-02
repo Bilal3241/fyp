@@ -4,7 +4,6 @@ import AppButton from '../components/AppButton';
 import InputField from '../components/InputField';
 import colors from '../config/colors';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import ImgPicker from '../components/ImgPicker';
 import { IMAGEASSETS } from '../assets/images';
 import stylesheet from '../assets/stylesheet/stylesheet';
 import PostUsers from '../controller/AdsController/PostUsers';

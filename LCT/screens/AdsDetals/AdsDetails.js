@@ -17,6 +17,9 @@ import colors from '../../config/colors';
 function AdsDetails({route, navigation}) {
     var user=firebase.auth().currentUser;
 
+    var images=[];
+    images.push({uri: "../../assets/images/badshahi mosque.jpg"});
+    images.push({uri: "../../assets/images/orange.jpg"});
     const apart=route.params.apartment;
     var user=firebase.auth().currentUser;
     function setChatNav(){
@@ -121,7 +124,7 @@ function AdsDetails({route, navigation}) {
 
         <View>
           
-        <PicSlider style={styles.picslider}>
+        <PicSlider style={styles.picslider} imageList={images}>
 
         </PicSlider>
         </View>

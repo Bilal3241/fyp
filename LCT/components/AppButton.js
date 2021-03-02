@@ -16,14 +16,15 @@ function AppButton({title, onPress, width="85" }) {
 const styles = StyleSheet.create({
     btnContainer:{
         alignItems:'center',
+        justifyContent:"center",
+        marginVertical:'3%',
     },
     button:{
         backgroundColor: colors.btnBlue,
         borderRadius: 30,
         justifyContent:"center",
         alignItems:"center",
-        margin: '3%',
-        padding:'3%',
+        paddingVertical:'3%',
     },
     text:{
         color: colors.white,
