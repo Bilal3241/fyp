@@ -11,7 +11,7 @@ import { IMAGEASSETS } from '../../assets/images';
 import * as yup from'yup';
 import colors from '../../config/colors';
 import stylesheet from '../../assets/stylesheet/stylesheet';
-//import PostAds from '../../controller/AdsController/PostAds';
+import PostAds from '../../controller/AdsController/PostAds';
 import { firebase } from '@react-native-firebase/firestore';
 
 const adValidationScheme=yup.object({
@@ -44,7 +44,7 @@ function PostAd({route,navigation}){
         var data={
             Charges: adData.charges, Description: adData.Description, images: adData.images,  IsAvailable: adData.availability, Location:adData.location, NoOfRooms: adData.noOfRooms, Title: adData.title,email:user.email, //,account: accountNum, //owner: current User
         }        
-        //PostAds(data,edit, adPosted);
+        PostAds(data,edit, adPosted);
         //navigation.goBack('AdsList',{page:edit});
     }
     return(
