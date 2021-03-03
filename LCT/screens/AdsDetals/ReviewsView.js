@@ -17,7 +17,6 @@ function ReviewsView({apartmentId}) {
         setReviewList(reviewList);
     }
     useEffect(() => {
-        console.log(apartmentId);
           getReviews(apartmentId, onReviewsRecieved);
         },[]);
     function Reviews() {
@@ -25,7 +24,7 @@ function ReviewsView({apartmentId}) {
             email:user.email,
             des:desc,
             photo:user.photoURL,
-            item:apartmentId.Location,
+            item:apartmentId,
         };
         PostReview(data);
     }
