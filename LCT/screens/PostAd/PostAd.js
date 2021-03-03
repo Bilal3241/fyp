@@ -25,6 +25,7 @@ const adValidationScheme=yup.object({
         return parseInt(val)>0;
     }),
     images: yup.array().of(yup.object().shape({uri: yup.string().required()})).min(1).required(),
+    availability: yup.bool().required(),
 })
 function PostAd({route,navigation}){
     var user=firebase.auth().currentUser;
@@ -45,7 +46,7 @@ function PostAd({route,navigation}){
             Charges: adData.charges, Description: adData.Description, images: adData.images,  IsAvailable: adData.availability, Location:adData.location, NoOfRooms: adData.noOfRooms, Title: adData.title,email:user.email, //,account: accountNum, //owner: current User
         }        
         PostAds(data,edit, adPosted);
-        //navigation.goBack('AdsList',{page:edit});
+        navigation.goBack('AdsList',{page:edit});
     }
     return(
         <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>        
@@ -119,6 +120,7 @@ function PostAd({route,navigation}){
                             onValueChange={(value) => {
                                 props.setFieldValue('availability', value);
                             }}
+                            onBlur={props.handleBlur('availability')}
                             value={props.values.availability}
                             />
                             </View>
