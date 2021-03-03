@@ -2,12 +2,10 @@ import Firestore, { firebase } from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
-function uploadAd(size, adData, images){
-    
-};
+
+var imgs=[];
 function PostAds(adData,edit, adPosted) {
         
-        var imgs=[];
         Firestore().collection("Rooms").where("Location","==",adData.Location).get()
         .then(snap => {
         if(edit!=="myrooms"){
@@ -22,15 +20,9 @@ function PostAds(adData,edit, adPosted) {
             .on(
                 'state_changed',
                 snapshot=>{
-                    //console.log("snapshot: "+ snapshot.state);
-                    //console.log("Progress: "+ (snapshot.bytesTransferred/snapshot.totalBytes)*100);
                     if (snapshot.state===storage.TaskState.SUCCESS){
                         console.log("image added successfully");
-                        storageRef.getDownloadURL()
-                        .then((downloadUrl)=>{
-                       //console.log("File url: "+ downloadUrl);
-                       imgs.push({uri: downloadUrl,});
-                   }); 
+                        
                     }
                 },
                 error=>{
@@ -38,35 +30,36 @@ function PostAds(adData,edit, adPosted) {
                     console.log("image upload error: "+ error.toString());
                 },
                 complete=>{
-                   
+                    storageRef.getDownloadURL()
+                    .then((downloadUrl)=>{
+                   //console.log("File url: "+ downloadUrl);
+                   imgs.push({uri: downloadUrl,});
+               }); 
                 }
             );
         }
         };
-         if(snap.size==0 || edit=="myrooms")//skip upload image
-                    {
-                        //console.log(adData);
-                        Firestore().collection('Rooms').doc(adData.Location).set({
-                            Charges: adData.Charges,
-                            Description: adData.Description,
-                            Images: imgs,
-                            IsAvailable: adData.IsAvailable,
-                            Location:adData.Location,
-                            NoOfRooms:adData.NoOfRooms,
-                            Owner:adData.email,
-                            Title:adData.Title,
-                
-                        }).then(function() {
-                            console.log("Document successfully written!");
-                        })
-                        .catch(function(error) {
-                            console.error("Error writing document: ", error);
-                        })
-                    }else{
-                        console.warn("already exist")
-                    }
      })
-    
+     if(snap.size==0 || edit=="myrooms")//skip upload image
+        {
+        Firestore().collection('Rooms').doc(adData.Location).set({
+            Charges: adData.Charges,
+            Description: adData.Description,
+            Images: imgs,
+            IsAvailable: adData.IsAvailable,
+            Location:adData.Location,
+            NoOfRooms:adData.NoOfRooms,
+            Owner:adData.email,
+            Title:adData.Title,
+            }).then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            })
+            }else{
+                console.warn("already exist")
+        }
 }
         
 export default PostAds;
