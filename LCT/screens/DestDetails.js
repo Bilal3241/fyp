@@ -31,5 +31,26 @@ function DestDetails(){
    </View>
 );
       }
-
 export default DestDetails;
+
+
+// import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
+// const GooglePlacesInput = () => {
+//   return (
+//     <GooglePlacesAutocomplete
+//       placeholder='Search'
+//       onPress={(data, details = null) => {
+//         // 'details' is provided when fetchDetails = true
+//         console.log(data, details);
+//       }}
+//       query={{
+//         key: 'AIzaSyBu0-yQ-guUuzeJuSROa30n9yeTD87CTH0',
+//         language: 'en',
+//       }}
+//     />
+//   );
+// };
+
+// export default GooglePlacesInput;
+
