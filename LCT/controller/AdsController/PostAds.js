@@ -1,7 +1,7 @@
 import Firestore from '@react-native-firebase/firestore';
 
 async function PostAds(adData,edit, adPosted) { 
-    console.log(adData);
+    //console.log(adData);
     Firestore().collection("Rooms").where("Location","==",adData.Location).get()
     .then(async (snap) => {
         if(snap.size==0 || edit=="myrooms")//skip upload image

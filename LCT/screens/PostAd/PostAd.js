@@ -77,13 +77,13 @@ function PostAd({route,navigation}){
     }
     };
     task.then(()=>{
-        console.log(imgs);        
+        //console.log(imgs);        
     })
     var data={
         Charges: adData.charges, Description: adData.Description, images: imgs,  IsAvailable: adData.availability, Location:adData.location, NoOfRooms: adData.noOfRooms, Title: adData.title,email:user.email, //,account: accountNum, //owner: current User
     };
     console.log(data); 
-    console.log("moving");   
+    //console.log("moving");   
     PostAds(data,edit, adPosted);
         //navigation.goBack('AdsList',{page:edit});
     }
