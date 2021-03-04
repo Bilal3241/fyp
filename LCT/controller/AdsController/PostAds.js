@@ -1,15 +1,33 @@
 import Firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
-async function PostAds(adData,edit, adPosted) { 
-    //console.log(adData);
+async function PostAds (adData,edit, adPosted) { 
+    var imgs=[];
+    if(edit!=="myrooms"){
+    var fileExtension;
+    await Promise.all(adData.images.map(async (image)=>{
+        try {
+            fileExtension=image.uri.split('.').pop();
+            var uid=uuidv4();
+            const storageRef=storage().ref('Ads/images/'+(uid+"."+fileExtension));
+            await storageRef.putFile(image.uri)
+            const url=await storageRef.getDownloadURL()
+                imgs.push({uri: url,})                
+        }
+        catch(err) {
+            console.log('errorr', err);
+        }  
+    }));
+    //console.log("STORED ALL IMAGES IN FIRESTORE", imgs);
     Firestore().collection("Rooms").where("Location","==",adData.Location).get()
-    .then(async (snap) => {
+    .then((snap) => {
         if(snap.size==0 || edit=="myrooms")//skip upload image
     {
-        await Firestore().collection('Rooms').doc(adData.Location).set({
+        Firestore().collection('Rooms').doc(adData.Location).set({
             Charges: adData.Charges,
             Description: adData.Description,
-            Images: adData.images,
+            Images: imgs,
             IsAvailable: adData.IsAvailable,
             Location:adData.Location,
             NoOfRooms:adData.NoOfRooms,
@@ -25,10 +43,11 @@ async function PostAds(adData,edit, adPosted) {
                 console.warn("already exist")
         }
      })
-        
+    }
+}       
      
-}
-        
+
+    
 export default PostAds;
 /*fireauth.onAuthStateChanged(function(user) {
            if (user) {
