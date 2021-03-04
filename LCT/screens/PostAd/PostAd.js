@@ -4,6 +4,7 @@ import InputField from '../../components/InputField';
 import ImgPicker from '../../components/ImgPicker';
 import AppButton from '../../components/AppButton';
 import {Formik} from 'formik';
+import { firebase } from '@react-native-firebase/firestore';
 //import styles from './style';
 import PicSlider from '../../components/PicSlider';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -12,7 +13,8 @@ import * as yup from'yup';
 import colors from '../../config/colors';
 import stylesheet from '../../assets/stylesheet/stylesheet';
 import PostAds from '../../controller/AdsController/PostAds';
-import { firebase } from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 const adValidationScheme=yup.object({
     title: yup.string().required().min(5),
@@ -41,12 +43,49 @@ function PostAd({route,navigation}){
     const adPosted=()=>{
     }
     const postMyAd=(adData)=>{
+        var imgs=[];
         var edit=route.params.path;
-        var data={
-            Charges: adData.charges, Description: adData.Description, images: adData.images,  IsAvailable: adData.availability, Location:adData.location, NoOfRooms: adData.noOfRooms, Title: adData.title,email:user.email, //,account: accountNum, //owner: current User
-        }        
-        PostAds(data,edit, adPosted);
-        navigation.goBack('AdsList',{page:edit});
+    if(edit!=="myrooms"){
+    var fileExtension;
+    var filesName=[];
+    var storageRef;
+    var task;
+    for(var i=0;i<adData.images.length;i++){
+        fileExtension=adData.images[i].uri.split('.').pop();
+        var uid=uuidv4();
+        filesName.push(uid+"."+fileExtension);
+        storageRef=storage().ref('Ads/images/'+filesName[i]);
+        task=storageRef.putFile(adData.images[i].uri);
+        task.on(
+            'state_changed',
+            (snapshot)=>{
+                if (snapshot.state===storage.TaskState.SUCCESS){
+                    console.log("image added successfully");                    
+                }
+            },
+            (error)=>{
+                unsubscribe();
+                console.log("image upload error: "+ error.toString());
+            },
+            (complete=>{
+                storageRef.getDownloadURL()
+            .then((downloadUrl)=>{
+            imgs.push({uri: downloadUrl,});
+            }); 
+            })
+        );
+    }
+    };
+    task.then(()=>{
+        console.log(imgs);        
+    })
+    var data={
+        Charges: adData.charges, Description: adData.Description, images: imgs,  IsAvailable: adData.availability, Location:adData.location, NoOfRooms: adData.noOfRooms, Title: adData.title,email:user.email, //,account: accountNum, //owner: current User
+    };
+    console.log(data); 
+    console.log("moving");   
+    PostAds(data,edit, adPosted);
+        //navigation.goBack('AdsList',{page:edit});
     }
     return(
         <ImageBackground source={IMAGEASSETS.backgroundImage} style={stylesheet.backgroundImage}>        
