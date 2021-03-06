@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text,StyleSheet } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+const styles = StyleSheet.create({
+ container: {
+   ...StyleSheet.absoluteFillObject,
+   height: '100%',
+   width: '100%',
+   justifyContent: 'flex-end',
+   alignItems: 'center',
+ },
+ map: {
+   ...StyleSheet.absoluteFillObject,
+ },
+});
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 function DestDetails(){
   return (
    <View style={styles.container}>
@@ -21,42 +32,3 @@ function DestDetails(){
 );
       }
 export default DestDetails;
-
-
-// import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-
-// const GooglePlacesInput = () => {
-//   return (
-//     <GooglePlacesAutocomplete
-//       placeholder='Search'
-//       onPress={(data, details = null) => {
-//         // 'details' is provided when fetchDetails = true
-//         console.log(data, details);
-//       }}
-//       query={{
-//         key: 'AIzaSyBu0-yQ-guUuzeJuSROa30n9yeTD87CTH0',
-//         language: 'en',
-//       }}
-//     />
-//   );
-// };
-
-// export default GooglePlacesInput;
-=======
-=======
->>>>>>> parent of e5c2696... map view added (sample code in dest detail screen)
- function DestDetails({navigation}) {
-    return (
-        <View>
-          <Text> DestDetails </Text>
-        </View>
-      );
-  }
-export default DestDetails;
-   
-  
-<<<<<<< HEAD
->>>>>>> parent of e5c2696... map view added (sample code in dest detail screen)
-=======
->>>>>>> parent of e5c2696... map view added (sample code in dest detail screen)
-

@@ -15,7 +15,7 @@ function EditProfile({route, navigation}) {
     const [email, setMail]=useState(route.params.email);
     const [contact, setContact]=useState('');
     function Users() {
-        var data={name:route.params.name,email:route.params.email,acc:accountNum,num:contact,photo:route.params.photo};
+        var data={name:route.params.name,email:route.params.email/*,acc:accountNum*/,num:contact,photo:route.params.photo};
         PostUsers(data).then(function() {
             navigation.replace("Home");
         }) 
