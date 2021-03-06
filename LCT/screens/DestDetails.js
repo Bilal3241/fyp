@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function DestDetails(){
   return (
    <View style={styles.container}>
@@ -42,6 +43,8 @@ export default DestDetails;
 
 // export default GooglePlacesInput;
 =======
+=======
+>>>>>>> parent of e5c2696... map view added (sample code in dest detail screen)
  function DestDetails({navigation}) {
     return (
         <View>
@@ -52,5 +55,8 @@ export default DestDetails;
 export default DestDetails;
    
   
+<<<<<<< HEAD
+>>>>>>> parent of e5c2696... map view added (sample code in dest detail screen)
+=======
 >>>>>>> parent of e5c2696... map view added (sample code in dest detail screen)
 
