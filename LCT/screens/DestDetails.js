@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text,StyleSheet } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
-const styles = StyleSheet.create({
- container: {
-   ...StyleSheet.absoluteFillObject,
-   height: '100%',
-   width: '100%',
-   justifyContent: 'flex-end',
-   alignItems: 'center',
- },
- map: {
-   ...StyleSheet.absoluteFillObject,
- },
-});
+import { View, Text } from 'react-native';
 
+<<<<<<< HEAD
 function DestDetails(){
   return (
    <View style={styles.container}>
@@ -53,4 +41,16 @@ export default DestDetails;
 // };
 
 // export default GooglePlacesInput;
+=======
+ function DestDetails({navigation}) {
+    return (
+        <View>
+          <Text> DestDetails </Text>
+        </View>
+      );
+  }
+export default DestDetails;
+   
+  
+>>>>>>> parent of e5c2696... map view added (sample code in dest detail screen)
 
