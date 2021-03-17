@@ -100,55 +100,7 @@ const styles = StyleSheet.create({
       opacity: 1,
     },
     
-    modal2:{
-        flex:0.8,
-        width:wp('65%'),
-        marginTop:hp('25%') ,
-        marginBottom:hp('25%'),
-        marginLeft:wp('17%'),
-        backgroundColor: 'rgba(190,190,190,0.9)',
-        borderRadius: 20,
-        alignItems: 'center',
-},
-chkInchkOutBTn:{
-  flex:1,
-  flexDirection:'row',
-  justifyContent:"center"
-},
-date:{
-  padding:wp('1%'),
-  margin: wp('2%'),
-  fontSize:15,
-},
-btn:{
-  flex:1,
-  flexDirection:'row',
-  justifyContent:"center",
-  marginTop:'3%',
-},
-
-openButton:{
-  marginTop:hp("10%"),
-  marginRight:wp('4%'),
-  marginBottom:hp("10%"),
-  backgroundColor: "#F194FF",
-  borderRadius: 20,
-  padding: 10,
-  
-},
-icons:{
-  padding:'2%'
-}
-// chkOutBtn:{
-//   marginTop:hp("3%"),
-//   marginLeft:wp('25%'),
-  
-//   backgroundColor: "#F194FF",
-//   borderRadius: 20,
-//   padding: 10,
-//   elevation: 2
-// },
-  
+    
      
 })
 
