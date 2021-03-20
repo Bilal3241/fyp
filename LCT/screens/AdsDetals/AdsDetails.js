@@ -16,9 +16,7 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 function AdsDetails({route, navigation}) {
     var user=firebase.auth().currentUser;
 
-    var images=[];
-    images.push({uri: "../../assets/images/badshahi mosque.jpg"});
-    images.push({uri: "../../assets/images/orange.jpg"});
+    var images=route.params.apartment.Images;
     const apart=route.params.apartment;
     var user=firebase.auth().currentUser;
     function setChatNav(){
@@ -38,8 +36,7 @@ function AdsDetails({route, navigation}) {
           
         <View>
           
-        <PicSlider style={styles.picslider} imageList={images}>
-
+        <PicSlider height="30" width="100" imageList={images}>
         </PicSlider>
         </View>
         <View>
