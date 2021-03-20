@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ImageSwipe({imageList, width='100', height='25'}) {
+export default function ImageSwipe({imageList, width='100', height='25', ...otherProps}) {
   //const width = useWindowDimensions().width;
   //const height = width * 0.6;
 
@@ -47,12 +47,12 @@ export default function ImageSwipe({imageList, width='100', height='25'}) {
         horizontal
         onScroll={change}
         showHorizontalScrollIndicator={false}
-        style={[{height: hp(height+'%')}, {width: wp(width+'%')}, {overflow: 'hidden'}, {borderRadius: 10}]}>
+        style={[{height: hp(height+'%')}, {width: wp(width+'%')}, {overflow: 'hidden'},{...otherProps}]}>
         {imageList.map((image, index) => (
           <Image
             key={index}
             source={{uri: image.uri}}
-            style={[{height: hp(height+'%')}, {width: wp(width+'%')}, {resizeMode: 'cover'},{borderRadius: 10}]}
+            style={[{height: hp(height+'%')}, {width: wp(width+'%')}, {resizeMode: 'cover'}, {...otherProps}]}
           />
         ))}
       </ScrollView>
