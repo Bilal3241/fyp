@@ -127,7 +127,7 @@ function PostAd({route,navigation}){
                             <Text style={styles.error}>{props.touched.availability && props.errors.availability}</Text>
                             {props.values.images?.length>0?(
                                 <PicSlider imageList={props.values.images} 
-                                height="25" width="85"></PicSlider>
+                                height="25" width="85" borderRadius={10}></PicSlider>
                             ):(<ImgPicker onImagesPicked={(imageList)=>{
                                 props.setFieldValue('images', imageList, false);
                             }}/>)
