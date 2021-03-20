@@ -7,7 +7,7 @@ function PostUsers(data) {
             Image: data.photo,
             Email: data.email,
             PhoneNo:data.num,
-            AccountNo:data.acc,
+            //AccountNo:data.acc,
         }).then(function() {
             console.log("Document successfully written!");
         })

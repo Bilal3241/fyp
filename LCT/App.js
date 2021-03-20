@@ -55,10 +55,11 @@ const App = () => {
           },
         })
         }>
+          <HomeStack.Screen name='Home' component={DrawerStackfn} options={{headerShown:false}}/>
+
           <HomeStack.Screen name='Splash' component={Splash} options={{headerShown:false}} />
           <HomeStack.Screen name="SignupScreen" component={SignupScreen} options={{headerShown:false}}/>
           <HomeStack.Screen name="EditProfile" component={EditProfile} options={{headerShown:false}}/>
-          <HomeStack.Screen name='Home' component={DrawerStackfn} options={{headerShown:false}}/>
           <HomeStack.Screen name='AdsList' component={AdsList} />
           <HomeStack.Screen name='StripePayment' component={StripePayment} />
           <HomeStack.Screen name='DestinationScreen' component={DestinationScreen} />

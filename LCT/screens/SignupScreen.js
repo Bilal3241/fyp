@@ -23,12 +23,14 @@ function SignupScreen({navigation}) {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     }, [loggedIn]);
     useEffect(() => {
+      console.log("moving")
       if (userInfo !== null) {
         let data={name:userInfo._user.displayName,email:userInfo._user.email,edit:false, photo:userInfo._user.photoURL};
         navigation.replace('EditProfile',data);//move to home screen
       }
     }, [userInfo]);
     useEffect(() => {
+      console.log("anzaal")
       GoogleSignin.configure({
         webClientId:
           '784726338195-haen1toc5ficjmv64ssp31mtet4sa3vk.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
@@ -54,6 +56,7 @@ function SignupScreen({navigation}) {
             // play services not available or outdated
           } else {
             // some other error happened
+            console.log(error)
           }
         }
       };
