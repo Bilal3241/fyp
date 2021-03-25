@@ -21,6 +21,7 @@ import MyCustomers from './screens/MyCustomers';
 import HotelList from './screens/HotelList';
 import { View } from 'native-base';
 import DestDetails from './screens/DestDetails';
+import ListView from './screens/ListView';
 
 const HomeStack=createStackNavigator();
 const DrawerStack=createDrawerNavigator();
@@ -70,6 +71,8 @@ const App = () => {
           <HomeStack.Screen name="Customers" component={MyCustomers}/>
           <HomeStack.Screen name='HotelList' component={HotelList} />
           <HomeStack.Screen name='DestDetails' component={DestDetails} />
+          <HomeStack.Screen name='ListView' component={ListView} />
+        
 
 
           

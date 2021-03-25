@@ -1,18 +1,11 @@
 import { Item, View ,Input} from 'native-base';
 import React, { useEffect, useState } from 'react';
-import {ImageBackground, Text,StyleSheet,FlatList,Alert} from 'react-native';
-import AppButton from '../components/AppButton';
+import {ImageBackground, Text,StyleSheet,FlatList,TouchableOpacity,Alert} from 'react-native';
 import colors from '../config/colors';
-import AdsCard from '../components/AdsCard';
 import SearchBox from '../components/SearchBox';
 import { IMAGEASSETS } from '../assets/images';
-import {getAllAds} from '../controller/AdsController/GetAllAds';
-import {MyRooms} from '../controller/AdsController/MyRooms';
-import IonIcons from 'react-native-vector-icons/Ionicons';
-import { NavigationEvents } from 'react-navigation';
-import { DatePickerIOSBase } from 'react-native';
 
-function AdsList() {
+function AdsList({navigation}) {
   
   const data = [
     { Title: 'Iqbal Town' },
@@ -34,7 +27,7 @@ function AdsList() {
 
       return (
        
-      <ImageBackground 
+        <ImageBackground 
         source={IMAGEASSETS.museumBg}
         style={styles.background}>
             <View style={styles.bg}>
@@ -44,9 +37,11 @@ function AdsList() {
                 <FlatList
             data={ search }
             renderItem={ ({item}) =>
-              <View style={styles.GridViewContainer}>
+            <TouchableOpacity style={styles.GridViewContainer} onPress={()=>navigation.navigate('ListView')}>
+              <View >
                <Text style={styles.GridViewTextLayout}  > {item.Title} </Text>
-              </View> }
+              </View>
+              </TouchableOpacity>}
             numColumns={3}
          />
             </View>
