@@ -9,11 +9,9 @@ import {IMAGEASSETS} from "../assets/images";
 import stylesheet from '../assets/stylesheet/stylesheet';
 
 function Home({route, navigation}) {
-    
     var show = () => {
         console.warn(route);
     };
-
     return (
         <ImageBackground style={stylesheet.backgroundImage}  source={IMAGEASSETS.backgroundImage} resizeMode="stretch">
             <View style={stylesheet.bgView} resizeMode="contain">
@@ -22,7 +20,7 @@ function Home({route, navigation}) {
                     {/* <Button title="My Rooms" onPress={()=>navigation.navigate('AdsList',{page:"myrooms"})} ></Button> */}
                 </View>
                 <View style={styles.hotelnRes}>
-                    <Circle fn={()=>navigation.navigate('HotelList')} title="Hotels & Restaurants" color="rgba(103,185,232,0.7)" size="20%" ></Circle>
+                    <Circle fn={()=>navigation.navigate('Nearby')} title="Nearby Attractions" color="rgba(103,185,232,0.7)" size="25%" ></Circle>
                 </View> 
                 <View style={styles.logo}>
                     <CircleImage color="rgba(21,66,107,0.7)" size="40%" image={IMAGEASSETS.logo}/>
@@ -30,11 +28,11 @@ function Home({route, navigation}) {
                 <View style={styles.destinations}>
                     <Circle fn={()=>navigation.navigate('DestinationScreen')} title="Destinations" color="rgba(33,127,214,0.7)" size="20%" />
                 </View> 
-                <View style={styles.nearby}>
-                    <Circle fn={show} title="Nearby Attractions" color="rgba(56,162,222,0.7)" size="25%"></Circle>
-                </View>
+                {/* <View style={styles.nearby}>
+                    <Circle fn={()=>navigation.navigate('Nearby')} title="Nearby Attractions" color="rgba(56,162,222,0.7)" size="25%"></Circle>
+                </View> */}
                 <View style={styles.reservations}>
-                    <Circle fn={()=>navigation.navigate('AdsList',{page:"allRooms"})} title="Reservations" color="rgba(29,208,248,0.7)" size="20%"></Circle>
+                    <Circle fn={()=>navigation.navigate('AdsList',{page:"allRooms"})} title="Reservations" color="rgba(29,208,248,0.7)" size="25%"></Circle>
                 </View> 
             </View>
         </ImageBackground>
@@ -44,12 +42,12 @@ const styles = StyleSheet.create({
     hotelnRes:{
         position:"absolute",
         top:hp('5%'),
-        right:wp('16%'),
+        right:wp('10%'),
     },
     destinations:{
         position:"absolute",
         top:hp('18%'),
-        left:wp('5%'),
+        left:wp('1%'),
     },
     nearby:{
         position:"absolute",
@@ -58,7 +56,7 @@ const styles = StyleSheet.create({
     },
     reservations:{
         position:"absolute",
-        bottom:hp('5%'),
+        bottom:hp('10%'),
         right:wp('6%'),
     },
     logo:{
