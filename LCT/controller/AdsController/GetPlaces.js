@@ -4,7 +4,7 @@ export async function getPlaces(placeRetrevived) {
 
 const placesList=[];
 var snapshot = await firebase.firestore()
-.collection('Places').where('Area', '==', 'DHA').get()
+.collection('Places').get()
 
  snapshot.forEach((doc)=>{
     placesList.push(doc.data());
