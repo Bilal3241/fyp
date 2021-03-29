@@ -78,17 +78,6 @@ function ListView({navigation,route}) {
     );
   };
   
-  // const renderHeader = (section, _, isActive) => {
-  //   return (
-  //     <Animatable.View
-  //       duration={400}
-  //       style={[styles.header, isActive ? styles.active : styles.inactive]}
-  //       transition="backgroundColor"
-  //     >
-  //       <Text style={styles.headerText}>{section.Area}</Text>
-  //     </Animatable.View>
-  //   );
-  // };
 
   const renderContent= (section, _, isActive)  => {
     return (
