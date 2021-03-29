@@ -1,10 +1,14 @@
 import React, { Component ,useState, useEffect} from 'react';
-import { View, Text,StyleSheet} from 'react-native';
+import { View, Text,StyleSheet,Modal, Button} from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import { Marker } from 'react-native-maps';
 import {PERMISSIONS, request} from 'react-native-permissions'
 import Geolocation from '@react-native-community/geolocation';
 import {getAllPlaces} from '../controller/GetPlaces';
+import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import AppButton from '../components/AppButton';
+import Icon from 'react-native-vector-icons/Ionicons';  
+
 function DestDetails(){
   const [region, setRegion] = useState({
     latitude: 31.5698,
@@ -12,7 +16,11 @@ function DestDetails(){
     latitudeDelta:  0.001,
     longitudeDelta: 0.008,
   });
+  const [currentMarker, setcurrentMarker] = useState({
+    Title:'None',
+  })
   const [places, setPlaces] = useState([])
+  const [showModal, setShowModal] = useState(false);
   const onPlacesRecieved=(places)=>{
     setPlaces(places)
 }
@@ -40,8 +48,29 @@ function DestDetails(){
     requestPermission();
     getAllPlaces(onPlacesRecieved)
   }, [])
+  var showdesc=(marker)=>{
+    console.log(marker.Location);
+    setcurrentMarker(marker);
+    setShowModal(true)
+  }
+
   return (
    <View style={styles.container}>
+     <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showModal}>
+            <View style={styles.mapModal}>
+              <Text style={styles.title}>{currentMarker.Title}</Text>
+              <View style={{flexDirection:'row'}}>
+                <Icon name="compass" style={styles.icon} style onPress={()=>alert('Direction') } size={40} color="green"></Icon>
+                <Icon name="list-circle" style={styles.icon} style onPress={()=>alert('Details') } size={40} color="yellow"></Icon>
+                <Icon name="close-circle-outline" style={styles.icon} style onPress={()=> setShowModal(false)} size={40} color="red"></Icon>
+              </View>
+              
+            </View>
+            
+          </Modal>
      <MapView
      showsUserLocation={true}
        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
@@ -52,9 +81,11 @@ function DestDetails(){
        {places.map((marker,index)=>( 
       <Marker key={index} 
         coordinate={{ latitude: marker.Location._latitude, longitude: marker.Location._longitude}}
-        title={marker.Title}
-        description={"this is a marker"}
-        onCalloutPress={e=>console.log("callout pressed")}>
+        // title={marker.Title}
+        // description={'descriptionbtn'}
+        onPress={() =>{
+          showdesc(marker);
+        }}>
       </Marker>
       ))} 
      </MapView>
@@ -72,5 +103,23 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  mapModal:{
+    padding:10,
+    display:'flex',
+    justifyContent:'space-between',
+    flexDirection:'row',
+    width:wp('98%'),
+    height:hp('15%'),
+    marginTop:hp('84%'),
+    // marginBottom:hp('5%'),
+    marginLeft:wp('1%'),
+    backgroundColor: 'rgba(20,20,20,0.9)',
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  title:{
+    color:'white',
+    fontSize:20
+  }
  });
 export default DestDetails;
