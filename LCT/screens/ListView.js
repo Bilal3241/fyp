@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { Component } from 'react';
 import {
   Switch,
@@ -46,44 +46,6 @@ function ListView({navigation,route}) {
   //   collapsed: true,
   //   multipleSelect: false,
   // };
-=======
-
-import React, { useEffect, useState } from 'react';
-import {Text,SafeAreaView, StyleSheet,View,UIManager,Platform ,ScrollView, TouchableOpacity} from 'react-native';
-import colors from '../config/colors';
-import { IMAGEASSETS } from '../assets/images';
-import { isTypeNode } from 'typescript';
-import { LayoutAnimation } from 'react-native';
-import {performance} from 'perf_hooks';
-const CONTENT =[
-  {
-    isExpanded:false,
-    category_name:'Item1',
-    subCategory:[
-      {id:1,val:'Sub1'},
-      {id:2,val:'Sub2'},
-    ]
-  },
-  {
-    isExpanded:false,
-    category_name:'Item2',
-    subCategory:[
-      {id:3,val:'Sub3'},
-      {id:4,val:'Sub4'},
-    ]
-  },
-  {
-    isExpanded:false,
-    category_name:'Item3',
-    subCategory:[
-      {id:5,val:'Sub5'},
-      {id:6,val:'Sub6'},
-    ]
-  },
-];
-function ListView({navigation,route}) {
- 
->>>>>>> 8d624607816c5a98f34b4b50a8ffcc09f0ab6635
   const [activeSections,setActiveSections]=useState([]);
   const [collapsed,setCollapsed]=useState(true);
   const [multipleSelect,setMultipleSelect]=useState(false);
@@ -99,65 +61,6 @@ function ListView({navigation,route}) {
   const toggleExpanded = () => {
     setCollapsed(!collapsed);
   };
-
-<<<<<<< HEAD
- 
-  const setSections = (sections) => {
-    setActiveSections(sections.includes(undefined) ? [] : sections,);
-  };
-
-  const renderHeader = (section, _, isActive) => {
-    return (
-      <Animatable.View
-        duration={400}
-        style={[styles.header, isActive ? styles.active : styles.inactive]}
-        transition="backgroundColor"
-      >
-        <Text style={styles.headerText}>{section.Area}</Text>
-      </Animatable.View>
-    );
-  };
-  
-  const renderContent= (section, _, isActive)  => {
-    return (
-      <Animatable.View
-        duration={400}
-        style={[styles.content, isActive ? styles.active : styles.inactive]}
-        transition="backgroundColor"
-      >
-        <Animatable.Text animation={isActive ? 'bounceIn' : undefined}>
-          {section.Title}
-        </Animatable.Text>
-      </Animatable.View>
-    );
-  };
-        
-        return (
-         
-  
-          <View>
-            
-        <ScrollView>
-            <Accordion
-              activeSections={activeSections}
-              sections={placeList1}
-              touchableComponent={TouchableOpacity}
-              expandMultiple={multipleSelect}
-              renderHeader={renderHeader}
-              renderContent={renderContent}
-              duration={400}
-              onChange={setSections}
-            />
-          </ScrollView>
-        </View>
-      );
-  }
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#F5FCFF',
-     //paddingTop: Constants.statusBarHeight,
-=======
     const ExpandableComponent = ({item,onClickFunction}) =>  {
       const [layoutHeight,setLayoutHeight]=useState(0);
       useEffect(()=>{
@@ -275,7 +178,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems:"center",
->>>>>>> 8d624607816c5a98f34b4b50a8ffcc09f0ab6635
+
     },
     title: {
       textAlign: 'center',
@@ -283,57 +186,6 @@ const styles = StyleSheet.create({
       fontWeight: '300',
       marginBottom: 20,
     },
-<<<<<<< HEAD
-    header: {
-      backgroundColor: '#F5FCFF',
-      padding: 10,
-    },
-    headerText: {
-      textAlign: 'center',
-      fontSize: 16,
-      fontWeight: '500',
-    },
-    content: {
-      padding: 20,
-      backgroundColor: '#fff',
-    },
-    active: {
-      backgroundColor: 'rgba(255,255,255,1)',
-    },
-    inactive: {
-      backgroundColor: 'rgba(245,252,255,1)',
-    },
-    selectors: {
-      marginBottom: 10,
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
-    selector: {
-      backgroundColor: '#F5FCFF',
-      padding: 10,
-    },
-    activeSelector: {
-      fontWeight: 'bold',
-    },
-    selectTitle: {
-      fontSize: 14,
-      fontWeight: '500',
-      padding: 10,
-    },
-    multipleToggle: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginVertical: 30,
-      alignItems: 'center',
-    },
-    multipleToggle__title: {
-      fontSize: 16,
-      marginRight: 8,
-    },
-  })
-  export default ListView;
-  
-=======
     margin:{
       marginBottom:"2%",
     },
@@ -361,4 +213,4 @@ const styles = StyleSheet.create({
 
 })
 export default ListView;
->>>>>>> 8d624607816c5a98f34b4b50a8ffcc09f0ab6635
+
