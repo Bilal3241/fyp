@@ -1,13 +1,11 @@
-import Firestore, { firebase } from '@react-native-firebase/firestore';
+import Firestore from '@react-native-firebase/firestore';
 
-export async function getPlaces(placeRetrevived) {
-
+export async function getPlaces(areaName, placeRetrevived) {
+var snapshot = await Firestore().collection("Places").where("Area", "==", areaName).get();
 const placesList=[];
-var snapshot = await firebase.firestore()
-.collection('Places').get()
-
  snapshot.forEach((doc)=>{
     placesList.push(doc.data());
  });
 placeRetrevived(placesList);
+console.log("in here", placesList);
 }
