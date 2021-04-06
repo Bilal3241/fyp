@@ -9,7 +9,7 @@ import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-nat
 import AppButton from '../components/AppButton';
 import Icon from 'react-native-vector-icons/Ionicons';  
 
-function DestDetails(){
+function DestDetails({route,navigation}){
   const [region, setRegion] = useState({
     latitude: 31.5698,
     longitude: 74.3120,
@@ -64,7 +64,7 @@ function DestDetails(){
               <Text style={styles.title}>{currentMarker.Title}</Text>
               <View style={{flexDirection:'row'}}>
                 <Icon name="compass" style={styles.icon} style onPress={()=>alert('Direction') } size={40} color="green"></Icon>
-                <Icon name="list-circle" style={styles.icon} style onPress={()=>alert('Details') } size={40} color="yellow"></Icon>
+                <Icon name="list-circle" style={styles.icon} style onPress={()=>navigation.navigate('PlacesDetails') } size={40} color="yellow"></Icon>
                 <Icon name="close-circle-outline" style={styles.icon} style onPress={()=> setShowModal(false)} size={40} color="red"></Icon>
               </View>
               

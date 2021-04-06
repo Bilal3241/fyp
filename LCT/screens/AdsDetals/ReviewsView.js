@@ -3,11 +3,12 @@ import AppButton from '../../components/AppButton';
 import InputField from '../../components/InputField'; 
 import { getReviews } from '../../controller/AdsController/GetReviews';
 import Icon from 'react-native-vector-icons/Ionicons';  
-import {FlatList, ScrollView, TouchableHighlight,Modal,View,StyleSheet,Text} from 'react-native';
+import {FlatList, SafeAreaView, TouchableHighlight,Modal,View,StyleSheet,Text} from 'react-native';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { firebase } from '@react-native-firebase/firestore';
 import PostReview from '../../controller/AdsController/PostReview';
 import colors from '../../config/colors';
+
 function ReviewsView({apartmentId}) {
     var user=firebase.auth().currentUser;
     const [desc,setDesc]=useState('');
@@ -32,7 +33,7 @@ function ReviewsView({apartmentId}) {
         setReviewModal(false);
     }
     return (
-        <View>
+        <SafeAreaView style={styles.bg}>
             <Modal //review modal
                 animationType="slide"
                 transparent={true}
@@ -62,7 +63,7 @@ function ReviewsView({apartmentId}) {
                 <AppButton  title="Post a Review" onPress={()=> setReviewModal(true)}></AppButton>
                 :<View />
             }
-        </View>
+        </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
@@ -102,6 +103,13 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         textAlign: "center"
-    }
+    },
+    bg:{
+        flex:1,
+        width:'100%',
+        height:'100%',
+        paddingHorizontal:'5%',
+    },
+   
 })
 export default ReviewsView;
