@@ -29,7 +29,7 @@ function MessageList({route,navigation}) {
     if (msgList.length==0 && fetchDone) {
         return(
             <SafeAreaView>
-                <Text style={{textAlign:'center',justifyContent:'center'}}>You have no new messages</Text>
+                <Text style={{textAlign:'center',justifyContent:'center',top:heightPercentageToDP('3%')}}>You have no new messages</Text>
             </SafeAreaView>
         )
     }
@@ -49,7 +49,6 @@ function MessageList({route,navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-       // marginTop: heightPercentageToDP("10%"),
       },
 })
 

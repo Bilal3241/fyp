@@ -1,12 +1,27 @@
 import Firestore from '@react-native-firebase/firestore';
+import{Alert} from 'react-native';
 
 function DeleteAd(location) {
+    const showAlert = (alertMsg) =>
+  Alert.alert(
+    "Attention",
+    alertMsg,
+    [
+      {
+        text: "Ok",
+        style: "ok",
+      },
+    ],
+    {
+      cancelable: true,
+    }
+  );
     return (
         
         Firestore().collection("Rooms").doc(location).delete().then(function() {
-            console.log("Document successfully deleted!");
+            showAlert("Ad successfully deleted!");
         }).catch(function(error) {
-            console.error("Error removing document: ", error);
+            showAlert("Error removing document: "+ error);
         })
         
     );
