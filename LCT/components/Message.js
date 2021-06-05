@@ -16,7 +16,7 @@ export default function Message({username,nav,apartment,userEmail}) {
             nav.navigate('Chat',{apart});
         }
             }>
-            <Text>{username}</Text>
+            <Text style={{padding:'2%', fontSize:hp('2%')}}>{username}</Text>
         </TouchableOpacity>
         
     )
@@ -27,5 +27,7 @@ const styles = StyleSheet.create({
         height:hp('7%'),
         borderBottomColor:'black',
         borderBottomWidth:1,
+        marginHorizontal:'3%',
+        marginVertical:'1%',
     }
 })

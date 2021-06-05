@@ -61,7 +61,8 @@ function DescriptionView({apartment,route,navigation}) {
       
    
     return (
-        <View style={styles.container}>
+        <View>
+        <View style={styles.detailContainer}>
             <Modal
           animationType="slide"
           transparent={true}
@@ -69,7 +70,7 @@ function DescriptionView({apartment,route,navigation}) {
          
           <View style={styles.modal2}>
 
-                    <Icon name="close-outline" style={styles.icon} style onPress={()=> setReservationModal(false)} size={50} color="black"></Icon>
+                    <Icon name="close-outline" style={styles.icon} style onPress={()=> setReservationModal(false)} size={40} color="black"></Icon>
               <View style={styles.chkInchkOutBTn}>  
                     <View>
                       <AppButton title="Check In" width='25'    onPress={showDatePicker}></AppButton>
@@ -82,7 +83,7 @@ function DescriptionView({apartment,route,navigation}) {
                           minimumDate={new Date()}/>
                    </View>
                    <View>
-                    <AppButton title="Check Out" width='30'    onPress={showDatePicker}></AppButton>
+                    <AppButton title="Check Out" width='30' onPress={showDatePicker}></AppButton>
                     <Text style={styles.date}>{checkOut.toDateString()}</Text>
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
@@ -92,17 +93,12 @@ function DescriptionView({apartment,route,navigation}) {
                         minimumDate={new Date(checkIn)}/>
                   </View>
               </View>    
-
-                 
-    
-              <TouchableHighlight style={styles.openButton}>
-                  <Text   onPress={doReservation}>Proceed to Payment</Text>
-                </TouchableHighlight>
+              <AppButton title="Proceed to Payment" width='60' onPress={doReservation}></AppButton>
             
             </View>
         </Modal>
 
-            <View style={styles.detailbox}>
+            <View>
                 <Text style={styles.title}>
                     {apartment.Title}
                 </Text>
@@ -121,42 +117,42 @@ function DescriptionView({apartment,route,navigation}) {
                     Description: <Text style={styles.description}>{'\n'}{apartment.Description} </Text>
                 </Text>
             </View>
-            <View style={styles.buttons}> 
-                {/* <AppButton  title="Get Direction" onPress={() => Linking.openURL('google.navigation:q=100+101')}></AppButton> */}
-               <View style={{alignItems:'center'}}>
-                <IonIcons size={50} name="compass" color={colors.btnBlue} onPress={() => Linking.openURL('google.navigation:q=100+101')} ></IonIcons>
-                <Text>Direction</Text>
-                </View>
-            {/* <AppButton title="Start Chat" width='45' onPress={setChatNav}></AppButton> */}
-            <View style={{alignItems:'center'}}>
-              <IonIcons size={50}  name="chatbubbles-sharp" color={colors.btnBlue} onPress={setChatNav} ></IonIcons>
-              <Text>Start Chat</Text>
-            </View>
-            <View style={{alignItems:'center'}}>
-              <IonIcons size={50}  name="bed-sharp" color={colors.btnBlue} onPress={()=> setReservationModal(true)} ></IonIcons>
-              <Text>Reserve Room</Text>
-            </View>
-
-
-
-
-            {/* <AppButton  title="Reserve Room" width='45' onPress={()=> setReservationModal(true)}></AppButton> */}
-           
-             </View>
         </View>
+        <View style={styles.buttons}> 
+        <View style={{alignItems:'center'}}>
+         <IonIcons size={50} name="compass" color={colors.btnBlue} onPress={() => Linking.openURL('google.navigation:q=100+101')} ></IonIcons>
+         <Text>Direction</Text>
+         </View>
+     <View style={{alignItems:'center'}}>
+       <IonIcons size={50}  name="chatbubbles-sharp" color={colors.btnBlue} onPress={setChatNav} ></IonIcons>
+       <Text>Ask a question</Text>
+     </View>
+     {
+         user.email!=apartment.Owner?(
+            <View style={{alignItems:'center'}}>
+            <IonIcons size={50}  name="bed-sharp" color={colors.btnBlue} onPress={()=> setReservationModal(true)} ></IonIcons>
+            <Text>Reserve Room</Text>
+          </View>
+         ):<View/>
+     }
+     </View>
+      </View>
     );
 }
 const styles = StyleSheet.create({
-    container:{
+    detailContainer:{
         justifyContent:'center',
-        padding:'5%'
+        padding:'4%'
     },
     title:{
-        color:colors.black,
+        color:colors.darkBlue,
         fontSize: hp('5%'),
         fontWeight:'bold',
-        textAlign:'center'
-
+        textAlign:'left',
+        borderBottomColor:colors.logoBG,
+        borderBottomWidth:2,
+        paddingBottom:'1%',
+        marginBottom:'2%',
     },
     heading:{
         color:colors.black,
@@ -165,19 +161,12 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         
     },
-    detailbox:{
-        padding:'6%',
-        borderColor:colors.black,
-        borderWidth:2,
-        borderTopLeftRadius:40,
-        borderBottomRightRadius:40,
-        backgroundColor:colors.cardBg,
-    },
     buttons:{
         flex:1,
         flexDirection:'row',
-        justifyContent:'space-around',
+        justifyContent:'space-evenly',
         marginTop:'3%',
+        bottom:hp('1%'),
     },
     description:{
         fontWeight:'normal',
@@ -187,24 +176,27 @@ const styles = StyleSheet.create({
 
     },
     modal2:{
-        flex:0.8,
-        width:wp('65%'),
+        flex:0.7,
+        width:wp('75%'),
         marginTop:hp('25%') ,
         marginBottom:hp('25%'),
-        marginLeft:wp('17%'),
-        backgroundColor: 'rgba(190,190,190,0.9)',
+        marginLeft:wp('13%'),
+        padding:'3%',
+        backgroundColor: colors.gray,
         borderRadius: 20,
         alignItems: 'center',
+        justifyContent:'center',
     },
     chkInchkOutBTn:{
     flex:1,
     flexDirection:'row',
-    justifyContent:"center"
+    justifyContent:"space-evenly"
     },
     date:{
     padding:wp('1%'),
     margin: wp('2%'),
     fontSize:15,
+    color:colors.white,
     },
     btn:{
     flex:1,
@@ -212,19 +204,6 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     marginTop:'3%',
     },
-
-    openButton:{
-    marginTop:hp("10%"),
-    marginRight:wp('4%'),
-    marginBottom:hp("10%"),
-    backgroundColor: "#F194FF",
-    borderRadius: 20,
-    padding: 10,
-    
-    },
-    icons:{
-    padding:'2%'
-    }
 
     
     

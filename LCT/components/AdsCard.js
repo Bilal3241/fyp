@@ -3,10 +3,12 @@ import React, { useEffect } from 'react';
 import {StyleSheet, View,Alert} from 'react-native';
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import colors from '../config/colors';
+import PicSlider from '../components/PicSlider';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import DeleteAd from '../controller/AdsController/DeleteAd';
 
 function AdsCard({apartment,nav,path,deleteStatefn,deleteState}){
+        //const thumbImg=JSON.parse(apartment.Images)
         const deleteAd=()=>{
             var loc=apartment.Location;
             DeleteAd(loc);
@@ -44,9 +46,11 @@ function AdsCard({apartment,nav,path,deleteStatefn,deleteState}){
         <Card style={{ backgroundColor: "transparent" }}>
             <CardItem style={styles.card} button onPress={()=>nav.navigate('AdsDetails',{apartment})}>
                 <Left>
-                <Thumbnail
-               // source={apartment.Image}
-                style={styles.pic}/>
+                    <PicSlider imageList={apartment.Images} 
+                                height="10" width="18" borderRadius={0}></PicSlider>
+                {/*<Thumbnail
+               source={{uri: thumbImg[0].uri}}
+                style={styles.pic}/>*/}
                 <View style={styles.details}>
                     <Title style={styles.heading}>{apartment.Title}</Title>
                     <Subtitle><IonIcons size={15} name="bed-sharp"></IonIcons> {apartment.NoOfRooms}</Subtitle>
@@ -77,6 +81,7 @@ const styles = StyleSheet.create({
         borderRadius:0,
     },
     details:{
+        marginLeft:'7%',
         alignItems: "flex-start",
         top: '-3%',
     },

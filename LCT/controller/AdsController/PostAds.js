@@ -2,7 +2,21 @@ import Firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
-async function PostAds (adData,edit, adPosted) { 
+async function PostAds (adData,edit) { 
+    const showAlert = (alertMsg) =>
+  Alert.alert(
+    "Attention",
+    alertMsg,
+    [
+      {
+        text: "Ok",
+        style: "ok",
+      },
+    ],
+    {
+      cancelable: true,
+    }
+  );
     var imgs=[];
     if(edit!=="myrooms"){
     var fileExtension;
@@ -16,7 +30,7 @@ async function PostAds (adData,edit, adPosted) {
                 imgs.push({uri: url,})                
         }
         catch(err) {
-            console.log('errorr', err);
+            showAlert('errorr'+ err);
         }  
     }));
     //console.log("STORED ALL IMAGES IN FIRESTORE", imgs);
@@ -34,13 +48,13 @@ async function PostAds (adData,edit, adPosted) {
             Owner:adData.email,
             Title:adData.Title,
             }).then(function() {
-                console.log("Document successfully written!");
+                showAlert("Changes made successfully!");
             })
             .catch(function(error) {
-                console.error("Error writing document: ", error);
+                showAlert("Error writing document: "+ error);
             })
             }else{
-                console.warn("already exist")
+                showAlert("Another ad with same credentials already exist")
         }
      })
     }

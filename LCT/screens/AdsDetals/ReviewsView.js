@@ -3,13 +3,13 @@ import AppButton from '../../components/AppButton';
 import InputField from '../../components/InputField'; 
 import { getReviews } from '../../controller/AdsController/GetReviews';
 import Icon from 'react-native-vector-icons/Ionicons';  
-import {FlatList, SafeAreaView, TouchableHighlight,Modal,View,StyleSheet,Text} from 'react-native';
+import {FlatList, SafeAreaView, Alert,Modal,View,StyleSheet,Text} from 'react-native';
 import {widthPercentageToDP as wp , heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { firebase } from '@react-native-firebase/firestore';
 import PostReview from '../../controller/AdsController/PostReview';
 import colors from '../../config/colors';
 
-function ReviewsView({apartmentId}) {
+function ReviewsView({apartmentId, apartmentOwner}) {
     var user=firebase.auth().currentUser;
     const [desc,setDesc]=useState('');
     const [ReviewModal, setReviewModal] = useState(false);
@@ -18,16 +18,35 @@ function ReviewsView({apartmentId}) {
         setReviewList(reviewList);
     }
     useEffect(() => {
-          getReviews(apartmentId, onReviewsRecieved);
+          getReviews(apartmentId, onReviewsRecieved)
         },[]);
+    const showAlert = (alertMsg) =>
+        Alert.alert(
+          "Attention",
+          alertMsg,
+          [
+            {
+              text: "Ok",
+              style: "ok",
+            },
+          ],
+          {
+            cancelable: true,
+          }
+        );
     function Reviews() {
-        var data={name:user.displayName,
-            email:user.email,
-            des:desc,
-            photo:user.photoURL,
-            item:apartmentId,
-        };
-        PostReview(data);
+        if (desc==""){
+            showAlert("Can't enter an empty review!!");
+        }
+        else{
+            var data={name:user.displayName,
+                email:user.email,
+                des:desc,
+                photo:user.photoURL,
+                item:apartmentId,
+            };
+            PostReview(data);
+        }
     }
     function onpress() {                                                                                                                                                                        
         setReviewModal(false);
@@ -54,13 +73,13 @@ function ReviewsView({apartmentId}) {
                 data={reviewList}
                 renderItem={({item})=>(
                     <View style={styles.reviewContainer}>
-                        <Text>{item.data.name}</Text>
+                        <Text style={{fontWeight:'bold'}}>{item.data.name}</Text>
                         <Text>{item.data.comment}</Text>
                     </View>               
                 )}/>
             {
-                user.email !=apartmentId.Owner?
-                <AppButton  title="Post a Review" onPress={()=> setReviewModal(true)}></AppButton>
+                user.email!=apartmentOwner?
+                (<AppButton  title="Post a Review" onPress={()=> setReviewModal(true)}></AppButton>)
                 :<View />
             }
         </SafeAreaView>
@@ -69,28 +88,29 @@ function ReviewsView({apartmentId}) {
 const styles = StyleSheet.create({
     reviewContainer:{
         padding: '4%',
-        margin: '2%',
+        marginTop: '4%',
         backgroundColor:colors.white,
-        borderBottomColor: colors.btnBlue,
-        borderBottomWidth: 2,
+        borderColor: colors.btnBlue,
+        borderWidth: 1,
+        borderRadius:10,
     },
     postReviewText:{
         color:colors.white,
         fontSize:hp('4%'),
     },
     modalBg:{
-        backgroundColor: 'rgba(0,0,0,0.4)'
+        backgroundColor: colors.gray
     },
     modal:{
         width:wp('70%'),
         height:hp('40%'),
         marginTop:hp('25%') ,
         marginLeft:wp('15%'),
-        backgroundColor: 'rgba(120,120,120,0.9)',
+        backgroundColor: colors.gray,
         borderRadius: 20,
         padding: '5%',
         alignItems: 'center',
-        elevation:15,
+        elevation:10,
     },
     openButton: {
         marginTop:hp("5%"),

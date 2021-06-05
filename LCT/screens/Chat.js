@@ -82,7 +82,8 @@ function Chat({navigation,route}) {
         messages={messages} 
         user={{_id:usernow.email}} 
         onSend={updateArray}
-        />  
+        />
+          
     );
 }
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView,View} from 'react-native';
+import {ScrollView,View, Alert} from 'react-native';
 import {CreditCardInput} from 'react-native-credit-card-input';
 import Stripe from 'react-native-stripe-api';
 import AppButton from '../components/AppButton';
@@ -15,10 +15,25 @@ export default function StripePayment(props) {
   var user=firebase.auth().currentUser;
 
   const [values, setValues] = useState({});
-  const [showPopUp, setshowPopUp] = useState(false);
   const [error, setError] = useState();
-  const [show, setShow] = useState(false);
-
+  const showAlert = (alertMsg) =>
+  Alert.alert(
+    "Attention",
+    alertMsg,
+    [
+      {
+        text: "Ok",
+        onPress: () =>
+        props.navigation.goBack(),
+        style: "ok",
+      },
+    ],
+    {
+      cancelable: true,
+      onDismiss: () =>
+        props.navigation.goBack(),
+    }
+  );
   const saveOnlinePaymentDefaults=(tokenValue)=>{
     var adAvailability=false;
     var reservationTableData={Owner: props.route.params.reservationData.apartmentDetails.Owner, RoomID: props.route.params.reservationData.apartmentDetails.Location, CheckIn:props.route.params.reservationData.inDate, CheckOut: props.route.params.reservationData.outDate, RenterID: user.email , RenterName: user.displayName};
@@ -44,18 +59,15 @@ export default function StripePayment(props) {
       })
       .then((value) => {
         const myObjStr = JSON.stringify(value);
-        if (myObjStr.includes('error')) {
-          setShow(true);
+        if (myObjStr.includes('An error occured, please try later.')) {
           setError(value.error);
+          showAlert(error);
         } else {
-          setshowPopUp(true);
           saveOnlinePaymentDefaults(value);
-          setTimeout(() => {
-            props.navigation.goBack();
-          }, 8000);
+          showAlert("Payment Successfull");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => showAlert(error));
   };
   return (
     <>
@@ -80,13 +92,13 @@ export default function StripePayment(props) {
         />
         <View>
           <Text style={styles.heading}>Reservation Details</Text>
-          <Text><Text style={styles.attr}>Title: </Text> {props.route.params.reservationData.apartmentDetails.Title}</Text>
-          <Text><Text style={styles.attr}>Location: </Text> {props.route.params.reservationData.apartmentDetails.Location}</Text>
-          <Text><Text style={styles.attr}>Owner: </Text> {props.route.params.reservationData.apartmentDetails.Owner}</Text>
-          <Text><Text style={styles.attr}>CheckIn: </Text> {props.route.params.reservationData.inDate}</Text>
-          <Text><Text style={styles.attr}>CheckOut: </Text> {props.route.params.reservationData.outDate}</Text>
-          <Text><Text style={styles.attr}>Total days of stay:</Text> {props.route.params.reservationData.daysOfStay}</Text>
-          <Text><Text style={styles.attr}>Price: </Text> {props.route.params.reservationData.totalFare}</Text>
+          <Text style={{paddingLeft:'2%'}}><Text style={styles.attr}>Title: </Text> {props.route.params.reservationData.apartmentDetails.Title}</Text>
+          <Text style={{paddingLeft:'2%'}}><Text style={styles.attr}>Location: </Text> {props.route.params.reservationData.apartmentDetails.Location}</Text>
+          <Text style={{paddingLeft:'2%'}}><Text style={styles.attr}>Owner: </Text> {props.route.params.reservationData.apartmentDetails.Owner}</Text>
+          <Text style={{paddingLeft:'2%'}}><Text style={styles.attr}>CheckIn: </Text> {props.route.params.reservationData.inDate}</Text>
+          <Text style={{paddingLeft:'2%'}}><Text style={styles.attr}>CheckOut: </Text> {props.route.params.reservationData.outDate}</Text>
+          <Text style={{paddingLeft:'2%'}}><Text style={styles.attr}>Total days of stay:</Text> {props.route.params.reservationData.daysOfStay}</Text>
+          <Text style={{paddingLeft:'2%'}}><Text style={styles.attr}>Price: </Text> {props.route.params.reservationData.totalFare}</Text>
         </View>
         <View style={{alignItems: 'center', marginBottom: 20}}>
           <AppButton

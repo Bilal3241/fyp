@@ -44,7 +44,7 @@ const App = () => {
         <HomeStack.Navigator initialRouteName="Splash" screenOptions={(nav) =>({
            headerRight: () => (
             <Icon
-              name="home" color={colors.white} style={{borderColor:"black", paddingRight:"2%"}} size={25}
+              name="home" color={colors.white} style={{borderColor:"black", paddingRight:"2%",}} size={25}
               onPress={() => nav.navigation.dispatch(HomeScreenAction)}
             />),
           headerStyle: {

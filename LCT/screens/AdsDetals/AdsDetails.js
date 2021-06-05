@@ -53,7 +53,7 @@ function AdsDetails({route, navigation}) {
         {tabIndex === 0 ? (
         <DescriptionView apartment={route.params.apartment} route={route} navigation={navigation} />
       ) : (
-        <ReviewsView apartmentId={route.params.apartment.Location}/>
+        <ReviewsView apartmentId={route.params.apartment.Location, route.params.apartment.Owner}/>
       )}
         </View>
        
@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
     },
     tabsContainerStyle: {
       width: '100%',
-      height: hp('6%'),
+      height: hp('7%'),
       borderRadius: 0,
     },
     tabTextStyle: {
       fontWeight:'bold',
       fontSize: hp('3%'),
-      paddingVertical:'3%',
+      paddingVertical:'1%',
       color: colors.btnBlue,
     },
     activeTabTextStyel: {
