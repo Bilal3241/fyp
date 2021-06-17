@@ -1,5 +1,5 @@
 import React, { Component ,useState, useEffect} from 'react';
-import { View, Text,StyleSheet,Modal, Button} from 'react-native';
+import { View, Text,StyleSheet,Modal, Button, Linking} from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import { Marker } from 'react-native-maps';
 import {PERMISSIONS, request} from 'react-native-permissions'
@@ -49,7 +49,7 @@ function DestDetails({route,navigation}){
     getAllPlaces(onPlacesRecieved)
   }, [])
   var showdesc=(marker)=>{
-    console.log(marker.Location);
+    console.log(marker);
     setcurrentMarker(marker);
     setShowModal(true)
   }
@@ -63,8 +63,8 @@ function DestDetails({route,navigation}){
             <View style={styles.mapModal}>
               <Text style={styles.title}>{currentMarker.Title}</Text>
               <View style={{flexDirection:'row'}}>
-                <Icon name="compass" style={styles.icon} style onPress={()=>alert('Direction') } size={40} color="green"></Icon>
-                <Icon name="list-circle" style={styles.icon} style onPress={()=>navigation.navigate('PlacesDetails') } size={40} color="yellow"></Icon>
+                <Icon name="compass" style={styles.icon} style onPress={() => Linking.openURL('google.navigation:q=100+101')} size={40} color="green"></Icon>
+                <Icon name="list-circle" style={styles.icon} style onPress={()=>navigation.navigate('PlacesDetails',{currentMarker}) } size={40} color="yellow"></Icon>
                 <Icon name="close-circle-outline" style={styles.icon} style onPress={()=> setShowModal(false)} size={40} color="red"></Icon>
               </View>
               

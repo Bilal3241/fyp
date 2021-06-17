@@ -12,7 +12,7 @@ import SignupScreen from './screens/SignupScreen';
 import AdsDetails from './screens/AdsDetals/AdsDetails';
 import DrawerScreen  from './screens/DrawerScreen';
 import StripePayment from './screens/StripePayment';
-import DestinationScreen from './screens/DestinationScreen';
+import DestinationAreas from './screens/DestinationScreen';
 import Chat from './screens/Chat';
 import colors from './config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';  
@@ -22,6 +22,7 @@ import HotelList from './screens/HotelList';
 import { View } from 'native-base';
 import DestDetails from './screens/DestDetails';
 import Nearby from './screens/Nearby';
+import AreaList from './screens/AreaList';
 import PlacesDetails from './screens/PlacesDetails/PlacesDetails';
 
 const HomeStack=createStackNavigator();
@@ -64,7 +65,7 @@ const App = () => {
           <HomeStack.Screen name="EditProfile" component={EditProfile} options={{headerShown:false}}/>
           <HomeStack.Screen name='AdsList' component={AdsList} />
           <HomeStack.Screen name='StripePayment' component={StripePayment} />
-          <HomeStack.Screen name='DestinationScreen' component={DestinationScreen} />
+          <HomeStack.Screen name='DestinationAreas' component={DestinationAreas} />
           <HomeStack.Screen name='PostAd' component={PostAd} />
           <HomeStack.Screen name='AdsDetails' component={AdsDetails} />
           <HomeStack.Screen name='Chat' component={Chat}/>
@@ -72,7 +73,8 @@ const App = () => {
           <HomeStack.Screen name="Customers" component={MyCustomers}/>
           <HomeStack.Screen name='HotelList' component={HotelList} />
           <HomeStack.Screen name='DestDetails' component={DestDetails} />
-          <HomeStack.Screen name='PlacesDetails' component={PlacesDetails} />
+          <HomeStack.Screen name='PlacesDetails' component={PlacesDetails}/> 
+          <HomeStack.Screen name='AreaList' component={AreaList} />
 
 
 

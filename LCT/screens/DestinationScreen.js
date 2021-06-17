@@ -3,34 +3,62 @@ import React, { useEffect, useState } from 'react';
 import {ImageBackground, Text,StyleSheet,FlatList,Alert} from 'react-native';
 import AppButton from '../components/AppButton';
 import colors from '../config/colors';
-import AdsCard from '../components/AdsCard';
 import SearchBox from '../components/SearchBox';
 import { IMAGEASSETS } from '../assets/images';
-import {getAllAds} from '../controller/AdsController/GetAllAds';
-import {MyRooms} from '../controller/AdsController/MyRooms';
-import IonIcons from 'react-native-vector-icons/Ionicons';
-import { NavigationEvents } from 'react-navigation';
-import { DatePickerIOSBase } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function AdsList() {
+function DestinationAreas({navigation,route}) {
   
   const data = [
-    { Title: 'Iqbal Town' },
-    { Title: 'Johar Town' },
-    { Title: 'Muslim Town' },
-    { Title: 'Township' },
-    { Title: 'Model Town' },
-    { Title: 'Gulberg' },
-    { Title: 'Ichra' },
-    { Title: 'Cantt' },
-    { Title: 'Mall Road' },
-    { Title: 'Defence' },
-    { Title: 'Bhatti Gate' },
-    { Title: 'Shadman' },
+    {
+      title: 'Garhi Shahu',
+    },
+    {
+      title: 'Walled City',
+    },
+    {
+      title: 'Saddar Town',
+    },
+    {
+      title: 'Gulberg',
+    },
+    {
+      title: 'DHA',
+    },
+    {
+      title: 'Wapda Town',
+    },
+    {
+      title: 'Walton',
+    },{
+      title: 'Allama Iqbal Town',
+    },{
+      title: 'Model Town',
+    },
+    {
+      title: 'Bahria Town',
+    },
+    {
+      title: 'Johar Town',
+    },
+    {
+      title: 'Canal Road',
+    },
+    {
+      title: 'Township',
+    },
+    {
+      title: 'Jail Road G.O.R. - I',
+    },{
+      title: 'Shahrah-e-Quaid-e-Azam',
+    },
+    {
+      title: 'Others',
+    },
+    
   ];
   
   const [search,setSearch]=useState(data);
-  const [destList,setDestList]=useState(data);
 
       return (
        
@@ -44,10 +72,11 @@ function AdsList() {
                 <FlatList
             data={ search }
             renderItem={ ({item}) =>
-              <View style={styles.GridViewContainer}>
-               <Text style={styles.GridViewTextLayout}  > {item.Title} </Text>
-              </View> }
-            numColumns={3}
+            <TouchableOpacity onPress={()=>navigation.navigate('AreaList', {areaName: item.title} )}>
+              <View style={styles.card}>
+               <Text style={styles.TextLayout}  > {item.title} </Text>
+              </View>
+              </TouchableOpacity> }
          />
             </View>
         </ImageBackground>
@@ -69,7 +98,12 @@ const styles = StyleSheet.create({
     margin:{
       marginTop:"5%",
     },
-    
+    card:{
+      width: '100%',
+      backgroundColor:colors.cardBg,
+      padding: '4%',
+        marginTop: '4%',
+  },
     GridViewContainer: {
       flex:1,
       justifyContent: 'center',
@@ -80,13 +114,13 @@ const styles = StyleSheet.create({
       backgroundColor:colors.btnBlue,
       borderRadius:20,
      },
-   GridViewTextLayout: {
+   TextLayout: {
       fontSize: 20,
       fontWeight: 'bold',
       justifyContent: 'center',
-      color: '#fff',
+      color: colors.white,
       padding: 10,
     }
    
 })
-export default AdsList;
+export default DestinationAreas;
