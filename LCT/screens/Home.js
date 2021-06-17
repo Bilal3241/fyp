@@ -27,7 +27,7 @@ function Home({route, navigation}) {
                     <CircleImage color={colors.logoBG} size="40%" image={IMAGEASSETS.logo}/>
                 </View>
                 <View style={styles.destinations}>
-                    <Circle fn={()=>navigation.navigate('DestinationScreen')} title="Destinations" color={colors.destBtnBg} size="20%" />
+                    <Circle fn={()=>navigation.navigate('DestinationAreas')} title="Destinations" color={colors.destBtnBg} size="20%" />
                 </View>
                 <View style={styles.reservations}>
                     <Circle fn={()=>navigation.navigate('AdsList',{page:"allRooms"})} title="Reservations" color={colors.reservBtnBg} size="25%"></Circle>
